@@ -1,10 +1,10 @@
 # 🍰 Sweet Delights Bakery
 
-![Bakery Banner](assets/Sweet_Delight_logo.png)
+![Bakery Banner](assets/hero-section.png)
 
 A modern, responsive bakery website featuring an elegant product catalog, interactive shopping cart, custom cake builder, blog section, and more. Built with vanilla HTML, CSS, and JavaScript for optimal performance and accessibility.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache2.0-yellow.svg)](LICENSE)
 ![HTML5](https://img.shields.io/badge/HTML5-%23E34F26.svg?logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-%231572B6.svg?logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-%23F7DF1E.svg?logo=javascript&logoColor=black)
@@ -47,7 +47,7 @@ A modern, responsive bakery website featuring an elegant product catalog, intera
 > **Note:** Add your deployed link here (GitHub Pages, Netlify, Vercel, etc.)
 
 ```
-https://your-username.github.io/Bakery_Website/
+https://your-username.github.io/bakery_web/
 ```
 
 ---
@@ -55,30 +55,30 @@ https://your-username.github.io/Bakery_Website/
 ## 📸 Screenshots
 
 ### Desktop View
-![Desktop Hero](assets/Sweet_Delight_logo.png)
+![Desktop Hero](assets/desktop-view.png)
 *Elegant hero section with featured product and CTAs*
 
-### Mobile Navigation
-![Mobile Menu](assets/Sweet_Delight_icon.png)
-*Accessible slide-over menu with focus management*
-
 ### Custom Cake Builder
-![Cake Builder](assets/Sweet_Delight_icon.png)
+![Cake Builder](assets/cake-builder.png)
 *Interactive form to design personalized cakes*
 
-> **Tip:** Replace placeholder images with actual screenshots after deploying
+### Admin Portal
+![Admin Portal](assets/admin-portal.png)
+*Powerful back‑office interface for managing products, orders, customers, and site content.*
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Technology | Purpose |
-|------------|---------|
-| **HTML5** | Semantic markup with ARIA roles |
-| **CSS3** | Custom properties, Grid, Flexbox, animations |
-| **JavaScript (ES6+)** | DOM manipulation, event handling, cart logic |
-| **Font Awesome 6.6.0** | Icon library |
-| **Google Fonts (Georgia)** | Typography |
+------------------------------------------------------------------------------
+|         Technology          |                   Purpose                    |
+|-----------------------------|----------------------------------------------|
+| **HTML5**                   | Semantic markup with ARIA roles              |
+| **CSS3**                    | Custom properties, Grid, Flexbox, animations |
+| **JavaScript (ES6+)**       | DOM manipulation, event handling, cart logic |
+| **Font Awesome 6.6.0**      | Icon library                                 |
+| **Google Fonts (Georgia)**  | Typography                                   |
+------------------------------------------------------------------------------
 
 ---
 
@@ -87,50 +87,26 @@ https://your-username.github.io/Bakery_Website/
 ### Prerequisites
 - A modern web browser (Chrome, Firefox, Safari, Edge)
 - (Optional) A local server for testing (VS Code Live Server, Python HTTP server, etc.)
-
-### Quick Start
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/your-username/Bakery_Website.git
-   cd Bakery_Website
-   ```
-
-2. **Open in browser**
-   - **Option A:** Double-click `bakery.html` to open in your default browser
-   - **Option B (recommended):** Use a local server to avoid CORS issues
-     ```bash
-     # Python 3
-     python -m http.server 8000
-     
-     # VS Code: Install "Live Server" extension and click "Go Live"
-     ```
-
-3. **Navigate to the site**
-   ```
-   http://localhost:8000/bakery.html
-   ```
-
 ---
 
 ## 📂 Project Structure
 
 ```
 Bakery_Website/
-├── bakery.html           # Main HTML file
-├── admin.html            # Admin/backend interface (placeholder)
+├── bakery.html                    # Main HTML file
+├── admin.html                     # Admin/backend interface (placeholder)
 ├── css/
-│   └── bakery.css        # Responsive styles (1873 lines)
+│   └── bakery.css                 # Responsive styles (1873 lines)
 ├── js/
-│   └── bakery.js         # Core functionality (465 lines)
-├── assets/               # Product images, logos, icons
+│   └── bakery.js                  # Core functionality (465 lines)
+├── assets/                        # Product images, logos, icons
 │   ├── Sweet_Delight_logo.png
 │   ├── Sweet_Delight_icon.png
 │   ├── Chocolate_cake.webp
 │   └── ... (40+ product images)
-├── LICENSE               # MIT License
-├── README.md             # Project documentation
-└── .gitignore            # Git ignore rules
+├── LICENSE                        # Apache 2.0 License
+├── README.md                      # Project documentation
+└── .gitignore                     # Git ignore rules
 ```
 
 ---
@@ -183,32 +159,6 @@ Bakery_Website/
 - [ ] Progressive Web App (PWA) features
 
 ---
-
-## 🤝 Contributing
-
-Contributions are welcome! Follow these steps:
-
-1. **Fork the repository**
-2. **Create a feature branch**
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-3. **Commit your changes**
-   ```bash
-   git commit -m "Add: Brief description of your changes"
-   ```
-4. **Push to your fork**
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-5. **Open a Pull Request** on GitHub
-
-### Contribution Guidelines
-- Follow existing code style (indentation, naming conventions)
-- Test on multiple browsers and screen sizes
-- Update documentation for new features
-- Add comments for complex logic
-- Ensure accessibility (ARIA labels, keyboard navigation)
 
 ---
 
@@ -266,7 +216,7 @@ This project is licensed under the **MIT License** – see the [LICENSE](LICENSE
 
 <div align="center">
 
-**Made with ❤️ and 🍰 by [Your Name/Team]**
+**Made with ❤️ and 🍰 by Samir Shaikh **
 
 ⭐ Star this repo if you found it helpful!
 
