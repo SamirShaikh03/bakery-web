@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/Sweet_Delight_icon.jpg" type="image/jpg">
+    <link rel="stylesheet" href="css/bakery.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Sweet Delights Bakery</title>
+</head>
+<body>
+        <nav>
+        <a href="#home"><i class="fas fa-home"></i> Home</a>
+        <a href="#products"><i class="fas fa-cookie-bite"></i> Products</a>
+        <a href="#location"><i class="fa-solid fa-location-dot"></i> Location</a>
+        <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+        <a class="cart-icon" onclick="showCart()"><i class="fas fa-shopping-cart"></i> Cart</a>
+        <form class="search-group" id="search-form" role="search">
+            <label class="sr-only" for="search-input">Search products</label>
+            <input type="search" id="search-input" class="search-bar" placeholder="Search products..." onkeyup="searchProducts()">
+            <button type="submit" id="search-button" aria-label="Search">
+                <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+            </button>
+        </form>
+        <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation" style="display:none;">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+        </button>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Bakery navigation" hidden>
+        <div class="mobile-menu__overlay" data-menu-dismiss></div>
+        <div class="mobile-menu__panel" role="menu">
+            <button type="button" class="mobile-menu__close" id="mobile-menu-close" aria-label="Close navigation">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <nav class="mobile-menu__links">
+                <a href="#home" role="menuitem"><i class="fas fa-home"></i> Home</a>
+                <a href="#products" role="menuitem"><i class="fas fa-cookie-bite"></i> Products</a>
+                <a href="#location" role="menuitem"><i class="fa-solid fa-location-dot"></i> Location</a>
+                <a href="#contact" role="menuitem"><i class="fas fa-envelope"></i> Contact</a>
+                <button type="button" class="mobile-menu__cart" role="menuitem" onclick="showCart()"><i class="fas fa-shopping-cart"></i> Cart</button>
+            </nav>
+        </div>
+    </div>
+    <header>
+        <div class="logo" id="home">
+            <a href="#home" id="logo-link" draggable="true">
+                <img src="assets/Sweet_Delight_logo.png" alt="Bakery Logo">
+            </a>
+        </div>
+        <h1>Sweet Delight's Bakery</h1>
+        <p>Freshly Baked Treats for Every Occasion!</p>
+        <p>Estd. 1960</p>
+    </header>
+    <div class="container">
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <span class="hero-badge"><i class="fa-solid fa-star" aria-hidden="true"></i> Artisanal bakery · Est. 1960</span>
+                <h2>Welcome to Sweet Delights</h2>
+                <p>Discover signature cakes, flaky pastries, and melt-in-your-mouth cookies baked fresh every sunrise.</p>
+                <ul class="hero-highlights">
+                    <li><i class="fa-solid fa-leaf" aria-hidden="true"></i> Locally sourced ingredients</li>
+                    <li><i class="fa-solid fa-heart" aria-hidden="true"></i> Seasonal specials crafted with love</li>
+                    <li><i class="fa-solid fa-truck" aria-hidden="true"></i> Same-day delivery across the city</li>
+                    <li><i class="fa-solid fa-seedling" aria-hidden="true"></i> Gluten-free & vegan options available</li>
+                </ul>
+                <div class="hero-actions">
+                    <a href="#products" class="btn primary">Explore Our Menu</a>
+                    <a href="#cake-builder" class="btn outline">Design a Custom Cake</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <img src="assets/Blueberry_Lemon_Cake.jpg" alt="Signature blueberry lemon cake" loading="lazy">
+                    <div class="hero-card-info">
+                        <span class="hero-card-tag">Chef's pick</span>
+                        <strong>Blueberry Lemon Dream</strong>
+                        <p>Zesty lemon sponge layered with wild blueberry compote and mascarpone frosting.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+        <div class="container1">
+        <section id="products">
+            <h2>Our Products</h2>
+            <div class="products">
+                <div class="product">
+                    <img src="assets/Chocolate_cake.webp" alt="Chocolate Cake">
+                    <h3>Chocolate Cake</h3>
+                    <p>899.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Chocolate Cake', 899.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Red_Velvet.jpeg" alt="Red Velvet Cake">
+                    <h3>Red Velvet</h3>
+                    <p>599.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Red Velvet', 599.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Rasmalai_Cake.jpg" alt="Rasmalai Cake">
+                    <h3>Rasmalai Cake</h3>
+                    <p>699.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Rasmalai Cake', 699.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Blueberry_Lemon_Cake.jpg" alt="Blueberry Lemon Cake">
+                    <h3>Blueberry Cake</h3>
+                    <p>969.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Blueberry Cake', 969.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Carrot_Cake.jpeg" alt="Carrot Cake">
+                    <h3>Carrot Cake</h3>
+                    <p>499.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Carrot Cake', 499.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Oreo_Cheesecake.webp" alt="Oreo Cheesecake">
+                    <h3>Oreo Cheesecake</h3>
+                    <p>399.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Oreo Cheesecake', 399.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Black_Forest.jpg" alt="Black Forest Cake">
+                    <h3>Black Forest</h3>
+                    <p>599.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Black Forest', 599.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/HummingBird_Cake.jpeg" alt="HummingBird Cake">
+                    <h3>HummingBird Cake</h3>
+                    <p>899.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('HummingBird Cake', 899.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Butter_croissant.webp" alt="Butter Croissant">
+                    <h3>Butter Croissant</h3>
+                    <p>320.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Butter Croissant', 320.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Oatmeal_cookies.jpeg" alt="Oatmeal Cookies">
+                    <h3>Oatmeal Cookies</h3>
+                    <p>240.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Oatmeal Cookies', 240.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Glazed_donuts.jpg" alt="Glazed Donuts">
+                    <h3>Glazed Donuts</h3>
+                    <p>160.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Glazed Donuts', 160.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Blueberry_muffins.jpg" alt="Blueberry Muffin">
+                    <h3>Blueberry Muffin</h3>
+                    <p>280.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Blueberry Muffin', 280.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Apple_pie.jpeg" alt="Apple Pie">
+                    <h3>Apple Pie</h3>
+                    <p>999.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Apple Pie', 999.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Cranberry_scones.jpg" alt="Cranberry Scone">
+                    <h3>Cranberry Scone</h3>
+                    <p>180.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Cranberry Scone', 180.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Sourdough_bread.jpg" alt="Sourdough Bread">
+                    <h3>Sourdough Bread</h3>
+                    <p>480.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Sourdough Bread', 480.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Cinnamon_Bagel.jpeg" alt="Cinnamon Bagel">
+                    <h3>Cinnamon Bagel</h3>
+                    <p>189.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Cinnamon Bagel', 189.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Almon_Pastry.webp" alt="Almond Pastry">
+                    <h3>Almond Pastry</h3>
+                    <p>269.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Almond Pastry', 269.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Fudge_Brownie.jpg" alt="Fudge Brownie">
+                    <h3>Fudge Brownie</h3>
+                    <p>189.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Fudge Brownie', 189.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Lemon_Tart.jpg" alt="Lemon Tart">
+                    <h3>Lemon Tart</h3>
+                    <p>499.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Lemon Tart', 499.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Chocolate_Eclairs.jpg" alt="Chocolate Eclair">
+                    <h3>Chocolate Eclair</h3>
+                    <p>199.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Chocolate Eclair', 199.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Macrons.jpg" alt="Assorted Macarons">
+                    <h3>Assorted Macarons</h3>
+                    <p>199.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Assorted Macarons', 199.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Vanilla_Cupcake.jpg" alt="Vanilla Cupcake">
+                    <h3>Vanilla Cupcake</h3>
+                    <p>149.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Vanilla Cupcake', 149.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Chocolate_Truffle.jpg" alt="Chocolate Truffle">
+                    <h3>Chocolate Truffle</h3>
+                    <p>419.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Chocolate Truffle', 419.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Cookie_Dough.jpg" alt="Edible Cookie Dough">
+                    <h3>Edible Cookie Dough</h3>
+                    <p>299.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Edible Cookie Dough', 299.00, 1)">Order Now</button>
+                </div>
+                <!---Add from here--->
+                <div class="product">
+                    <img src="assets/Salted-Caramel-Pretzel-Brownies.jpg" alt="Salted-Caramel-Pretzel-Brownies">
+                    <h3>Salted Pretzel Brownie</h3>
+                    <p>99.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Salted Pretzel Brownie', 99.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/matcha.jpg" alt="Matcha Cake">
+                    <h3>Matcha Cupcake</h3>
+                    <p>49.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Matcha Cupcake', 49.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Lavender-Lemon-Scone.jpg" alt="Lavender Lemon Scone">
+                    <h3>Lavender Lemon Scone</h3>
+                    <p>199.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Lavender Lemon Scone ', 199.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Bannana_bread.webp" alt="Banana Bread">
+                    <h3>Bannana Bread</h3>
+                    <p>199.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Bannana Bread', 199.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/raspberry-and-white-chocolate-eclairs.webp" alt="raspberry-and-white-chocolate-eclairs">
+                    <h3>White chocolate Eclairs</h3>
+                    <p>119.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('White Chocolate Eclairs', 119.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Mapple_Danish.jpg" alt="Mapple Danish">
+                    <h3>Mapple Danish</h3>
+                    <p>49.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Mapple Danish', 49.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Apple-turnover.jpg" alt="Apple Turnover">
+                    <h3>Apple Turnover</h3>
+                    <p>129.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Apple Turnover', 129.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Hezelnut_Truffle.webp" alt="Hazelnut Truffle">
+                    <h3>Hazelnut Truffle</h3>
+                    <p>99.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Salted Caramel Macarons', 99.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Salted-Caramel-Macaron.jpg" alt="Salted Caramel Macarons">
+                    <h3>Salted Caramel Macarons</h3>
+                    <p>129.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Salted Caramel Macarons', 129.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/pistachio-roll.jpg" alt="Pistachio Roll">
+                    <h3>Pistachio Roll</h3>
+                    <p>159.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Pistachio Roll', 159.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Chai-Spices-Cookies.jpg" alt="Chai Spice Cookie">
+                    <h3>Chai Spice Cookie</h3>
+                    <p>79.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Chai Spice Cookie', 79.00, 1)">Order Now</button>
+                </div>
+                <div class="product">
+                    <img src="assets/Orange-blossom-tart.jpg" alt="Orange Blossom Mini Tart">
+                    <h3>Orange Blossom Mini Tart</h3>
+                    <p>139.00 ₹</p>
+                    <button class="order-btn" onclick="addToCart('Orange Blossom Mini Tart', 139.00, 1)">Order Now</button>
+                </div>
+            </div>
+        </section>
+
+<section class="order-tracking content-section">
+    <h2>Track Your Order</h2>
+    <div class="tracking-form">
+        <input type="text" id="order-id" placeholder="Enter Order ID">
+        <button onclick="trackOrder()">Track</button>
+        <div id="tracking-status"></div>
+    </div>
+</section>
+
+<section class="seasonal-offers content-section">
+    <h2>Special Offers</h2>
+    <div class="offer-cards">
+        <div class="offer-card">
+            <img src="assets/Lemon_Tart.jpg" alt="Seasonal lemon tart special">
+            <h3>Summer Special</h3>
+            <p>20% off on all fruit cakes!</p>
+        </div>
+        <!-- Add more offer cards -->
+    </div>
+</section>
+
+<section class="cake-builder content-section" id="cake-builder">
+    <div class="builder-header">
+    <span class="section-badge"><i class="fa-solid fa-cake-candles" aria-hidden="true"></i> Custom creations</span>
+        <h2>Design Your Custom Cake</h2>
+        <p>Mix and match our baker's favorite sizes, flavors, and finishes to bring your celebration dessert to life.</p>
+    </div>
+    <div class="builder-grid">
+        <div class="builder-benefits">
+            <article class="benefit">
+                <i class="fa-solid fa-palette" aria-hidden="true"></i>
+                <div>
+                    <h3>Signature Finishes</h3>
+                    <p>Choose from floral piping, drip glaze, or chocolate sails crafted to match your theme.</p>
+                </div>
+            </article>
+            <article class="benefit">
+                <i class="fa-solid fa-seedling" aria-hidden="true"></i>
+                <div>
+                    <h3>Fresh Ingredients</h3>
+                    <p>We bake to order using locally sourced butter, farm eggs, and seasonal fruit purees.</p>
+                </div>
+            </article>
+            <article class="benefit">
+                <i class="fa-solid fa-clock" aria-hidden="true"></i>
+                <div>
+                    <h3>48-Hour Turnaround</h3>
+                    <p>Submit your design and receive a confirmation with sketches and price within two days.</p>
+                </div>
+            </article>
+        </div>
+        <form class="builder-form" onsubmit="event.preventDefault(); buildCake();">
+            <div class="form-group">
+                <label for="cake-size">Cake Size</label>
+                <div class="input-shell">
+                    <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+                    <select id="cake-size" required>
+                        <option value="" disabled selected>Select size</option>
+                        <option value="4 inch">4 inch · serves 2–4 (Petite)</option>
+                        <option value="5 inch">5 inch · serves 4–6</option>
+                        <option value="6 inch">6 inch · serves 6–8</option>
+                        <option value="7 inch">7 inch · serves 8–10</option>
+                        <option value="9 inch">9 inch · serves 12–14</option>
+                        <option value="12 inch">12 inch · serves 18–24</option>
+                        <option value="14 inch">14 inch · serves 24–30</option>
+                        <option value="half-sheet">Half sheet · serves 30–40</option>
+                        <option value="full-sheet">Full sheet · serves 50–60</option>
+                        <option value="6+8">2-tier (6″ + 8″) · serves 16–20</option>
+                        <option value="8+10">2-tier (8″ + 10″) · serves 24–30</option>
+                        <option value="6+8+10">3-tier (6″ + 8″ + 10″) · serves 40–50</option>
+                        <option value="cupcakes-dozen">Dozen cupcakes (assorted) · 12 pcs</option>
+                        <option value="mini-assortment">Mini assortment · 24 mini portions</option>
+                        </optgroup>
+                        <option value="8 inch">8 inch · serves 10-12</option>
+                        <option value="10 inch">10 inch · serves 14-18</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cake-flavor">Flavor Profile</label>
+                <div class="input-shell">
+                    <i class="fa-solid fa-ice-cream" aria-hidden="true"></i>
+                    <select id="cake-flavor" required>
+                        <option value="" disabled selected>Select flavor</option>
+                        <option value="Chocolate">Chocolate ganache</option>
+                        <option value="Lemon">Lemon curd & citrus buttercream</option>
+                        <option value="Matcha">Matcha green tea</option>
+                        <option value="Coffee">Espresso & mascarpone</option>
+                        <option value="Strawberry">Strawberry compote & cream</option>
+                        <option value="Pistachio">Pistachio praline</option>
+                        <option value="Mango">Alphonso mango</option>
+                        <option value="Salted Caramel">Salted caramel & toffee</option>
+                        <option value="Hazelnut">Hazelnut praline</option>
+                        <option value="Coconut">Coconut cream</option>
+                        <option value="Earl Grey">Earl Grey & bergamot</option>
+                        <option value="Vegan Chocolate">Vegan dark chocolate (plant-based)</option>
+                        <option value="Vanilla">Madagascar vanilla</option>
+                        <option value="Red Velvet">Red velvet & cream cheese</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cake-frosting">Frosting Finish</label>
+                <div class="input-shell">
+                    <i class="fa-solid fa-brush" aria-hidden="true"></i>
+                    <select id="cake-frosting">
+                        <option value="Buttercream" selected>Silky buttercream</option>
+                        <option value="Whipped Cream">Whipped cream</option>
+                        <option value="Cream Cheese">Cream cheese frosting</option>
+                        <option value="Swiss Meringue">Swiss meringue buttercream</option>
+                        <option value="Italian Meringue">Italian meringue buttercream</option>
+                        <option value="Stabilized Whipped Cream">Stabilized whipped cream (longer hold)</option>
+                        <option value="Fondant">Fondant finish</option>
+                        <option value="Royal Icing">Royal icing (piped details)</option>
+                        <option value="Mirror Glaze">Mirror glaze (shiny)</option>
+                        <option value="Salted Caramel Glaze">Salted caramel glaze</option>
+                        <option value="Floral Buttercream">Floral buttercream (piped)</option>
+                        <option value="Vegan Buttercream">Vegan buttercream (plant-based)</option>
+                        <option value="Ganache">Chocolate ganache</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cake-message">Celebration Message</label>
+                <div class="input-shell">
+                    <i class="fa-solid fa-pen" aria-hidden="true"></i>
+                    <input type="text" id="cake-message" maxlength="35" placeholder="e.g., Happy 25th, Aditi!">
+                </div>
+            </div>
+            <button type="submit" class="btn primary builder-submit">Calculate Price</button>
+            <p class="builder-footnote">Need a multi-tier cake? <a href="#contact">Contact our pastry chef</a> for a personalized quote.</p>
+            <div id="cake-result" class="builder-result" role="status" aria-live="polite"></div>
+        </form>
+    </div>
+</section>
+
+<section class="blog content-section" id="blog">
+    <h2>Baking Tips & Recipes</h2>
+    <div class="blog-posts">
+        <article class="blog-card" aria-labelledby="post1-title">
+            <img src="assets/Blueberry_Lemon_Cake.jpg" alt="Classic vanilla sponge on a cooling rack">
+            <div class="card-content">
+                <h3 id="post1-title" class="post-title">Classic Vanilla Sponge: Tips for Fluffy Layers</h3>
+                <div class="post-meta">
+                    <span class="author">By: Anjali Rao</span> •
+                    <time datetime="2025-06-01">Jun 1, 2025</time> •
+                    <span class="read-time">5 min read</span>
+                </div>
+                <p class="excerpt">A light, tender sponge is the base of many celebration cakes. Learn how to avoid dense layers, the best folding technique and a simple syrup trick to lock in moisture.</p>
+                <div class="post-tags">Tags: <span>vanilla</span>, <span>technique</span>, <span>tips</span></div>
+                <a href="#post-1" class="read-more" data-blog-trigger="post-1">Read More →</a>
+            </div>
+
+            <!-- Hidden full post content -->
+            <div id="post-1" class="full-post" hidden>
+                <h4 class="post-title">Classic Vanilla Sponge: Tips for Fluffy Layers</h4>
+                <div class="post-meta">
+                    <span class="author">Anjali Rao</span> • <time datetime="2025-06-01">Jun 1, 2025</time>
+                </div>
+                <div class="post-body">
+                    <p>Start with room-temperature eggs and fold gently to keep the air in the batter. Use a light hand when incorporating dry ingredients and avoid overmixing. If your recipe tends to produce dry layers, brush each round with a simple syrup (equal parts sugar and water heated until dissolved) while still warm — this adds moisture without changing texture.</p>
+                    <h5>Quick Checklist</h5>
+                    <ul>
+                        <li>Sift dry ingredients to remove lumps.</li>
+                        <li>Weigh ingredients for accuracy.</li>
+                        <li>Preheat oven and rotate pans once during baking.</li>
+                    </ul>
+                    <p>Try these small adjustments and you'll notice a big difference in crumb and mouthfeel.</p>
+                </div>
+            </div>
+        </article>
+
+        <article class="blog-card" aria-labelledby="post2-title">
+            <img src="assets/Salted-Caramel-Pretzel-Brownies.jpg" alt="Salted pretzel brownies arranged on a tray">
+            <div class="card-content">
+                <h3 id="post2-title" class="post-title">Salted Pretzel Brownie: Balancing Sweet & Savory</h3>
+                <div class="post-meta">
+                    <span class="author">By: Rohit Mehta</span> •
+                    <time datetime="2025-05-20">May 20, 2025</time> •
+                    <span class="read-time">4 min read</span>
+                </div>
+                <p class="excerpt">Combining crunchy salted pretzels with a fudgy brownie creates an addictive contrast. Learn the right salt level, how to keep pretzels crisp and a quick caramel drizzle to finish.</p>
+                <div class="post-tags">Tags: <span>brownie</span>, <span>salted caramel</span>, <span>snack</span></div>
+                <a href="#post-2" class="read-more" data-blog-trigger="post-2">Read More →</a>
+            </div>
+
+            <div id="post-2" class="full-post" hidden>
+                <h4 class="post-title">Salted Pretzel Brownie: Balancing Sweet & Savory</h4>
+                <div class="post-meta">
+                    <span class="author">Rohit Mehta</span> • <time datetime="2025-05-20">May 20, 2025</time>
+                </div>
+                <div class="post-body">
+                    <p>Use a slightly underbaked, fudgy brownie base so the pretzels don't make it cakey. Toss pretzel pieces in a small amount of melted butter and a sprinkle of sugar before pressing some into the top of the batter — this helps them stay crisp after baking. For the caramel, cook sugar until amber, add cream and a pinch of flaky sea salt. Drizzle lightly to keep the balance between sweet and salty.</p>
+                    <h5>Pro Tip</h5>
+                    <p>If you want extra crunch on serving day, reserve a handful of pretzel pieces to scatter over the caramel just before presenting.</p>
+                </div>
+            </div>
+        </article>
+
+        <article class="blog-card" aria-labelledby="post3-title">
+            <img src="assets/Bannana_bread.webp" alt="Sliced banana bread with maple glaze">
+            <div class="card-content">
+                <h3 id="post3-title" class="post-title">Caramelized Banana Bread with Maple Glaze</h3>
+                <div class="post-meta">
+                    <span class="author">By: Kavya Deshpande</span> •
+                    <time datetime="2025-04-10">Apr 10, 2025</time> •
+                    <span class="read-time">6 min read</span>
+                </div>
+                <p class="excerpt">Take the classic loaf up a notch with brown-butter bananas, toasted pecans, and a silky maple glaze that sets with a gentle sheen.</p>
+                <div class="post-tags">Tags: <span>banana bread</span>, <span>breakfast</span>, <span>maple</span></div>
+                <a href="#post-3" class="read-more" data-blog-trigger="post-3">Read More →</a>
+            </div>
+
+            <div id="post-3" class="full-post" hidden>
+                <h4 class="post-title">Caramelized Banana Bread with Maple Glaze</h4>
+                <div class="post-meta">
+                    <span class="author">Kavya Deshpande</span> • <time datetime="2025-04-10">Apr 10, 2025</time>
+                </div>
+                <div class="post-body">
+                    <p>Caramelize sliced bananas in brown butter and dark sugar until glossy, then fold into your batter for deep toffee notes. Toast pecans separately to keep their crunch and scatter half through the batter and half on top just before baking.</p>
+                    <h5>Maple Glaze</h5>
+                    <ul>
+                        <li>Whisk together 3 tbsp maple syrup, 1 tbsp melted butter, and enough icing sugar to form a slow ribbon.</li>
+                        <li>Pour over the warm loaf so it seeps into the crumb yet sets with a gentle sheen.</li>
+                        <li>Finish with a pinch of smoked salt to brighten the sweetness.</li>
+                    </ul>
+                    <p>Store leftovers wrapped at room temperature; a quick toast the next morning reawakens the caramel aromas beautifully.</p>
+                </div>
+            </div>
+        </article>
+        <article class="blog-card" aria-labelledby="post4-title">
+            <img src="assets/matcha.jpg" alt="Matcha cupcake">
+            <div class="card-content">
+                <h3 id="post4-title" class="post-title">Matcha Cupcake</h3>
+                <div class="post-meta">
+                    <span class="author">By: GitHub Copilot</span> •
+                    <time datetime="2025-04-10">Apr 10, 2025</time> •
+                    <span class="read-time">3 min read</span>
+                </div>
+                <p class="excerpt">Bring out the vibrant, earthy aroma of matcha in a light, tender cupcake — 
+                    learn how to bloom and sift matcha powder to avoid bitterness, balance sweetness with a white‑chocolate or citrus frosting, 
+                    and use gentle folding to keep the crumb airy.</p>
+                <div class="post-tags">Tags: <span>matcha</span>, <span>cupcake</span></div>
+                <a href="#post-4" class="read-more" data-blog-trigger="post-4">Read More →</a>
+            </div>
+
+            <div id="post-4" class="full-post" hidden>
+                <h4 class="post-title">Matcha Cupcake</h4>
+                <div class="post-meta">
+                    <span class="author">Kavya Deshpande</span> • <time datetime="2025-04-10">Apr 10, 2025</time>
+                </div>
+                <div class="post-body">
+                    <p>Mix matcha powder with flour.</p>
+                    <h5>Maple Glaze</h5>
+                    <ul>
+                        <li>Whisk together 3 tbsp maple syrup, 1 tbsp melted butter, and enough icing sugar to form a slow ribbon.</li>
+                        <li>Pour over the warm loaf so it seeps into the crumb yet sets with a gentle sheen.</li>
+                        <li>Finish with a pinch of smoked salt to brighten the sweetness.</li>
+                    </ul>
+                    <p>Bake for 20 minutes.</p>
+                </div>
+            </div>
+        </article>
+    </div>
+
+    <div id="blog-modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" hidden>
+        <div class="modal-overlay" data-blog-close aria-hidden="true"></div>
+        <div class="modal-panel" role="document" tabindex="-1">
+            <button class="modal-close" type="button" aria-label="Close" data-blog-close>✕</button>
+            <header>
+                <h3 id="modal-title"></h3>
+                <div id="modal-meta" class="post-meta"></div>
+            </header>
+            <main id="modal-body" class="modal-body"></main>
+        </div>
+    </div>
+    </section>
+<section class="reviews content-section" id="reviews">
+    <h2>Customer Reviews</h2>
+    <div class="section-subtext">Loved by our regulars across Mumbai</div>
+    <div class="review-marquee" aria-live="off">
+        <div class="review-track">
+            <article class="review-card">
+                <figure>
+                    <img src="assets/Sweet_Delight_icon.png" alt="Customer portrait - Priya Sharma">
+                    <figcaption>
+                        <h4>Priya Sharma</h4>
+                        <small class="location">Mumbai</small>
+                        <time datetime="2025-05-14" class="review-date">May 14, 2025</time>
+                    </figcaption>
+                </figure>
+                <blockquote class="review-text">The Red Velvet was moist, beautifully decorated and tasted homemade. I'll be ordering this for every celebration.</blockquote>
+                <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            </article>
+
+            <article class="review-card">
+                <figure>
+                    <img src="assets/Sweet_Delight_icon.png" alt="Customer portrait - Ahmed Khan">
+                    <figcaption>
+                        <h4>Ahmed Khan</h4>
+                        <small class="location">Bandra</small>
+                        <time datetime="2025-04-28" class="review-date">Apr 28, 2025</time>
+                    </figcaption>
+                </figure>
+                <blockquote class="review-text">Quick delivery and the croissants were flaky and buttery — exactly what I hoped for on a busy morning.</blockquote>
+                <div class="stars" aria-label="4 out of 5 stars">★★★★☆</div>
+            </article>
+
+            <article class="review-card">
+                <figure>
+                    <img src="assets/Sweet_Delight_icon.png" alt="Customer portrait - Meera Patel">
+                    <figcaption>
+                        <h4>Meera Patel</h4>
+                        <small class="location">Thane</small>
+                        <time datetime="2025-03-12" class="review-date">Mar 12, 2025</time>
+                    </figcaption>
+                </figure>
+                <blockquote class="review-text">Ordered a custom birthday cake — the design matched the mockup and it tasted better than we imagined. Highly recommend.</blockquote>
+                <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            </article>
+
+            <article class="review-card">
+                <figure>
+                    <img src="assets/Sweet_Delight_icon.png" alt="Customer portrait - Rajiv Menon">
+                    <figcaption>
+                        <h4>Rajiv Menon</h4>
+                        <small class="location">Andheri</small>
+                        <time datetime="2025-02-05" class="review-date">Feb 05, 2025</time>
+                    </figcaption>
+                </figure>
+                <blockquote class="review-text">Great service and friendly staff. The pastries were a touch sweeter than I prefer, but overall a solid experience.</blockquote>
+                <div class="stars" aria-label="4 out of 5 stars">★★★★☆</div>
+            </article>
+
+            <article class="review-card">
+                <figure>
+                    <img src="assets/Sweet_Delight_icon.png" alt="Customer portrait - S. Reddy">
+                    <figcaption>
+                        <h4>S. Reddy</h4>
+                        <small class="location">Navi Mumbai</small>
+                        <time datetime="2025-01-20" class="review-date">Jan 20, 2025</time>
+                    </figcaption>
+                </figure>
+                <blockquote class="review-text">Fresh muffins, punctual delivery and very polite delivery team. Excellent value for money — will order again.</blockquote>
+                <div class="stars" aria-label="4 out of 5 stars">★★★★☆</div>
+            </article>
+        </div>
+    </div>
+</section>
+<section id="about" class="about-section content-section">
+    <h2>About Us</h2>
+    <p>Sweet Delights Bakery, founded in 2020, is a family-owned business dedicated to creating delightful treats. We use only the finest ingredients to ensure every bite is a moment of joy.</p>
+</section>
+<section id="location" class="locations-section content-section">
+    <h2>Company Locations:</h2>
+    <div class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3766.6304122126494!2d72.97454087716243!3d19.254932599909406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7bb687e77c67b%3A0xf56ed765bc7831a7!2sSweet%20Delight!5e0!3m2!1sen!2sin!4v1746081886509!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</section>
+<section id="contact" class="contact-section content-section">
+    <h2>Contact Us</h2>
+    <p>Email: info@sweetdelightsbakery</p>
+    <p>Phone: +91- 12345 67890</p>
+    <p>Address: 123 Bakery Lane, Bandra, West Mumbai</p>
+    <p>Pin Code: 502278</p>
+    <p>Follow us on:</p>
+    <div class="social-icons">
+        <a href="https://www.facebook.com/sweetdelightsbakery" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/sweetdelightsbakery" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.twitter.com/sweetdelightsbakery" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.linkedin.com/company/sweetdelightsbakery" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+</section>
+    <footer>
+        <p>© 2025 Sweet Delights Bakery. All Rights Reserved.</p>
+    </footer>
+ <!-- Cart Overlay -->
+    <div id="cart-section">
+       <div class="cart-content">
+           <span class="close-cart" onclick="hideCart()">&times;</span>
+           <h3>Your Cart</h3>
+           <div id="cart-items"></div>
+           <div id="cart-total"></div>
+           <form id="cart-form">
+               <label for="address">Address:</label>
+               <input type="text" id="address" name="address" required>
+               <label for="phone">Phone Number:</label>
+               <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
+               <div class="cart-actions">
+                   <button type="button" id="checkout-btn" onclick="checkout()">Place Order</button>
+                   <button type="button" id="clear-cart-btn" onclick="clearCart()">Clear Cart</button>
+               </div>
+           </form>
+       </div>
+    </div>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="js/bakery.js"></script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'938d23807966bfcc',t:'MTc0NjA4MDA2Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
+</html>
