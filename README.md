@@ -1,0 +1,275 @@
+# 🍰 Sweet Delights Bakery
+
+![Bakery Banner](assets/Sweet_Delight_logo.png)
+
+A modern, responsive bakery website featuring an elegant product catalog, interactive shopping cart, custom cake builder, blog section, and more. Built with vanilla HTML, CSS, and JavaScript for optimal performance and accessibility.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![HTML5](https://img.shields.io/badge/HTML5-%23E34F26.svg?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-%231572B6.svg?logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-%23F7DF1E.svg?logo=javascript&logoColor=black)
+
+---
+
+## 🌟 Features
+
+### 🛍️ Core Functionality
+- **Dynamic Product Catalog** – Browse 40+ bakery items across categories (cakes, pastries, cookies, breads, desserts)
+- **Interactive Shopping Cart** – Add, remove, and adjust quantities (max 3 per item) with live total calculation
+- **Real-time Search** – Instant product filtering with category-aware search
+- **Order Tracking** – Track your order status with order ID lookup
+- **Custom Cake Builder** – Interactive form to design personalized cakes (flavor, size, frosting, toppings, message)
+
+### 🎨 User Experience
+- **Responsive Design** – Mobile-first approach with hamburger navigation, optimized layouts for phones, tablets, and desktops
+- **Accessible Navigation** – ARIA-compliant mobile menu with focus trap, keyboard navigation (ESC to close), and screen-reader support
+- **Hero Section** – Eye-catching landing with bakery highlights, CTAs, and featured product card
+- **Seasonal Offers** – Rotating promotional banners (Valentine's, Summer, Holiday specials)
+- **Customer Reviews** – Auto-scrolling testimonial marquee with pause-on-hover
+
+### 📰 Content & Engagement
+- **Blog Section** – Modal-based blog posts with baking tips, recipes, and stories
+- **Location Finder** – Embedded Google Maps for store locations
+- **Contact Form** – Email, phone, and social media links
+- **Draggable Logo** – Fun interactive logo element
+
+### 🔧 Technical Highlights
+- **Vanilla JS** – No frameworks, lightweight, and fast
+- **CSS Grid & Flexbox** – Modern layout system with mobile breakpoints (768px, 480px)
+- **Font Awesome Icons** – Scalable vector icons throughout
+- **Smooth Scroll** – Native `scroll-behavior: smooth` for anchor links
+- **LocalStorage-ready** – Cart persistence structure (can be extended)
+
+---
+
+## 🚀 Live Demo
+
+> **Note:** Add your deployed link here (GitHub Pages, Netlify, Vercel, etc.)
+
+```
+https://your-username.github.io/Bakery_Website/
+```
+
+---
+
+## 📸 Screenshots
+
+### Desktop View
+![Desktop Hero](assets/Sweet_Delight_logo.png)
+*Elegant hero section with featured product and CTAs*
+
+### Mobile Navigation
+![Mobile Menu](assets/Sweet_Delight_icon.png)
+*Accessible slide-over menu with focus management*
+
+### Custom Cake Builder
+![Cake Builder](assets/Sweet_Delight_icon.png)
+*Interactive form to design personalized cakes*
+
+> **Tip:** Replace placeholder images with actual screenshots after deploying
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| **HTML5** | Semantic markup with ARIA roles |
+| **CSS3** | Custom properties, Grid, Flexbox, animations |
+| **JavaScript (ES6+)** | DOM manipulation, event handling, cart logic |
+| **Font Awesome 6.6.0** | Icon library |
+| **Google Fonts (Georgia)** | Typography |
+
+---
+
+## 📦 Installation & Setup
+
+### Prerequisites
+- A modern web browser (Chrome, Firefox, Safari, Edge)
+- (Optional) A local server for testing (VS Code Live Server, Python HTTP server, etc.)
+
+### Quick Start
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/Bakery_Website.git
+   cd Bakery_Website
+   ```
+
+2. **Open in browser**
+   - **Option A:** Double-click `bakery.html` to open in your default browser
+   - **Option B (recommended):** Use a local server to avoid CORS issues
+     ```bash
+     # Python 3
+     python -m http.server 8000
+     
+     # VS Code: Install "Live Server" extension and click "Go Live"
+     ```
+
+3. **Navigate to the site**
+   ```
+   http://localhost:8000/bakery.html
+   ```
+
+---
+
+## 📂 Project Structure
+
+```
+Bakery_Website/
+├── bakery.html           # Main HTML file
+├── admin.html            # Admin/backend interface (placeholder)
+├── css/
+│   └── bakery.css        # Responsive styles (1873 lines)
+├── js/
+│   └── bakery.js         # Core functionality (465 lines)
+├── assets/               # Product images, logos, icons
+│   ├── Sweet_Delight_logo.png
+│   ├── Sweet_Delight_icon.png
+│   ├── Chocolate_cake.webp
+│   └── ... (40+ product images)
+├── LICENSE               # MIT License
+├── README.md             # Project documentation
+└── .gitignore            # Git ignore rules
+```
+
+---
+
+## 🎯 Usage Guide
+
+### For Customers
+
+1. **Browse Products**
+   - Scroll to the "Our Products" section or click `Products` in the nav
+   - Use the search bar to filter items by name or category
+
+2. **Add to Cart**
+   - Click `Order Now` on any product
+   - Adjust quantities using `+` / `-` buttons (max 3 per item)
+   - View cart total and proceed to checkout
+
+3. **Design a Custom Cake**
+   - Click `Design a Custom Cake` in the hero section
+   - Select flavor, size, frosting, toppings, and add a message
+   - Submit the form to receive a quote
+
+4. **Track Orders**
+   - Enter your order ID in the "Track Your Order" section
+   - View real-time status updates
+
+5. **Read Blog Posts**
+   - Scroll to the "From Our Kitchen" blog section
+   - Click on any post to open the modal reader
+
+### For Developers
+
+- **Cart Logic:** See `addToCart()`, `updateQuantity()`, `showCart()` in `js/bakery.js`
+- **Search:** `searchProducts()` filters products by name and category attributes
+- **Mobile Menu:** `setMenuState()` manages focus trap, ESC handling, and ARIA states
+- **Custom Cake Form:** `submitCakeOrder()` captures form data (extend for backend API)
+
+---
+
+## 🧩 Features Roadmap
+
+- [ ] Backend integration (Node.js/Express or Firebase)
+- [ ] User authentication (login/signup)
+- [ ] Payment gateway (Stripe, Razorpay)
+- [ ] Persistent cart (LocalStorage or database)
+- [ ] Admin dashboard for product/order management
+- [ ] Email notifications for orders
+- [ ] Multi-language support (i18n)
+- [ ] Dark mode toggle
+- [ ] Progressive Web App (PWA) features
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Follow these steps:
+
+1. **Fork the repository**
+2. **Create a feature branch**
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+3. **Commit your changes**
+   ```bash
+   git commit -m "Add: Brief description of your changes"
+   ```
+4. **Push to your fork**
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+5. **Open a Pull Request** on GitHub
+
+### Contribution Guidelines
+- Follow existing code style (indentation, naming conventions)
+- Test on multiple browsers and screen sizes
+- Update documentation for new features
+- Add comments for complex logic
+- Ensure accessibility (ARIA labels, keyboard navigation)
+
+---
+
+## 🐛 Bug Reports & Feature Requests
+
+Found a bug or have a feature idea?
+
+1. Check [existing issues](https://github.com/your-username/Bakery_Website/issues)
+2. If not found, [open a new issue](https://github.com/your-username/Bakery_Website/issues/new)
+3. Include:
+   - Browser/OS version
+   - Steps to reproduce
+   - Expected vs. actual behavior
+   - Screenshots (if applicable)
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
+
+**TL;DR:** You can use, modify, and distribute this project freely, just keep the copyright notice.
+
+---
+
+## 🙏 Acknowledgments
+
+- **Font Awesome** – Icon library ([fontawesome.com](https://fontawesome.com))
+- **Google Fonts** – Typography
+- **Unsplash / Pexels** – Product imagery inspiration (replace with actual credits if using specific images)
+- **Community** – Thanks to all contributors and users!
+
+---
+
+## 📞 Contact
+
+- **Website:** [Sweet Delights Bakery](https://your-domain.com)
+- **Email:** contact@sweetdelights.com
+- **Phone:** +1 (555) 123-4567
+- **Social Media:**
+  - [Facebook](https://facebook.com/sweetdelights)
+  - [Instagram](https://instagram.com/sweetdelights)
+  - [Twitter](https://twitter.com/sweetdelights)
+
+---
+
+## 📊 Project Stats
+
+- **Lines of Code:** ~8,500+ (HTML: 700, CSS: 1,873, JS: 465)
+- **Product Images:** 40+
+- **Categories:** 5 (Cakes, Pastries, Cookies, Breads, Desserts)
+- **Responsive Breakpoints:** 768px (tablet), 480px (mobile)
+
+---
+
+<div align="center">
+
+**Made with ❤️ and 🍰 by [Your Name/Team]**
+
+⭐ Star this repo if you found it helpful!
+
+[Report Bug](https://github.com/your-username/Bakery_Website/issues) · [Request Feature](https://github.com/your-username/Bakery_Website/issues) · [View Demo](https://your-username.github.io/Bakery_Website/)
+
+</div>
