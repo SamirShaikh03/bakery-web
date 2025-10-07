@@ -47,7 +47,7 @@ A modern, responsive bakery website featuring an elegant product catalog, intera
 > **Note:** Add your deployed link here (GitHub Pages, Netlify, Vercel, etc.)
 
 ```
-https://your-username.github.io/bakery_web/
+https://samirshaikh03.github.io/bakery-web/
 ```
 
 ---
@@ -220,6 +220,6 @@ This project is licensed under the **MIT License** – see the [LICENSE](LICENSE
 
 ⭐ Star this repo if you found it helpful!
 
-[Report Bug](https://github.com/your-username/Bakery_Website/issues) · [Request Feature](https://github.com/your-username/Bakery_Website/issues) · [View Demo](https://your-username.github.io/Bakery_Website/)
+[Report Bug](https://github.com/samirshaikh03/Bakery_Website/issues) · [Request Feature](https://github.com/samirshaikh03/Bakery_Website/issues) · [View Demo](https://samirshaikh03.github.io/Bakery_Website/)
 
 </div>
