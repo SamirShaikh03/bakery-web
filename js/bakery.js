@@ -378,6 +378,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const setMenuState = isOpen => {
         if (!mobileMenu || !navToggle) return;
+        navToggle.classList.toggle('is-active', isOpen);
         if (isOpen) {
             mobileMenu.hidden = false;
             requestAnimationFrame(() => {
