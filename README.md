@@ -193,21 +193,9 @@ This project is licensed under the **MIT License** – see the [LICENSE](LICENSE
 
 ---
 
-## 📞 Contact
-
-- **Website:** [Sweet Delights Bakery](https://your-domain.com)
-- **Email:** contact@sweetdelights.com
-- **Phone:** +1 (555) 123-4567
-- **Social Media:**
-  - [Facebook](https://facebook.com/sweetdelights)
-  - [Instagram](https://instagram.com/sweetdelights)
-  - [Twitter](https://twitter.com/sweetdelights)
-
----
-
 ## 📊 Project Stats
 
-- **Lines of Code:** ~8,500+ (HTML: 700, CSS: 1,873, JS: 465)
+- **Lines of Code:** ~8,500+
 - **Product Images:** 40+
 - **Categories:** 5 (Cakes, Pastries, Cookies, Breads, Desserts)
 - **Responsive Breakpoints:** 768px (tablet), 480px (mobile)
