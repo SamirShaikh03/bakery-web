@@ -365,7 +365,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const navToggle = document.getElementById('nav-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
-    const mobileMenuClose = document.getElementById('mobile-menu-close');
     const mobileMenuOverlay = mobileMenu ? mobileMenu.querySelector('.mobile-menu__overlay') : null;
     const mobileMenuLinks = mobileMenu ? mobileMenu.querySelector('.mobile-menu__links') : null;
     const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -436,10 +435,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const isOpen = mobileMenu.classList.contains('is-active');
             setMenuState(!isOpen);
         });
-    }
-
-    if (mobileMenuClose) {
-        mobileMenuClose.addEventListener('click', () => setMenuState(false));
     }
 
     if (mobileMenuOverlay) {

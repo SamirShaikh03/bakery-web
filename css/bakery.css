@@ -1,6 +1,7 @@
 * {
             box-sizing: border-box;
         }
+        html,
         body {
             font-family: 'Georgia', serif;
             margin: 0;
@@ -8,6 +9,7 @@
             background-color: #ebe5d9;
             color: #3c2005;
             line-height: 1.7;
+            overflow-x: hidden;
         }
         html {
         scroll-behavior: smooth;
@@ -44,9 +46,8 @@
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            width: 100vw;
+            width: 100%;
             gap: 12px 24px;
-            margin-left: -2px;
             padding: 12px clamp(16px, 4vw, 32px);
             background: linear-gradient(118deg,
                 rgba(60, 32, 5, 0.98) 10%,
@@ -698,12 +699,10 @@
 .review-marquee {
     position: relative;
     overflow: hidden;
-    position: relative;
-    left: 50%;
-    right: 50%;
     width: 100vw;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
     box-sizing: border-box;
     padding: clamp(76px, 3vw, 24px) 0;
     background: linear-gradient(135deg, rgba(255, 240, 210, 0.38), rgba(255, 205, 140, 0.32));
@@ -836,38 +835,36 @@
 
 /* Order Tracking */
 .order-tracking {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    width: min(var(--content-max-width, 1120px), 96%);
+    max-width: 1120px;
+    margin: clamp(36px, 8vw, 64px) auto;
+    padding: clamp(32px, 6vw, 52px) clamp(20px, 4vw, 60px);
+    background: linear-gradient(135deg, rgba(255, 212, 138, 0.22), rgba(255, 191, 97, 0.1));
     text-align: center;
-    padding-top: clamp(32px, 6vw, 52px);
-    padding-bottom: clamp(32px, 6vw, 52px);
+    overflow: hidden;
+    border-radius: 20px;
 }
 
-.order-tracking::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 100% !important;
-    height: clamp(120px, 22vw, 180px);
-    border-radius: 24px;
-    background: linear-gradient(135deg, rgba(255, 212, 138, 0.22), rgba(255, 191, 97, 0.1));
-    z-index: -1;
-}
 
 .tracking-form {
-    max-width: 520px;
+    width: min(100%, 620px);
     margin: 0 auto;
-    padding: clamp(26px, 5vw, 34px);
+    padding: clamp(26px, 5vw, 36px);
     text-align: center;
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 240, 213, 0.88));
-    border-radius: 22px;
-    box-shadow: 0 16px 36px rgba(60, 32, 5, 0.14);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 240, 213, 0.9));
+    border-radius: 24px;
+    box-shadow: 0 18px 38px rgba(60, 32, 5, 0.14);
     display: flex;
     flex-direction: column;
     gap: 18px;
-    border: 1px solid rgba(255, 179, 0, 0.2);
+    border: 1px solid rgba(255, 179, 0, 0.22);
 }
 
 .tracking-form input {
@@ -903,6 +900,54 @@
 #tracking-status {
     font-weight: 600;
     color: #3c2005;
+}
+
+@media (max-width: 768px) {
+    .order-tracking {
+        margin: clamp(28px, 6vw, 48px) auto;
+        padding: clamp(28px, 8vw, 42px) clamp(16px, 6vw, 32px);
+    }
+
+    .order-tracking::before {
+        top: clamp(-28px, -5vw, -18px);
+        width: min(720px, 94vw);
+        height: clamp(150px, 34vw, 210px);
+        border-radius: clamp(22px, 8vw, 32px);
+    }
+
+    .tracking-form {
+        width: 100%;
+        max-width: 520px;
+        margin: 0 auto;
+        padding: clamp(22px, 7vw, 30px);
+        border-radius: 22px;
+        box-shadow: 0 16px 32px rgba(60, 32, 5, 0.12);
+    }
+}
+
+@media (max-width: 480px) {
+    .order-tracking {
+        margin: clamp(22px, 6vw, 32px) auto;
+        padding: clamp(22px, 9vw, 30px) clamp(14px, 8vw, 22px);
+    }
+
+    .order-tracking::before {
+        top: clamp(-20px, -6vw, -12px);
+        width: min(640px, 96vw);
+        height: clamp(138px, 44vw, 190px);
+        border-radius: clamp(20px, 10vw, 26px);
+    }
+
+    .tracking-form {
+        padding: clamp(18px, 8vw, 24px);
+        border-radius: 20px;
+    }
+
+    .tracking-form input,
+    .tracking-form button {
+        padding: 12px 14px;
+        font-size: 0.98rem;
+    }
 }
 
 /* Seasonal Offers */
