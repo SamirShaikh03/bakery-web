@@ -59,8 +59,8 @@
             backdrop-filter: blur(7px) saturate(3520%);
             -webkit-backdrop-filter: blur(2px) saturate(520%);
             background-color: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.08);
             transition: box-shadow 220ms ease, transform 200ms ease;
+            position: fixed;
             }      
             nav a {
             color: #fff;
