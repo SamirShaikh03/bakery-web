@@ -44,7 +44,7 @@
         </div>
     </div>
     <header>
-        <div class="logo" id="home">
+        <div class="logo" id="home-logo">
             <a href="#home" id="logo-link" draggable="true">
                 <img src="assets/Sweet_Delight_logo.png" alt="Bakery Logo">
             </a>
@@ -54,7 +54,7 @@
         <p>Estd. 1960</p>
     </header>
     <div class="container">
-        <section class="hero" id="home">
+    <section class="hero" id="home">
             <div class="hero-content">
                 <span class="hero-badge"><i class="fa-solid fa-star" aria-hidden="true"></i> Artisanal bakery · Est. 1960</span>
                 <h2>Welcome to Sweet Delights</h2>
@@ -84,8 +84,23 @@
     </div>
         <div class="container1">
         <section id="products">
-            <h2>Our Products</h2>
-            <div class="products">
+            <h2>Our Delicious Selection</h2>
+            <p class="section-subtext">From artisanal cakes to savory bites - discover our complete range</p>
+            
+            <!-- Product Categories Navigation -->
+            <div class="category-tabs">
+                <button class="category-tab active" onclick="showCategory('cakes')">Premium Cakes</button>
+                <button class="category-tab" onclick="showCategory('pastries')">Fresh Pastries</button>
+                <button class="category-tab" onclick="showCategory('bread')">Artisan Breads</button>
+                <button class="category-tab" onclick="showCategory('savory')">Savory Delights</button>
+                <button class="category-tab" onclick="showCategory('desserts')">Sweet Treats</button>
+                <button class="category-tab" onclick="showCategory('beverages')">Beverages</button>
+            </div>
+            
+            <!-- Cakes Category -->
+            <div class="category-section active" id="cakes">
+                <h3 class="category-title">Premium Cakes</h3>
+                <div class="products">
                 <div class="product">
                     <img src="assets/Chocolate_cake.webp" alt="Chocolate Cake">
                     <h3>Chocolate Cake</h3>
@@ -302,6 +317,233 @@
                     <h3>Orange Blossom Mini Tart</h3>
                     <p>139.00 ₹</p>
                     <button class="order-btn" onclick="addToCart('Orange Blossom Mini Tart', 139.00, 1)">Order Now</button>
+                </div>
+            </div>
+            
+            <!-- Pastries Category -->
+            <div class="category-section" id="pastries">
+                <h3 class="category-title">Fresh Pastries</h3>
+                <div class="products">
+                    <div class="product">
+                        <img src="assets/placeholder-pastry.jpg" alt="Butter Croissant">
+                        <h3>Butter Croissant</h3>
+                        <p>89.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Butter Croissant', 89.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-pastry.jpg" alt="Pain au Chocolat">
+                        <h3>Pain au Chocolat</h3>
+                        <p>109.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Pain au Chocolat', 109.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-pastry.jpg" alt="Danish Pastry">
+                        <h3>Danish Pastry</h3>
+                        <p>119.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Danish Pastry', 119.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-pastry.jpg" alt="Puff Pastry">
+                        <h3>Puff Pastry</h3>
+                        <p>79.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Puff Pastry', 79.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-pastry.jpg" alt="Apple Turnover">
+                        <h3>Apple Turnover</h3>
+                        <p>99.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Apple Turnover', 99.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-pastry.jpg" alt="Napoleons">
+                        <h3>Napoleons</h3>
+                        <p>149.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Napoleons', 149.00, 1)">Order Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Artisan Breads Category -->
+            <div class="category-section" id="bread">
+                <h3 class="category-title">Artisan Breads</h3>
+                <div class="products">
+                    <div class="product">
+                        <img src="assets/placeholder-bread.jpg" alt="Sourdough Bread">
+                        <h3>Sourdough Bread</h3>
+                        <p>189.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Sourdough Bread', 189.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-bread.jpg" alt="French Baguette">
+                        <h3>French Baguette</h3>
+                        <p>149.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('French Baguette', 149.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-bread.jpg" alt="Whole Wheat Bread">
+                        <h3>Whole Wheat Bread</h3>
+                        <p>119.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Whole Wheat Bread', 119.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-bread.jpg" alt="Multigrain Bread">
+                        <h3>Multigrain Bread</h3>
+                        <p>139.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Multigrain Bread', 139.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-bread.jpg" alt="Garlic Bread">
+                        <h3>Garlic Bread</h3>
+                        <p>99.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Garlic Bread', 99.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-bread.jpg" alt="Focaccia">
+                        <h3>Focaccia</h3>
+                        <p>169.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Focaccia', 169.00, 1)">Order Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Savory Delights Category -->
+            <div class="category-section" id="savory">
+                <h3 class="category-title">Savory Delights</h3>
+                <div class="products">
+                    <div class="product">
+                        <img src="assets/placeholder-savory.jpg" alt="Mini Pizza">
+                        <h3>Mini Pizza</h3>
+                        <p>149.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Mini Pizza', 149.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-savory.jpg" alt="Vegetable Puff">
+                        <h3>Vegetable Puff</h3>
+                        <p>69.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Vegetable Puff', 69.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-savory.jpg" alt="Chicken Puff">
+                        <h3>Chicken Puff</h3>
+                        <p>89.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Chicken Puff', 89.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-savory.jpg" alt="Cheese Straws">
+                        <h3>Cheese Straws</h3>
+                        <p>119.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Cheese Straws', 119.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-savory.jpg" alt="Sausage Roll">
+                        <h3>Sausage Roll</h3>
+                        <p>129.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Sausage Roll', 129.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-savory.jpg" alt="Spinach & Feta Puff">
+                        <h3>Spinach & Feta Puff</h3>
+                        <p>99.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Spinach & Feta Puff', 99.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-savory.jpg" alt="Quiche Lorraine">
+                        <h3>Quiche Lorraine</h3>
+                        <p>179.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Quiche Lorraine', 179.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-savory.jpg" alt="Samosa">
+                        <h3>Samosa (Pack of 4)</h3>
+                        <p>89.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Samosa Pack', 89.00, 1)">Order Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sweet Treats Category -->
+            <div class="category-section" id="desserts">
+                <h3 class="category-title">Sweet Treats</h3>
+                <div class="products">
+                    <div class="product">
+                        <img src="assets/placeholder-dessert.jpg" alt="Chocolate Truffle">
+                        <h3>Chocolate Truffle</h3>
+                        <p>49.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Chocolate Truffle', 49.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-dessert.jpg" alt="Tiramisu Cup">
+                        <h3>Tiramisu Cup</h3>
+                        <p>129.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Tiramisu Cup', 129.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-dessert.jpg" alt="Crème Brûlée">
+                        <h3>Crème Brûlée</h3>
+                        <p>159.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Crème Brûlée', 159.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-dessert.jpg" alt="Panna Cotta">
+                        <h3>Panna Cotta</h3>
+                        <p>119.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Panna Cotta', 119.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-dessert.jpg" alt="Chocolate Mousse">
+                        <h3>Chocolate Mousse</h3>
+                        <p>139.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Chocolate Mousse', 139.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-dessert.jpg" alt="Fruit Tart">
+                        <h3>Fruit Tart</h3>
+                        <p>179.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Fruit Tart', 179.00, 1)">Order Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Beverages Category -->
+            <div class="category-section" id="beverages">
+                <h3 class="category-title">Beverages</h3>
+                <div class="products">
+                    <div class="product">
+                        <img src="assets/placeholder-beverage.jpg" alt="Fresh Coffee">
+                        <h3>Fresh Brewed Coffee</h3>
+                        <p>89.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Fresh Brewed Coffee', 89.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-beverage.jpg" alt="Cappuccino">
+                        <h3>Cappuccino</h3>
+                        <p>119.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Cappuccino', 119.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-beverage.jpg" alt="Latte">
+                        <h3>Latte</h3>
+                        <p>129.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Latte', 129.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-beverage.jpg" alt="Hot Chocolate">
+                        <h3>Hot Chocolate</h3>
+                        <p>99.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Hot Chocolate', 99.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-beverage.jpg" alt="Fresh Juice">
+                        <h3>Fresh Orange Juice</h3>
+                        <p>79.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Fresh Orange Juice', 79.00, 1)">Order Now</button>
+                    </div>
+                    <div class="product">
+                        <img src="assets/placeholder-beverage.jpg" alt="Masala Chai">
+                        <h3>Masala Chai</h3>
+                        <p>59.00 ₹</p>
+                        <button class="order-btn" onclick="addToCart('Masala Chai', 59.00, 1)">Order Now</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -591,8 +833,126 @@
     </div>
 </section>
 <section id="about" class="about-section content-section">
-    <h2>About Us</h2>
-    <p>Sweet Delights Bakery, founded in 1960, is a family-owned business dedicated to creating delightful treats. We use only the finest ingredients to ensure every bite is a moment of joy.</p>
+    <h2>About Sweet Delights Bakery</h2>
+    <p class="section-subtext">Three generations of baking excellence since 1960</p>
+    
+    <!-- Founders Section -->
+    <div class="founders-section">
+        <h3>Meet Our Founders</h3>
+        <div class="founders-grid">
+            <div class="founder-card">
+                <div class="founder-image">
+                    <img src="assets/placeholder-founder.png" alt="Raj Patel - Founder" loading="lazy">
+                </div>
+                <div class="founder-info">
+                    <h4>Raj Patel</h4>
+                    <span class="founder-title">Founder & Master Baker</span>
+                    <p>Started Sweet Delights in 1960 with a passion for traditional Indian sweets and European baking techniques. His innovative approach to blending flavors created our signature style.</p>
+                    <div class="founder-legacy">
+                        <strong>Legacy:</strong> Created our famous Rasmalai Cake recipe
+                    </div>
+                </div>
+            </div>
+            
+            <div class="founder-card">
+                <div class="founder-image">
+                    <img src="assets/placeholder-co-founder.png" alt="Daya Patel - Co-Founder" loading="lazy">
+                </div>
+                <div class="founder-info">
+                    <h4>Daya Patel</h4>
+                    <span class="founder-title">Co-Founder & Business Manager</span>
+                    <p>Joined Raj in building Sweet Delights from a small neighborhood bakery to Mumbai's beloved institution. Her business acumen and customer service philosophy shaped our values.</p>
+                    <div class="founder-legacy">
+                        <strong>Legacy:</strong> Established our "Customer First" philosophy
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Timeline Section -->
+    <div class="timeline-section">
+        <h3>Our Journey Through Generations</h3>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-year">1960</div>
+                <div class="timeline-content">
+                    <h4>The Beginning</h4>
+                    <p><strong>First Generation:</strong> Raj and Daya Patel open Sweet Delights in a small 300 sq ft shop in Bandra. Starting with just 5 traditional sweets and 3 types of bread.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-year">1975</div>
+                <div class="timeline-content">
+                    <h4>Expansion Era</h4>
+                    <p>Introduced European pastries and cakes. The famous Chocolate Truffle cake becomes Mumbai's favorite. Expanded to a 1200 sq ft space.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-year">1988</div>
+                <div class="timeline-content">
+                    <h4>Second Generation Takes Over</h4>
+                    <p><strong>Second Generation:</strong> Arjun Patel (Raj's son) joins the business, bringing modern techniques while preserving traditional recipes. Launched custom cake services.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-year">1995</div>
+                <div class="timeline-content">
+                    <h4>Innovation & Quality</h4>
+                    <p>Introduced state-of-the-art baking equipment. Became the first bakery in Mumbai to offer sugar-free and gluten-free options.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-year">2010</div>
+                <div class="timeline-content">
+                    <h4>Digital Age & Expansion</h4>
+                    <p><strong>Third Generation:</strong> Priya and Rohit Patel (Arjun's children) modernize operations with online ordering and home delivery services.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-year">2020</div>
+                <div class="timeline-content">
+                    <h4>Pandemic Resilience</h4>
+                    <p>Adapted quickly to contactless delivery and safety protocols. Launched DIY baking kits for families during lockdown.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-year">2025</div>
+                <div class="timeline-content">
+                    <h4>65 Years Strong</h4>
+                    <p>Today, Sweet Delights serves over 500 customers daily, with 3 generations working together, maintaining the perfect blend of tradition and innovation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Values Section -->
+    <div class="values-section">
+        <h3>Our Values</h3>
+        <div class="values-grid">
+            <div class="value-item">
+                <i class="fa-solid fa-heart"></i>
+                <h4>Family Tradition</h4>
+                <p>Three generations of baking expertise passed down through love and dedication.</p>
+            </div>
+            <div class="value-item">
+                <i class="fa-solid fa-leaf"></i>
+                <h4>Fresh Ingredients</h4>
+                <p>We source the finest, freshest ingredients daily from trusted local suppliers.</p>
+            </div>
+            <div class="value-item">
+                <i class="fa-solid fa-award"></i>
+                <h4>Quality Excellence</h4>
+                <p>Every product meets our high standards before reaching your table.</p>
+            </div>
+        </div>
+    </div>
 </section>
 <section id="location" class="locations-section content-section">
     <h2>Company Locations:</h2>

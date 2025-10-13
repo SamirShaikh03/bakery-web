@@ -124,6 +124,33 @@ function searchProducts() {
     });
 }
 
+// Category Switching
+function showCategory(categoryId) {
+    // Hide all categories
+    const categories = document.querySelectorAll('.category-section');
+    categories.forEach(category => {
+        category.classList.remove('active');
+    });
+    
+    // Remove active class from all tabs
+    const tabs = document.querySelectorAll('.category-tab');
+    tabs.forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    // Show selected category
+    const selectedCategory = document.getElementById(categoryId);
+    if (selectedCategory) {
+        selectedCategory.classList.add('active');
+    }
+    
+    // Add active class to clicked tab
+    const clickedTab = event ? event.target : document.querySelector(`[onclick="showCategory('${categoryId}')"]`);
+    if (clickedTab) {
+        clickedTab.classList.add('active');
+    }
+}
+
 // Order Tracking
 function trackOrder() {
     const orderId = document.getElementById('order-id').value;
@@ -369,11 +396,11 @@ function initReviewMarquee() {
     };
 
     const updateDuration = () => {
-        const pixelsPerSecond = 52;
+        const pixelsPerSecond = 90;
         const trackWidth = track.scrollWidth;
-        const duration = Math.max(26, trackWidth / pixelsPerSecond);
+        const duration = Math.max(12, trackWidth / pixelsPerSecond);
         track.style.setProperty('--review-speed', `${duration}s`);
-        track.style.setProperty('--review-speed-mobile', `${Math.max(duration + 8, 34)}s`);
+        track.style.setProperty('--review-speed-mobile', `${Math.max(duration + 4, 16)}s`);
     };
 
     ensureFilled();
@@ -427,7 +454,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let lastFocusedTrigger = null;
     let focusableItems = [];
 
-    const MENU_ANIMATION_MS = 280;
+    const MENU_ANIMATION_MS = 360;
 
     const setMenuState = isOpen => {
         if (!mobileMenu || !navToggle) return;
@@ -497,12 +524,60 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (mobileMenuLinks) {
         mobileMenuLinks.addEventListener('click', event => {
-            const target = event.target;
-            if (target && (target.closest('a') || target.closest('button'))) {
+            const cartButton = event.target.closest('.mobile-menu__cart');
+            if (cartButton) {
                 setMenuState(false);
             }
         });
     }
+
+    const navElement = document.querySelector('nav');
+    const getNavOffset = () => {
+        if (!navElement) return 0;
+        const navPosition = window.getComputedStyle(navElement).position;
+        if (navPosition === 'fixed' || navPosition === 'sticky') {
+            return navElement.getBoundingClientRect().height + 12;
+        }
+        return 0;
+    };
+
+    document.addEventListener('click', event => {
+        if (event.defaultPrevented) return;
+        const link = event.target.closest('a[href^="#"]');
+        if (!link) return;
+
+        const hash = link.getAttribute('href');
+        if (!hash || hash === '#' || hash === '#!' || link.hasAttribute('data-blog-trigger')) {
+            return;
+        }
+
+        const target = document.querySelector(hash);
+        if (!target) return;
+
+        event.preventDefault();
+
+        const offset = getNavOffset();
+        const targetTop = target.getBoundingClientRect().top + window.scrollY - offset;
+
+        window.scrollTo({
+            top: Math.max(targetTop, 0),
+            behavior: 'smooth'
+        });
+
+        if (history.pushState) {
+            if (window.location.hash !== hash) {
+                history.pushState(null, '', hash);
+            } else {
+                history.replaceState(null, '', hash);
+            }
+        } else {
+            window.location.hash = hash;
+        }
+
+        if (mobileMenu && mobileMenu.classList.contains('is-active')) {
+            setMenuState(false);
+        }
+    });
 
     window.addEventListener('resize', () => {
         if (window.innerWidth > 768 && mobileMenu && mobileMenu.classList.contains('is-active')) {
