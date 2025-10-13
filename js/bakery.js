@@ -136,52 +136,106 @@ function trackOrder() {
 }
 
 // Custom Cake Builder
+let customCakeDetails = null;
+
 function buildCake() {
     const size = document.getElementById('cake-size');
     const flavor = document.getElementById('cake-flavor');
+    const frosting = document.getElementById('cake-frosting');
     const message = document.getElementById('cake-message');
     const result = document.getElementById('cake-result');
+    const orderBtn = document.getElementById('order-custom-cake');
 
     if (!size || !flavor || !result) return;
 
     const selectedSize = size.value;
     const selectedFlavor = flavor.value;
+    const selectedFrosting = frosting ? frosting.value : 'Buttercream';
 
     if (!selectedSize || !selectedFlavor) {
         result.textContent = 'Please choose both a cake size and flavor to see pricing.';
         result.classList.add('is-error');
+        if (orderBtn) orderBtn.style.display = 'none';
         return;
     }
 
+    // Enhanced pricing for all sizes
     let basePrice = 0;
-    switch (selectedSize) {
-        case '6 inch':
-            basePrice = 720;
-            break;
-        case '8 inch':
-            basePrice = 1040;
-            break;
-        case '10 inch':
-            basePrice = 1460;
-            break;
-        default:
-            basePrice = 0;
-    }
+    const sizeMap = {
+        '4 inch': 450, '5 inch': 600, '6 inch': 720, '7 inch': 900,
+        '8 inch': 1040, '9 inch': 1280, '10 inch': 1460, '12 inch': 1800,
+        '14 inch': 2200, 'half-sheet': 2800, 'full-sheet': 4200,
+        '6+8': 2000, '8+10': 2800, '6+8+10': 4500,
+        'cupcakes-dozen': 720, 'mini-assortment': 850
+    };
+    basePrice = sizeMap[selectedSize] || 720;
 
+    // Enhanced flavor premiums
     const flavorPremium = {
-        Chocolate: 120,
-        Vanilla: 80,
-        'Red Velvet': 160
+        'Chocolate': 120, 'Vanilla': 80, 'Red Velvet': 160,
+        'Lemon': 140, 'Matcha': 180, 'Coffee': 150,
+        'Strawberry': 130, 'Pistachio': 200, 'Mango': 170,
+        'Salted Caramel': 160, 'Hazelnut': 190, 'Coconut': 140,
+        'Earl Grey': 150, 'Vegan Chocolate': 200
     };
 
-    let totalPrice = basePrice + (flavorPremium[selectedFlavor] || 0);
+    let totalPrice = basePrice + (flavorPremium[selectedFlavor] || 100);
 
+    // Message surcharge
     if (message && message.value.trim().length > 24) {
         totalPrice += 120;
     }
 
+    // Store details for ordering
+    customCakeDetails = {
+        name: `Custom ${selectedFlavor} Cake (${selectedSize})`,
+        size: selectedSize,
+        flavor: selectedFlavor,
+        frosting: selectedFrosting,
+        message: message ? message.value.trim() : '',
+        price: totalPrice
+    };
+
     result.textContent = `Estimated price: ₹${totalPrice.toLocaleString('en-IN')} (includes custom décor)`;
     result.classList.remove('is-error');
+    
+    // Show order button
+    if (orderBtn) {
+        orderBtn.style.display = 'inline-flex';
+    }
+}
+
+function orderCustomCake() {
+    if (!customCakeDetails) {
+        alert('Please calculate the price first!');
+        return;
+    }
+
+    // Build detailed description
+    let description = `${customCakeDetails.size} | ${customCakeDetails.flavor} flavor | ${customCakeDetails.frosting} frosting`;
+    if (customCakeDetails.message) {
+        description += ` | Message: "${customCakeDetails.message}"`;
+    }
+
+    // Add to cart
+    addToCart(customCakeDetails.name, customCakeDetails.price, 1);
+
+    // Show confirmation
+    const result = document.getElementById('cake-result');
+    if (result) {
+        result.textContent = `✓ Custom cake added to cart! (₹${customCakeDetails.price.toLocaleString('en-IN')})`;
+        result.classList.remove('is-error');
+    }
+
+    // Reset form after 2 seconds
+    setTimeout(() => {
+        const form = document.querySelector('.builder-form');
+        if (form) form.reset();
+        customCakeDetails = null;
+        const orderBtn = document.getElementById('order-custom-cake');
+        if (orderBtn) orderBtn.style.display = 'none';
+        if (result) result.textContent = '';
+    }, 2000);
 }
 
 // Blog modal helpers

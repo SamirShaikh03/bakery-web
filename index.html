@@ -31,6 +31,9 @@
     <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Bakery navigation" hidden>
         <div class="mobile-menu__overlay" data-menu-dismiss></div>
         <div class="mobile-menu__panel" role="menu">
+            <button type="button" class="mobile-menu__close" data-menu-dismiss aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
             <nav class="mobile-menu__links">
                 <a href="#home" role="menuitem"><i class="fas fa-home"></i> Home</a>
                 <a href="#products" role="menuitem"><i class="fas fa-cookie-bite"></i> Products</a>
@@ -433,8 +436,9 @@
                 </div>
             </div>
             <button type="submit" class="btn primary builder-submit">Calculate Price</button>
-            <p class="builder-footnote">Need a multi-tier cake? <a href="#contact">Contact our pastry chef</a> for a personalized quote.</p>
             <div id="cake-result" class="builder-result" role="status" aria-live="polite"></div>
+            <button type="button" id="order-custom-cake" class="btn primary builder-submit" style="display: none;" onclick="orderCustomCake()">Add to Cart</button>
+            <p class="builder-footnote">Need a multi-tier cake? <a href="#contact">Contact our pastry chef</a> for a personalized quote.</p>
         </form>
     </div>
 </section>
