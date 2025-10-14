@@ -50,8 +50,8 @@
             gap: 12px 24px;
             padding: 12px clamp(16px, 4vw, 32px);
             background: linear-gradient(118deg,
-                rgba(60, 32, 5, 0.98) 10%,
-                rgba(122, 62, 13, 0.96) 48%,
+                rgba(134, 76, 22, 0.98) 10%,
+                rgba(157, 83, 23, 0.96) 48%,
                 rgba(191, 107, 21, 0.95) 72%,
                 rgba(255, 179, 0, 0.92) 100%);
             border-bottom: 1px solid rgba(122, 62, 13, 0.35);
@@ -59,10 +59,16 @@
             backdrop-filter: blur(7px) saturate(3520%);
             -webkit-backdrop-filter: blur(2px) saturate(520%);
             background-color: rgba(255, 255, 255, 0.06);
-          
             position: fixed;  transition: box-shadow 220ms ease, transform 200ms ease;
-            }      
-            nav a {
+        }     
+        nav :hover {
+            border: 2px solid rgba(199, 111, 0, 0.25);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 240, 213, 0.8));
+            border-radius: 999px;
+            color: #3c2005;
+            font-weight: 600;
+        } 
+        nav a {
             color: #fff;
             text-decoration: none;
             font-weight: 600;
@@ -1261,7 +1267,8 @@
 .seasonal-offers {
     background: linear-gradient(135deg, #fff8e1 0%, #fff3e0 100%);
     padding: 60px 20px;
-    width: 1400px;
+    width: 2080px;
+    margin-left: -10rem;
 }
 
 .seasonal-offers .section-subtext {
@@ -1302,7 +1309,7 @@
 }
 
 .offer-image {
-    height: 250px;
+    height: 420px;
     overflow: hidden;
     border-radius: 15px 15px 0 0;
     position: relative;
@@ -1311,7 +1318,7 @@
 
 .offer-image img {
     width: 100%;
-    height: 320px;
+    height: 420px;
     object-fit: cover;
     transition: transform 0.3s ease;
 }
@@ -1410,7 +1417,7 @@
     gap: 12px;
     margin-bottom: 12px;
     padding: 10px;
-    background: #efefef;
+    background: #f0e9db;
     border-radius: 10px;
 }
 
@@ -2050,7 +2057,6 @@
 .search-group:focus-within {
     border-color: #ffb300;
     box-shadow: 0 0 0 4px rgba(255, 179, 0, 0.22);
-    background-color: rgba(255, 246, 230, 0.6);
 }
 
 .search-group .search-bar {
@@ -2095,7 +2101,7 @@
 }
 
 .search-group button:focus-visible {
-    outline: 2px solid #ffb300;
+    outline: 2px solid #000000;
     outline-offset: 2px;
 }
 
