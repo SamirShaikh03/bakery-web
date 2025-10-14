@@ -1259,8 +1259,9 @@
 
 /* Special Offers Section */
 .seasonal-offers {
-    /*background: linear-gradient(135deg, #fff8e1 0%, #fff3e0 100%);*/
-    padding: 60px 0;
+    background: linear-gradient(135deg, #fff8e1 0%, #fff3e0 100%);
+    padding: 60px 20px;
+    width: 1400px;
 }
 
 .seasonal-offers .section-subtext {
