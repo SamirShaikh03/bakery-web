@@ -557,19 +557,135 @@
     </div>
 </section>
 
-<section class="seasonal-offers content-section">
-    <h2>Special Offers</h2>
+    <section class="seasonal-offers content-section">
+    <h2>Festival Special Offers</h2>
+    <p class="section-subtext">Celebrate the season with our handcrafted festive treats</p>
+    
     <div class="offer-cards">
-        <div class="offer-card">
-            <img src="assets/Lemon_Tart.jpg" alt="Seasonal lemon tart special">
-            <h3>Summer Special</h3>
-            <p>20% off on all fruit cakes!</p>
+        <!-- Festive Gift Box Offer (Left) -->
+        <div class="offer-card offer-card--gift">
+            <div class="offer-image">
+                <img src="assets/diwali_gift_box.jpg" alt="Festive Gift Box Collection">
+            </div>
+            <div class="offer-content">
+                <div class="offer-header">
+                    <h3 class="offer-title">
+                        <i class="fa-solid fa-gift"></i>
+                        Festive Gift Boxes
+                    </h3>
+                    <span class="offer-badge offer-badge--premium">Premium</span>
+                </div>
+                <p class="offer-description">
+                    Curated collection of traditional sweets, artisan chocolates, and festive treats. 
+                    Beautifully packaged and ready for gifting to your loved ones.
+                </p>
+                <div class="offer-features">
+                    <div class="feature-item">
+                        <i class="fa-solid fa-check-circle"></i>
+                        <span>10+ Premium Sweets</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fa-solid fa-check-circle"></i>
+                        <span>Elegant Gift Packaging</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fa-solid fa-check-circle"></i>
+                        <span>Free Personalized Card</span>
+                    </div>
+                </div>
+                <div class="offer-pricing">
+                    <span class="price-original">₹2,499</span>
+                    <span class="price-discounted">₹1,899</span>
+                    <span class="discount-percent">24% OFF</span>
+                </div>
+                <div class="offer-actions">
+                    <a href="#products" class="btn btn--primary">Order Gift Box</a>
+                    <button class="btn btn--secondary" onclick="alert('Gift box details coming soon!')">View Details</button>
+                </div>
+            </div>
         </div>
-        <!-- Add more offer cards -->
-    </div>
-</section>
 
-<section class="cake-builder content-section" id="cake-builder">
+        <!-- Diwali Special Offer (Right) -->
+        <div class="offer-card offer-card--diwali">
+            <div class="offer-image">
+                <img src="assets/Lemon_Tart.jpg" alt="Diwali Special Collection">
+            </div>
+            <div class="offer-content">
+                <div class="offer-header">
+                    <h3 class="offer-title">
+                        <i class="fa-solid fa-star"></i>
+                        Diwali Special Collection
+                        <i class="fa-solid fa-sparkles"></i>
+                    </h3>
+                    <span class="offer-badge offer-badge--festive">Festival Special</span>
+                </div>
+                <p class="offer-description">
+                    Celebrate the festival of lights with our exclusive Diwali collection. 
+                    Traditional mithai made with pure ghee, dry fruits, and aromatic spices.
+                </p>
+                <div class="offer-highlights">
+                    <div class="highlight-item">
+                        <i class="fa-solid fa-medal"></i>
+                        <div>
+                            <strong>Premium Ingredients</strong>
+                            <span>Saffron, Pistachios, Silver Leaf</span>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fa-solid fa-clock"></i>
+                        <div>
+                            <strong>Fresh Daily</strong>
+                            <span>Made fresh every morning</span>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fa-solid fa-truck-fast"></i>
+                        <div>
+                            <strong>Same Day Delivery</strong>
+                            <span>Order before 2 PM</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="offer-pricing">
+                    <span class="discount-text">Up to 30% OFF</span>
+                    <span class="price-range">Starting from ₹299</span>
+                </div>
+                <div class="offer-actions">
+                    <a href="#products" class="btn btn--primary">Shop Diwali Collection</a>
+                    <a href="#cake-builder" class="btn btn--secondary">Custom Orders</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Quick Offers -->
+        <div class="quick-offers">
+            <div class="quick-offer-item">
+                <i class="fa-solid fa-birthday-cake"></i>
+                <div class="quick-offer-content">
+                    <h4>Birthday Specials</h4>
+                    <p>Free decoration on orders above ₹1500</p>
+                    <a href="#products" class="quick-link">Explore →</a>
+                </div>
+            </div>
+            <div class="quick-offer-item">
+                <i class="fa-solid fa-cookie-bite"></i>
+                <div class="quick-offer-content">
+                    <h4>Fresh Cookies</h4>
+                    <p>Buy 2 dozen, get 20% off</p>
+                    <a href="#products" class="quick-link">Order Now →</a>
+                </div>
+            </div>
+            <div class="quick-offer-item">
+                <i class="fa-solid fa-bread-slice"></i>
+                <div class="quick-offer-content">
+                    <h4>Daily Fresh Bread</h4>
+                    <p>Pre-order for next day delivery</p>
+                    <a href="#products" class="quick-link">Pre-order →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><section class="cake-builder content-section" id="cake-builder">
     <div class="builder-header">
     <span class="section-badge"><i class="fa-solid fa-cake-candles" aria-hidden="true"></i> Custom creations</span>
         <h2>Design Your Custom Cake</h2>
