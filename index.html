@@ -10,18 +10,18 @@
 </head>
 <body>
         <nav>
+        <form class="search-group" id="search-form" role="search">
+            <label class="sr-only" for="search-input">Search products</label>
+            <input type="search" id="search-input" class="search-bar" placeholder="Search products..." onkeyup="searchProducts()">
+            <button type="submit" id="search-button" aria-label="Search">
+            <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+            </button>
+        </form>
         <a href="#home"><i class="fas fa-home"></i> Home</a>
         <a href="#products"><i class="fas fa-cookie-bite"></i> Products</a>
         <a href="#location"><i class="fa-solid fa-location-dot"></i> Location</a>
         <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
         <a class="cart-icon" onclick="showCart()"><i class="fas fa-shopping-cart"></i> Cart</a>
-        <form class="search-group" id="search-form" role="search">
-            <label class="sr-only" for="search-input">Search products</label>
-            <input type="search" id="search-input" class="search-bar" placeholder="Search products..." onkeyup="searchProducts()">
-            <button type="submit" id="search-button" aria-label="Search">
-                <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
-            </button>
-        </form>
         <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation" style="display:none;">
             <span class="nav-toggle-bar"></span>
             <span class="nav-toggle-bar"></span>

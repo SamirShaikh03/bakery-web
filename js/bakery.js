@@ -111,8 +111,6 @@ function order(itemName) {
     showCart();
 }
 
-// Add at the end of your JavaScript file
-
 // Search Functionality
 function searchProducts() {
     const searchInput = document.getElementById('search-input').value.toLowerCase();
