@@ -32,7 +32,7 @@
         <div class="mobile-menu__overlay" data-menu-dismiss></div>
         <div class="mobile-menu__panel" role="menu">
             <button type="button" class="mobile-menu__close" data-menu-dismiss aria-label="Close menu">
-                <i class="fas fa-times"></i>
+                <i class="fas fa-times" aria-hidden="true"></i>
             </button>
             <nav class="mobile-menu__links">
                 <a href="#home" role="menuitem"><i class="fas fa-home"></i> Home</a>
@@ -43,6 +43,8 @@
             </nav>
         </div>
     </div>
+
+    <main>
     <header>
         <div class="logo" id="home-logo">
             <a href="#home" id="logo-link" draggable="true">
@@ -89,12 +91,12 @@
             
             <!-- Product Categories Navigation -->
             <div class="category-tabs">
-                <button class="category-tab active" onclick="showCategory('cakes')">Premium Cakes</button>
-                <button class="category-tab" onclick="showCategory('pastries')">Fresh Pastries</button>
-                <button class="category-tab" onclick="showCategory('bread')">Artisan Breads</button>
-                <button class="category-tab" onclick="showCategory('savory')">Savory Delights</button>
-                <button class="category-tab" onclick="showCategory('desserts')">Sweet Treats</button>
-                <button class="category-tab" onclick="showCategory('beverages')">Beverages</button>
+                <button class="category-tab active" onclick="showCategory(event, 'cakes')">Premium Cakes</button>
+                <button class="category-tab" onclick="showCategory(event, 'pastries')">Fresh Pastries</button>
+                <button class="category-tab" onclick="showCategory(event, 'bread')">Artisan Breads</button>
+                <button class="category-tab" onclick="showCategory(event, 'savory')">Savory Delights</button>
+                <button class="category-tab" onclick="showCategory(event, 'desserts')">Sweet Treats</button>
+                <button class="category-tab" onclick="showCategory(event, 'beverages')">Beverages</button>
             </div>
             
             <!-- Cakes Category -->
@@ -599,8 +601,8 @@
                     <span class="discount-percent">24% OFF</span>
                 </div>
                 <div class="offer-actions">
-                    <a href="#products" class="btn btn--primary">Order Gift Box</a>
-                    <button class="btn btn--secondary" onclick="alert('Gift box details coming soon!')">View Details</button>
+                    <button type="button" class="btn btn--primary" onclick="event.preventDefault(); openOfferModal('giftbox');">Order Gift Box</button>
+                    <button type="button" class="btn btn--secondary" onclick="event.preventDefault(); openOfferModal('giftbox');">View Details</button>
                 </div>
             </div>
         </div>
@@ -651,7 +653,7 @@
                     <span class="price-range">Starting from ₹299</span>
                 </div>
                 <div class="offer-actions">
-                    <a href="#products" class="btn btn--primary">Shop Diwali Collection</a>
+                    <button type="button" class="btn btn--primary" onclick="event.preventDefault(); openOfferModal('diwali');">Shop Diwali Collection</button>
                     <a href="#cake-builder" class="btn btn--secondary">Custom Orders</a>
                 </div>
             </div>
@@ -1090,9 +1092,106 @@
         <a href="https://www.linkedin.com/company/sweetdelightsbakery" target="_blank"><i class="fab fa-linkedin-in"></i></a>
     </div>
 </section>
+    </main>
+
     <footer>
         <p>© 2025 Sweet Delights Bakery. All Rights Reserved.</p>
     </footer>
+
+    <!-- Offer Modals -->
+    <div class="offer-modal" id="giftbox-modal" aria-hidden="true">
+        <div class="offer-modal__overlay" onclick="closeOfferModal('giftbox')"></div>
+        <div class="offer-modal__panel" role="dialog" aria-modal="true" aria-labelledby="giftbox-modal-title" tabindex="-1">
+            <button type="button" class="offer-modal__close" onclick="closeOfferModal('giftbox')" aria-label="Close gift box details">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="offer-modal__header">
+                <span class="offer-modal__badge">Festive</span>
+                <h3 id="giftbox-modal-title">Festive Gift Box Builder</h3>
+                <p>Create the perfect assortment for your celebration.</p>
+            </div>
+            <form class="offer-modal__form" onsubmit="return submitGiftBox(event)">
+                <div class="form-group">
+                    <label for="giftbox-size">Select Box Size</label>
+                    <select id="giftbox-size" name="boxSize" required>
+                        <option value="classic">Classic (₹1,899 · 8 artisanal sweets)</option>
+                        <option value="deluxe">Deluxe (₹2,199 · 12 premium treats)</option>
+                        <option value="royal">Royal (₹2,899 · 18 indulgent delights)</option>
+                    </select>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="giftbox-quantity">Quantity</label>
+                        <input type="number" id="giftbox-quantity" name="quantity" min="1" max="3" value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="giftbox-message">Gift Message (optional)</label>
+                        <input type="text" id="giftbox-message" name="message" maxlength="60" placeholder="Add a sweet note">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Include Add-ons</label>
+                    <div class="form-checkboxes">
+                        <label><input type="checkbox" name="addon" value="sparkles"> Sparkler candles (+₹99)</label>
+                        <label><input type="checkbox" name="addon" value="nuts"> Assorted nut cluster (+₹149)</label>
+                        <label><input type="checkbox" name="addon" value="tea"> Masala chai sachets (+₹129)</label>
+                    </div>
+                </div>
+                <div class="offer-modal__actions">
+                    <button type="submit" class="btn btn--primary">Add Gift Box to Cart</button>
+                    <button type="button" class="btn btn--secondary" onclick="closeOfferModal('giftbox')">Maybe Later</button>
+                </div>
+                <p class="offer-modal__status" id="giftbox-status" role="status" aria-live="polite"></p>
+            </form>
+        </div>
+    </div>
+
+    <div class="offer-modal" id="diwali-modal" aria-hidden="true">
+        <div class="offer-modal__overlay" onclick="closeOfferModal('diwali')"></div>
+        <div class="offer-modal__panel" role="dialog" aria-modal="true" aria-labelledby="diwali-modal-title" tabindex="-1">
+            <button type="button" class="offer-modal__close" onclick="closeOfferModal('diwali')" aria-label="Close Diwali collection details">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="offer-modal__header">
+                <span class="offer-modal__badge offer-modal__badge--accent">Diwali Special</span>
+                <h3 id="diwali-modal-title">Diwali Collection Curator</h3>
+                <p>Mix and match mithai boxes and festive desserts.</p>
+            </div>
+            <form class="offer-modal__form" onsubmit="return submitDiwaliCollection(event)">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="diwali-box">Select Collection</label>
+                        <select id="diwali-box" name="collection" required>
+                            <option value="radiance">Radiance Mithai Box · ₹1,299</option>
+                            <option value="royal">Royal Dry Fruit Hamper · ₹1,699</option>
+                            <option value="lumina">Lumina Dessert Platter · ₹2,299</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="diwali-quantity">Quantity</label>
+                        <input type="number" id="diwali-quantity" name="quantity" min="1" max="3" value="1" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Preferred Delivery Slot</label>
+                    <div class="form-radio">
+                        <label><input type="radio" name="delivery" value="morning" required> Morning (9 AM – 12 PM)</label>
+                        <label><input type="radio" name="delivery" value="afternoon"> Afternoon (1 PM – 4 PM)</label>
+                        <label><input type="radio" name="delivery" value="evening"> Evening (5 PM – 8 PM)</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="diwali-notes">Special Instructions</label>
+                    <textarea id="diwali-notes" name="notes" rows="3" placeholder="Mention allergen preferences or delivery notes"></textarea>
+                </div>
+                <div class="offer-modal__actions">
+                    <button type="submit" class="btn btn--primary">Add Collection to Cart</button>
+                    <button type="button" class="btn btn--secondary" onclick="closeOfferModal('diwali')">Keep Browsing</button>
+                </div>
+                <p class="offer-modal__status" id="diwali-status" role="status" aria-live="polite"></p>
+            </form>
+        </div>
+    </div>
  <!-- Cart Overlay -->
     <div id="cart-section">
        <div class="cart-content">
@@ -1112,8 +1211,14 @@
            </form>
        </div>
     </div>
+
+    <!-- Page Scripts -->
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="js/bakery.js"></script>
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'938d23807966bfcc',t:'MTc0NjA4MDA2Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <noscript>
+        <div class="no-js-notice">
+            <p>This website requires JavaScript for the best experience. Please enable JavaScript in your browser.</p>
+        </div>
+    </noscript>
 </body>
 </html>

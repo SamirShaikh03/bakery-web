@@ -123,31 +123,179 @@ function searchProducts() {
 }
 
 // Category Switching
-function showCategory(categoryId) {
-    // Hide all categories
+function showCategory(event, categoryId) {
+    if (event) {
+        event.preventDefault();
+    }
+
     const categories = document.querySelectorAll('.category-section');
     categories.forEach(category => {
-        category.classList.remove('active');
+        category.classList.toggle('active', category.id === categoryId);
     });
-    
-    // Remove active class from all tabs
+
     const tabs = document.querySelectorAll('.category-tab');
-    tabs.forEach(tab => {
-        tab.classList.remove('active');
-    });
-    
-    // Show selected category
-    const selectedCategory = document.getElementById(categoryId);
-    if (selectedCategory) {
-        selectedCategory.classList.add('active');
-    }
-    
-    // Add active class to clicked tab
-    const clickedTab = event ? event.target : document.querySelector(`[onclick="showCategory('${categoryId}')"]`);
-    if (clickedTab) {
-        clickedTab.classList.add('active');
+    tabs.forEach(tab => tab.classList.remove('active'));
+
+    if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active');
+    } else {
+        const fallbackTab = document.querySelector(`.category-tab[onclick*="'${categoryId}'"]`);
+        if (fallbackTab) {
+            fallbackTab.classList.add('active');
+        }
     }
 }
+
+function openOfferModal(type) {
+    closeActiveOfferModal();
+
+    const modal = document.getElementById(`${type}-modal`);
+    if (!modal) {
+        console.error(`Modal not found: ${type}-modal`);
+        return false;
+    }
+
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.dataset.offerModal = 'open';
+    document.body.style.overflow = 'hidden';
+
+    const panel = modal.querySelector('.offer-modal__panel');
+    if (panel) {
+        requestAnimationFrame(() => panel.focus());
+    }
+    
+    return false;
+}
+
+function closeOfferModal(type) {
+    const modal = document.getElementById(`${type}-modal`);
+    if (!modal) {
+        return;
+    }
+
+    const wasOpen = modal.classList.contains('is-open');
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    if (wasOpen) {
+        const status = modal.querySelector('.offer-modal__status');
+        if (status) {
+            status.textContent = '';
+        }
+
+        const form = modal.querySelector('form');
+        if (form) {
+            form.reset();
+        }
+
+        delete document.body.dataset.offerModal;
+        document.body.style.overflow = '';
+    }
+}
+
+function submitGiftBox(event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const size = form.boxSize.value;
+    const quantity = Math.max(1, Math.min(3, parseInt(form.quantity.value, 10) || 1));
+    const message = form.message.value.trim();
+    const addonInputs = form.querySelectorAll('input[name="addon"]:checked');
+    const statusEl = document.getElementById('giftbox-status');
+
+    const sizeMap = {
+        classic: 1899,
+        deluxe: 2199,
+        royal: 2899
+    };
+
+    const addonPrices = {
+        sparkles: 99,
+        nuts: 149,
+        tea: 129
+    };
+
+    const addonLabels = {
+        sparkles: 'Sparkler candles',
+        nuts: 'Assorted nut cluster',
+        tea: 'Masala chai sachets'
+    };
+
+    const selectedAddons = Array.from(addonInputs, input => input.value);
+    const addonTotal = selectedAddons.reduce((total, addon) => total + (addonPrices[addon] || 0), 0);
+    const basePrice = sizeMap[size] || sizeMap.classic;
+    const totalPrice = basePrice + addonTotal;
+
+    const capitalizedSize = size.charAt(0).toUpperCase() + size.slice(1);
+    const notes = message ? ` · Message: ${message}` : '';
+    const addonsText = selectedAddons.length
+        ? ` · Add-ons: ${selectedAddons.map(addon => addonLabels[addon] || addon).join(', ')}`
+        : '';
+
+    addToCart(`Festive Gift Box (${capitalizedSize})`, totalPrice, quantity);
+
+    if (statusEl) {
+        statusEl.textContent = `✓ Added ${quantity} box${quantity > 1 ? 'es' : ''} to your cart${notes}${addonsText}.`;
+    }
+
+    form.reset();
+
+    setTimeout(() => {
+        closeOfferModal('giftbox');
+        if (statusEl) {
+            statusEl.textContent = '';
+        }
+    }, 900);
+
+    return false;
+}
+
+function submitDiwaliCollection(event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const collection = form.collection.value;
+    const quantity = Math.max(1, Math.min(3, parseInt(form.quantity.value, 10) || 1));
+    const delivery = form.delivery.value;
+    const notes = form.notes.value.trim();
+    const statusEl = document.getElementById('diwali-status');
+
+    const collectionMap = {
+        radiance: { label: 'Radiance Mithai Box', price: 1299 },
+        royal: { label: 'Royal Dry Fruit Hamper', price: 1699 },
+        lumina: { label: 'Lumina Dessert Platter', price: 2299 }
+    };
+
+    const selected = collectionMap[collection] || collectionMap.radiance;
+    const summary = `Delivery: ${delivery.replace(/^./, char => char.toUpperCase())}${notes ? ` · Notes: ${notes}` : ''}`;
+
+    addToCart(selected.label, selected.price, quantity);
+
+    if (statusEl) {
+        statusEl.textContent = `✓ Added ${quantity} ${selected.label}${quantity > 1 ? 's' : ''} to your cart. ${summary}`;
+    }
+
+    form.reset();
+
+    setTimeout(() => {
+        closeOfferModal('diwali');
+        if (statusEl) {
+            statusEl.textContent = '';
+        }
+    }, 900);
+
+    return false;
+}
+
+function closeActiveOfferModal() {
+    ['giftbox', 'diwali'].forEach(closeOfferModal);
+}
+
+document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && document.body.dataset.offerModal === 'open') {
+        closeActiveOfferModal();
+    }
+});
 
 // Order Tracking
 function trackOrder() {
@@ -446,6 +594,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileMenuOverlay = mobileMenu ? mobileMenu.querySelector('.mobile-menu__overlay') : null;
     const mobileMenuLinks = mobileMenu ? mobileMenu.querySelector('.mobile-menu__links') : null;
+    const menuDismissTriggers = mobileMenu ? mobileMenu.querySelectorAll('[data-menu-dismiss]') : [];
     const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
     const navToggleOpenLabel = navToggle ? navToggle.getAttribute('aria-label') || 'Open navigation' : 'Open navigation';
     const navToggleCloseLabel = 'Close navigation';
@@ -520,8 +669,19 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileMenuOverlay.addEventListener('click', () => setMenuState(false));
     }
 
+    if (menuDismissTriggers.length) {
+        menuDismissTriggers.forEach(trigger => {
+            trigger.addEventListener('click', () => setMenuState(false));
+        });
+    }
+
     if (mobileMenuLinks) {
         mobileMenuLinks.addEventListener('click', event => {
+            const link = event.target.closest('a');
+            if (link) {
+                setMenuState(false);
+                return;
+            }
             const cartButton = event.target.closest('.mobile-menu__cart');
             if (cartButton) {
                 setMenuState(false);
