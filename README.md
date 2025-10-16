@@ -154,7 +154,6 @@ Bakery_Website/
 - [ ] Persistent cart (LocalStorage or database)
 - [ ] Admin dashboard for product/order management
 - [ ] Email notifications for orders
-- [ ] Multi-language support (i18n)
 - [ ] Dark mode toggle
 - [ ] Progressive Web App (PWA) features
 
@@ -167,7 +166,7 @@ Bakery_Website/
 Found a bug or have a feature idea?
 
 1. Check [existing issues](https://github.com/your-username/Bakery_Website/issues)
-2. If not found, [open a new issue](https://github.com/your-username/Bakery_Website/issues/new)
+2. If not found, [open a new issue](https://github.com/SamirShaikh03/Bakery_Website/issues/new)
 3. Include:
    - Browser/OS version
    - Steps to reproduce
@@ -178,7 +177,7 @@ Found a bug or have a feature idea?
 
 ## 📜 License
 
-This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **Apache 2.0 License** – see the [LICENSE](LICENSE) file for details.
 
 **TL;DR:** You can use, modify, and distribute this project freely, just keep the copyright notice.
 
