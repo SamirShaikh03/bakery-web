@@ -1,5 +1,6 @@
 let cart = [];
 let activeBlogTrigger = null;
+const productIndex = [];
 
 function addToCart(itemName, price, quantity) {
     const existingItem = cart.find(item => item.name === itemName);
@@ -111,15 +112,186 @@ function order(itemName) {
     showCart();
 }
 
-// Search Functionality
-function searchProducts() {
-    const searchInput = document.getElementById('search-input').value.toLowerCase();
+function buildProductIndex() {
+    productIndex.length = 0;
     const products = document.querySelectorAll('.product');
-    
     products.forEach(product => {
-        const title = product.querySelector('h3').textContent.toLowerCase();
-        product.style.display = title.includes(searchInput) ? 'block' : 'none';
+        const titleElement = product.querySelector('h3');
+        if (!titleElement) return;
+        const name = titleElement.textContent.trim();
+        const categorySection = product.closest('.category-section');
+        const categoryId = categorySection ? categorySection.id : null;
+        productIndex.push({
+            name,
+            nameLower: name.toLowerCase(),
+            element: product,
+            categoryId
+        });
     });
+}
+
+function getDefaultCategoryId() {
+    const defaultTab = document.querySelector('.category-tab[data-category]');
+    return defaultTab ? defaultTab.dataset.category : null;
+}
+
+function setActiveCategory(categoryId) {
+    const categories = document.querySelectorAll('.category-section');
+    const tabs = document.querySelectorAll('.category-tab');
+    let matchFound = false;
+
+    categories.forEach(category => {
+        const isMatch = category.id === categoryId;
+        category.classList.toggle('active', isMatch);
+        if (isMatch) {
+            matchFound = true;
+        }
+    });
+
+    tabs.forEach(tab => {
+        const tabCategory = tab.dataset.category;
+        tab.classList.toggle('active', tabCategory === categoryId);
+    });
+
+    return matchFound;
+}
+
+function resetProductVisibility() {
+    document.querySelectorAll('.product').forEach(product => {
+        product.style.display = '';
+    });
+}
+
+function clearSearchSuggestions() {
+    const suggestions = document.getElementById('search-suggestions');
+    if (!suggestions) return;
+    suggestions.innerHTML = '';
+    suggestions.classList.remove('is-visible');
+}
+
+function updateSearchSuggestions(query) {
+    const suggestions = document.getElementById('search-suggestions');
+    const searchInput = document.getElementById('search-input');
+    if (!suggestions || !searchInput) return;
+
+    suggestions.innerHTML = '';
+
+    const trimmedQuery = (query || '').trim();
+    if (!trimmedQuery) {
+        suggestions.classList.remove('is-visible');
+        return;
+    }
+
+    const normalized = trimmedQuery.toLowerCase();
+    const matches = productIndex
+        .filter(item => item.nameLower.includes(normalized))
+        .slice(0, 6);
+
+    if (!matches.length) {
+        suggestions.classList.remove('is-visible');
+        return;
+    }
+
+    matches.forEach(item => {
+        const option = document.createElement('button');
+        option.type = 'button';
+        option.className = 'search-suggestion';
+        option.role = 'option';
+        option.textContent = item.name;
+        option.addEventListener('mousedown', event => {
+            event.preventDefault();
+            searchInput.value = item.name;
+            clearSearchSuggestions();
+            searchProducts({ forceCategoryId: item.categoryId, scrollToSection: true, suppressSuggestions: true });
+            searchInput.focus();
+            requestAnimationFrame(() => {
+                const length = searchInput.value.length;
+                searchInput.setSelectionRange(length, length);
+            });
+        });
+        suggestions.appendChild(option);
+    });
+
+    suggestions.classList.add('is-visible');
+}
+
+function scrollToSectionWithOffset(target) {
+    if (!target) return;
+    const nav = document.querySelector('nav');
+    const navHeight = nav ? nav.getBoundingClientRect().height : 0;
+    const offset = navHeight + 16;
+    const destination = target.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: Math.max(0, destination), behavior: 'smooth' });
+}
+
+function scrollToProductsSection() {
+    const productsSection = document.getElementById('products');
+    if (productsSection) {
+        scrollToSectionWithOffset(productsSection);
+    }
+}
+
+// Search Functionality
+function searchProducts(options = {}) {
+    const { forceCategoryId = null, scrollToSection = false, suppressSuggestions = false } = options;
+    const searchInput = document.getElementById('search-input');
+    if (!searchInput) return;
+
+    if (!productIndex.length) {
+        buildProductIndex();
+    }
+
+    const queryRaw = searchInput.value || '';
+    const query = queryRaw.trim().toLowerCase();
+
+    let firstMatchCategoryId = null;
+
+    productIndex.forEach(item => {
+        const isMatch = !query || item.nameLower.includes(query);
+        item.element.style.display = isMatch ? '' : 'none';
+        if (isMatch && !firstMatchCategoryId) {
+            firstMatchCategoryId = item.categoryId;
+        }
+    });
+
+    if (suppressSuggestions) {
+        clearSearchSuggestions();
+    } else {
+        updateSearchSuggestions(query);
+    }
+
+    const categories = document.querySelectorAll('.category-section');
+    const visibilityMap = {};
+    categories.forEach(category => {
+        const hasVisible = Array.from(category.querySelectorAll('.product')).some(product => product.style.display !== 'none');
+        visibilityMap[category.id] = hasVisible;
+    });
+
+    if (query) {
+        const targetCategoryId = forceCategoryId || firstMatchCategoryId;
+        categories.forEach(category => {
+            const shouldShow = visibilityMap[category.id] && (!targetCategoryId || category.id === targetCategoryId);
+            category.classList.toggle('active', shouldShow);
+        });
+
+        const tabs = document.querySelectorAll('.category-tab');
+        tabs.forEach(tab => {
+            const tabCategory = tab.dataset.category;
+            const shouldActivate = tabCategory ? (visibilityMap[tabCategory] && (!targetCategoryId || tabCategory === targetCategoryId)) : false;
+            tab.classList.toggle('active', !!shouldActivate);
+        });
+    } else {
+    resetProductVisibility();
+    clearSearchSuggestions();
+        const defaultCategoryId = getDefaultCategoryId();
+        if (defaultCategoryId) {
+            setActiveCategory(defaultCategoryId);
+        }
+    }
+
+    if (scrollToSection) {
+        scrollToProductsSection();
+    }
 }
 
 // Category Switching
@@ -128,21 +300,23 @@ function showCategory(event, categoryId) {
         event.preventDefault();
     }
 
-    const categories = document.querySelectorAll('.category-section');
-    categories.forEach(category => {
-        category.classList.toggle('active', category.id === categoryId);
-    });
+    const searchInput = document.getElementById('search-input');
+    if (searchInput && searchInput.value.trim() !== '') {
+        searchInput.value = '';
+        resetProductVisibility();
+        clearSearchSuggestions();
+    }
 
-    const tabs = document.querySelectorAll('.category-tab');
-    tabs.forEach(tab => tab.classList.remove('active'));
-
-    if (event && event.currentTarget) {
-        event.currentTarget.classList.add('active');
-    } else {
-        const fallbackTab = document.querySelector(`.category-tab[onclick*="'${categoryId}'"]`);
-        if (fallbackTab) {
-            fallbackTab.classList.add('active');
+    if (!setActiveCategory(categoryId)) {
+        const fallback = getDefaultCategoryId();
+        if (fallback) {
+            setActiveCategory(fallback);
         }
+    }
+
+    const selectedCategory = document.getElementById(categoryId);
+    if (selectedCategory) {
+        scrollToSectionWithOffset(selectedCategory);
     }
 }
 
@@ -569,14 +743,46 @@ document.addEventListener('DOMContentLoaded', function() {
         section.classList.add('loading');
     });
 
+    buildProductIndex();
+    const defaultCategoryId = getDefaultCategoryId();
+    if (defaultCategoryId) {
+        setActiveCategory(defaultCategoryId);
+    }
+
     const searchForm = document.getElementById('search-form');
-    if (searchForm) {
+    const searchInput = document.getElementById('search-input');
+    if (searchForm && searchInput) {
         searchForm.addEventListener('submit', event => {
             event.preventDefault();
+            searchProducts({ scrollToSection: true, suppressSuggestions: true });
+            searchInput.focus();
+        });
+
+        searchInput.addEventListener('input', () => {
             searchProducts();
-            const searchInput = document.getElementById('search-input');
-            if (searchInput) {
-                searchInput.focus();
+        });
+
+        searchInput.addEventListener('focus', () => {
+            updateSearchSuggestions(searchInput.value.trim().toLowerCase());
+        });
+
+        searchInput.addEventListener('keydown', event => {
+            if (event.key === 'Escape') {
+                searchInput.value = '';
+                resetProductVisibility();
+                clearSearchSuggestions();
+                if (defaultCategoryId) {
+                    setActiveCategory(defaultCategoryId);
+                }
+            }
+        });
+    }
+
+    const suggestions = document.getElementById('search-suggestions');
+    if (suggestions) {
+        document.addEventListener('click', event => {
+            if (!event.target.closest('.search-group')) {
+                clearSearchSuggestions();
             }
         });
     }

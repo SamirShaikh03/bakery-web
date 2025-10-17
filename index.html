@@ -12,7 +12,8 @@
         <nav>
         <form class="search-group" id="search-form" role="search">
             <label class="sr-only" for="search-input">Search products</label>
-            <input type="search" id="search-input" class="search-bar" placeholder="Search products..." onkeyup="searchProducts()">
+            <input type="search" id="search-input" class="search-bar" placeholder="Search products..." autocomplete="off">
+            <div class="search-suggestions" id="search-suggestions" role="listbox" aria-label="Search suggestions"></div>
             <button type="submit" id="search-button" aria-label="Search">
             <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
             </button>
@@ -91,12 +92,12 @@
             
             <!-- Product Categories Navigation -->
             <div class="category-tabs">
-                <button class="category-tab active" onclick="showCategory(event, 'cakes')">Premium Cakes</button>
-                <button class="category-tab" onclick="showCategory(event, 'pastries')">Fresh Pastries</button>
-                <button class="category-tab" onclick="showCategory(event, 'bread')">Artisan Breads</button>
-                <button class="category-tab" onclick="showCategory(event, 'savory')">Savory Delights</button>
-                <button class="category-tab" onclick="showCategory(event, 'desserts')">Sweet Treats</button>
-                <button class="category-tab" onclick="showCategory(event, 'beverages')">Beverages</button>
+                <button class="category-tab active" data-category="cakes" onclick="showCategory(event, 'cakes')">Premium Cakes</button>
+                <button class="category-tab" data-category="pastries" onclick="showCategory(event, 'pastries')">Fresh Pastries</button>
+                <button class="category-tab" data-category="bread" onclick="showCategory(event, 'bread')">Artisan Breads</button>
+                <button class="category-tab" data-category="savory" onclick="showCategory(event, 'savory')">Savory Delights</button>
+                <button class="category-tab" data-category="desserts" onclick="showCategory(event, 'desserts')">Sweet Treats</button>
+                <button class="category-tab" data-category="beverages" onclick="showCategory(event, 'beverages')">Beverages</button>
             </div>
             
             <!-- Cakes Category -->
@@ -327,37 +328,37 @@
                 <h3 class="category-title">Fresh Pastries</h3>
                 <div class="products">
                     <div class="product">
-                        <img src="assets/placeholder-pastry.jpg" alt="Butter Croissant">
+                        <img src="assets/Butter_croissant.webp" alt="Butter Croissant">
                         <h3>Butter Croissant</h3>
                         <p>89.00 ₹</p>
                         <button class="order-btn" onclick="addToCart('Butter Croissant', 89.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
-                        <img src="assets/placeholder-pastry.jpg" alt="Pain au Chocolat">
+                        <img src="assets/Almon_Pastry.webp" alt="Pain au Chocolat">
                         <h3>Pain au Chocolat</h3>
                         <p>109.00 ₹</p>
                         <button class="order-btn" onclick="addToCart('Pain au Chocolat', 109.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
-                        <img src="assets/placeholder-pastry.jpg" alt="Danish Pastry">
+                        <img src="assets/Blueberry_muffins.jpg" alt="Danish Pastry">
                         <h3>Danish Pastry</h3>
                         <p>119.00 ₹</p>
                         <button class="order-btn" onclick="addToCart('Danish Pastry', 119.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
-                        <img src="assets/placeholder-pastry.jpg" alt="Puff Pastry">
+                        <img src="assets/Fudge_Brownie.jpg" alt="Puff Pastry">
                         <h3>Puff Pastry</h3>
                         <p>79.00 ₹</p>
                         <button class="order-btn" onclick="addToCart('Puff Pastry', 79.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
-                        <img src="assets/placeholder-pastry.jpg" alt="Apple Turnover">
+                        <img src="assets/Glazed_donuts.jpg" alt="Apple Turnover">
                         <h3>Apple Turnover</h3>
                         <p>99.00 ₹</p>
                         <button class="order-btn" onclick="addToCart('Apple Turnover', 99.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
-                        <img src="assets/placeholder-pastry.jpg" alt="Napoleons">
+                        <img src="assets/Chai-Spices-Cookies.jpg" alt="Napoleons">
                         <h3>Napoleons</h3>
                         <p>149.00 ₹</p>
                         <button class="order-btn" onclick="addToCart('Napoleons', 149.00, 1)">Order Now</button>
