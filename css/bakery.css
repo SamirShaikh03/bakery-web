@@ -50,7 +50,7 @@
             gap: 12px 24px;
             padding: 12px clamp(16px, 4vw, 32px);
             background: linear-gradient(118deg,
-                rgba(60, 32, 5, 0.98) 10%,
+                rgb(99 49 0 / 98%) 10%,
                 rgba(122, 62, 13, 0.96) 48%,
                 rgba(191, 107, 21, 0.95) 72%,
                 rgba(255, 179, 0, 0.92) 100%);
@@ -78,7 +78,7 @@
 
         nav a:hover,
         nav a:focus-visible {
-            background: rgba(255, 255, 255, 0.18);
+            background: rgba(201, 113, 59, 0.18);
             color: #fffbea;
             transform: translateY(-2px);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
@@ -1248,7 +1248,7 @@
     max-width: 1120px;
     margin: clamp(36px, 8vw, 64px) auto;
     padding: clamp(32px, 6vw, 52px) clamp(20px, 4vw, 60px);
-    background: linear-gradient(135deg, rgba(255, 212, 138, 0.22), rgba(255, 191, 97, 0.1));
+    background: linear-gradient(135deg, rgba(255, 216, 148, 0.66), rgba(255, 198, 113, 0.214));
     text-align: center;
     overflow: hidden;
     border-radius: 20px;
