@@ -81,6 +81,10 @@
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Georgia', -apple-system, BlinkMacSystemFont, 'Segoe UI', serif;
     color: var(--text-primary);
@@ -91,6 +95,26 @@ body {
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(255, 179, 0, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(243, 162, 97, 0.04) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+body > * {
+    position: relative;
+    z-index: 1;
 }
 
 img {
@@ -252,11 +276,11 @@ textarea {
    ========================================== */
 .admin-main {
     width: min(1400px, 96vw);
-    margin: clamp(32px, 5vw, 56px) auto;
+    margin: clamp(32px, 5vw, 56px) auto clamp(40px, 6vw, 64px);
     display: flex;
     flex-direction: column;
-    gap: clamp(28px, 4vw, 40px);
-    padding: 0 var(--spacing-md);
+    gap: clamp(32px, 5vw, 48px);
+    padding: 0 var(--spacing-md) var(--spacing-2xl);
 }
 
 /* ==========================================
@@ -275,6 +299,7 @@ textarea {
     display: grid;
     gap: var(--spacing-lg);
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    margin-bottom: var(--spacing-md);
 }
 
 .metric-card {
@@ -413,6 +438,7 @@ textarea {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
 }
 
 .section-header {
@@ -421,6 +447,8 @@ textarea {
     justify-content: space-between;
     gap: var(--spacing-md);
     flex-wrap: wrap;
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid rgba(255, 179, 0, 0.1);
 }
 
 .section-header h2 {
@@ -430,6 +458,43 @@ textarea {
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
+}
+
+.section-header h2 i {
+    color: var(--amber);
+    transition: all var(--transition-base);
+}
+
+.section-header:hover h2 i {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.analytics-section:hover .section-header h2 i.fa-chart-column {
+    animation: chartBounce 0.6s ease;
+}
+
+.quick-actions:hover .section-header h2 i.fa-bolt {
+    animation: boltShake 0.5s ease;
+}
+
+.activity-feed:hover .section-header h2 i.fa-clock-rotate-left {
+    animation: clockRotate 1s ease;
+}
+
+@keyframes chartBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes boltShake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+}
+
+@keyframes clockRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .section-badge {
@@ -569,6 +634,18 @@ textarea {
     gap: var(--spacing-lg);
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     align-items: end;
+    margin-bottom: var(--spacing-xl);
+    position: relative;
+}
+
+.control-panel::before {
+    content: "🔍";
+    position: absolute;
+    top: -15px;
+    right: 30px;
+    font-size: 2rem;
+    opacity: 0.3;
+    animation: float 3s ease-in-out infinite;
 }
 
 .form-field {
@@ -601,7 +678,7 @@ select {
     font-family: inherit;
     font-size: 0.95rem;
     background: rgba(255, 255, 255, 0.9);
-    transition: border var(--transition-base), box-shadow var(--transition-base);
+    transition: all var(--transition-base);
     color: var(--text-primary);
 }
 
@@ -612,6 +689,14 @@ select:focus {
     outline: none;
     border-color: var(--amber);
     box-shadow: 0 0 0 4px rgba(255, 179, 0, 0.15);
+    transform: translateY(-1px);
+}
+
+input[type="search"]:hover,
+input[type="text"]:hover,
+input[type="date"]:hover,
+select:hover {
+    border-color: rgba(255, 179, 0, 0.4);
 }
 
 input::placeholder {
@@ -713,6 +798,7 @@ input::placeholder {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
 }
 
 .orders-header {
@@ -721,6 +807,8 @@ input::placeholder {
     justify-content: space-between;
     gap: var(--spacing-md);
     flex-wrap: wrap;
+    padding-bottom: var(--spacing-md);
+    border-bottom: 2px solid rgba(255, 179, 0, 0.15);
 }
 
 .orders-header h2 {
@@ -730,7 +818,7 @@ input::placeholder {
 
 .order-count {
     font-weight: 600;
-    padding: 6px 16px;
+    padding: 8px 18px;
     border-radius: var(--radius-full);
     background: var(--amber-soft);
     color: var(--coffee);
@@ -1156,6 +1244,7 @@ input::placeholder {
     padding: clamp(24px, 4vw, 32px);
     box-shadow: var(--shadow-lg);
     border: 1px solid var(--card-border);
+    margin-bottom: var(--spacing-lg);
 }
 
 .action-grid {
@@ -1168,10 +1257,10 @@ input::placeholder {
 .action-card {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 243, 224, 0.8));
     border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
+    padding: clamp(20px, 3vw, 24px);
     border: 1px solid rgba(60, 32, 5, 0.08);
     cursor: pointer;
-    transition: all var(--transition-base);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1210,6 +1299,7 @@ input::placeholder {
     padding: clamp(24px, 4vw, 32px);
     box-shadow: var(--shadow-lg);
     border: 1px solid var(--card-border);
+    margin-bottom: var(--spacing-2xl);
 }
 
 .activity-list {
@@ -1217,6 +1307,27 @@ input::placeholder {
     flex-direction: column;
     gap: var(--spacing-md);
     margin-top: var(--spacing-lg);
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: var(--spacing-sm);
+}
+
+.activity-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.activity-list::-webkit-scrollbar-track {
+    background: rgba(60, 32, 5, 0.05);
+    border-radius: var(--radius-full);
+}
+
+.activity-list::-webkit-scrollbar-thumb {
+    background: var(--amber);
+    border-radius: var(--radius-full);
+}
+
+.activity-list::-webkit-scrollbar-thumb:hover {
+    background: var(--amber-dark);
 }
 
 .activity-item {
@@ -1266,22 +1377,37 @@ input::placeholder {
    ========================================== */
 .admin-footer {
     margin-top: auto;
-    padding: var(--spacing-xl) var(--spacing-md);
+    padding: clamp(24px, 4vw, 32px) var(--spacing-md) clamp(32px, 5vw, 48px);
     text-align: center;
     font-size: 0.9rem;
     color: var(--text-secondary);
-    border-top: 1px solid rgba(60, 32, 5, 0.08);
+    border-top: 2px solid rgba(255, 179, 0, 0.1);
+    background: linear-gradient(to bottom, transparent, rgba(255, 179, 0, 0.02));
+    position: relative;
+}
+
+.admin-footer::before {
+    content: "🍰";
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2.5rem;
+    opacity: 0.2;
 }
 
 .admin-footer a {
     color: var(--amber-dark);
     font-weight: 600;
-    transition: color var(--transition-base);
+    transition: all var(--transition-base);
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
 }
 
 .admin-footer a:hover {
     color: var(--coffee);
-    text-decoration: underline;
+    background: rgba(255, 179, 0, 0.1);
 }
 
 /* ==========================================
@@ -1497,6 +1623,292 @@ input::placeholder {
 .loading {
     opacity: 0.6;
     pointer-events: none;
+}
+
+/* Visual divider */
+.section-divider {
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--amber), transparent);
+    margin: var(--spacing-2xl) 0;
+    border-radius: var(--radius-full);
+    opacity: 0.3;
+}
+
+/* Glow effect for important elements */
+.glow {
+    box-shadow: 0 0 20px rgba(255, 179, 0, 0.4);
+}
+
+/* ==========================================
+   Decorative Headings
+   ========================================== */
+.section-header h2 {
+    position: relative;
+    display: inline-block;
+}
+
+.section-header h2::before {
+    content: "";
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background: var(--amber);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(255, 179, 0, 0.2);
+    animation: decorPulse 2s ease-in-out infinite;
+}
+
+.section-header h2::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, var(--amber), transparent);
+    border-radius: var(--radius-full);
+}
+
+.orders-header h2::before {
+    content: "";
+    position: absolute;
+    left: -24px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    background: var(--amber);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(255, 179, 0, 0.2);
+    animation: decorPulse 2s ease-in-out infinite;
+}
+
+.orders-header h2 {
+    position: relative;
+    padding-left: var(--spacing-md);
+}
+
+/* Decorative icons for sections */
+.analytics-section::before,
+.quick-actions::before,
+.activity-feed::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle at top left, rgba(255, 179, 0, 0.1), transparent 70%);
+    border-radius: var(--radius-2xl) 0 0 0;
+    pointer-events: none;
+}
+
+.analytics-section,
+.quick-actions,
+.activity-feed {
+    position: relative;
+    overflow: hidden;
+}
+
+/* ==========================================
+   Enhanced Animations
+   ========================================== */
+@keyframes decorPulse {
+    0%, 100% {
+        transform: translateY(-50%) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-50%) scale(1.2);
+        opacity: 0.7;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Add bounce effect to metric cards on load */
+.metric-card:nth-child(1) { animation: bounceIn 0.6s ease-out 0.1s both; }
+.metric-card:nth-child(2) { animation: bounceIn 0.6s ease-out 0.2s both; }
+.metric-card:nth-child(3) { animation: bounceIn 0.6s ease-out 0.3s both; }
+.metric-card:nth-child(4) { animation: bounceIn 0.6s ease-out 0.4s both; }
+.metric-card:nth-child(5) { animation: bounceIn 0.6s ease-out 0.5s both; }
+.metric-card:nth-child(6) { animation: bounceIn 0.6s ease-out 0.6s both; }
+
+/* Floating animation for icons */
+.metric-icon {
+    animation: float 3s ease-in-out infinite;
+}
+
+.metric-icon:nth-child(even) {
+    animation-delay: 1.5s;
+}
+
+/* Shimmer effect for buttons on hover */
+.button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: left 0.5s;
+}
+
+.button:hover::before {
+    left: 100%;
+}
+
+.button {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Smooth entrance for order cards */
+.order-card {
+    animation: slideInUp 0.5s ease-out both;
+}
+
+.order-card:nth-child(1) { animation-delay: 0.1s; }
+.order-card:nth-child(2) { animation-delay: 0.2s; }
+.order-card:nth-child(3) { animation-delay: 0.3s; }
+.order-card:nth-child(4) { animation-delay: 0.4s; }
+.order-card:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Action cards scale on hover */
+.action-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.action-card:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+/* Activity items slide in */
+.activity-item {
+    animation: slideInLeft 0.4s ease-out both;
+}
+
+.activity-item:nth-child(1) { animation-delay: 0.1s; }
+.activity-item:nth-child(2) { animation-delay: 0.2s; }
+.activity-item:nth-child(3) { animation-delay: 0.3s; }
+.activity-item:nth-child(4) { animation-delay: 0.4s; }
+.activity-item:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Chart bars grow animation */
+.bar {
+    animation: growUp 0.8s ease-out both;
+}
+
+.bar-chart-item:nth-child(1) .bar { animation-delay: 0.1s; }
+.bar-chart-item:nth-child(2) .bar { animation-delay: 0.2s; }
+.bar-chart-item:nth-child(3) .bar { animation-delay: 0.3s; }
+.bar-chart-item:nth-child(4) .bar { animation-delay: 0.4s; }
+.bar-chart-item:nth-child(5) .bar { animation-delay: 0.5s; }
+.bar-chart-item:nth-child(6) .bar { animation-delay: 0.6s; }
+.bar-chart-item:nth-child(7) .bar { animation-delay: 0.7s; }
+
+@keyframes growUp {
+    from {
+        transform: scaleY(0);
+        transform-origin: bottom;
+    }
+    to {
+        transform: scaleY(1);
+        transform-origin: bottom;
+    }
+}
+
+/* Status pill animation */
+.status-pill::before {
+    animation: statusBlink 2s ease-in-out infinite;
+}
+
+@keyframes statusBlink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+/* Section badge bounce */
+.section-badge {
+    animation: badgeBounce 2s ease-in-out infinite;
+}
+
+@keyframes badgeBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
 }
 
 /* ==========================================
