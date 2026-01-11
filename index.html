@@ -10,6 +10,11 @@
 </head>
 <body>
         <nav>
+        <div class="hero-logo">
+            <a href="#home" draggable="true" aria-label="Return to top">
+                <img src="assets/Sweet_Delight_logo.png" alt="Sweet Delights Bakery logo">
+            </a>
+        </div>
         <form class="search-group" id="search-form" role="search">
             <label class="sr-only" for="search-input">Search products</label>
             <input type="search" id="search-input" class="search-bar" placeholder="Search products..." autocomplete="off">
@@ -46,45 +51,85 @@
     </div>
 
     <main>
-    <header>
-        <div class="logo" id="home-logo">
-            <a href="#home" id="logo-link" draggable="true">
-                <img src="assets/Sweet_Delight_logo.png" alt="Bakery Logo">
-            </a>
-        </div>
-        <h1>Sweet Delight's Bakery</h1>
-        <p>Freshly Baked Treats for Every Occasion!</p>
-        <p>Estd. 1960</p>
-    </header>
-    <div class="container">
-    <section class="hero" id="home">
-            <div class="hero-content">
-                <span class="hero-badge"><i class="fa-solid fa-star" aria-hidden="true"></i> Artisanal bakery · Est. 1960</span>
-                <h2>Welcome to Sweet Delights</h2>
-                <p>Discover signature cakes, flaky pastries, and melt-in-your-mouth cookies baked fresh every sunrise.</p>
+    <header class="hero-area" id="home">
+        <div class="hero-area__texture" aria-hidden="true"></div>
+        <div class="hero-area__wrapper">
+            <div class="hero-copy">
+                <div class="nav-brand">
+                    <a href="#home" id="logo-link" aria-label="Sweet Delights Bakery home">
+                        <span>Sweet Delights</span>
+                    </a>
+                    <small>Since 1960</small>
+                </div>
+                <div class="hero-logo">
+                    <p class="hero-logo__tagline">Family-owned · Since 1960</p>
+                </div>
+                <div class="hero-pill-group">
+                    <span class="hero-pill"><i class="fa-solid fa-star" aria-hidden="true"></i> Artisanal bakery · Est. 1960</span>
+                    <span class="hero-pill pill-outline"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Bandra • Mumbai</span>
+                </div>
+                <h1>Sweet Delight's Bakery</h1>
+                <p class="hero-lead">Fresh croissants, celebration cakes, and artisanal breads leaving the oven every sunrise. Crafted by three generations of Patels with locally sourced ingredients.</p>
+                <div class="hero-metrics">
+                    <article class="hero-metric-card">
+                        <span class="metric-value">65+</span>
+                        <span class="metric-label">Years Baking</span>
+                    </article>
+                    <article class="hero-metric-card">
+                        <span class="metric-value">500</span>
+                        <span class="metric-label">Daily Orders</span>
+                    </article>
+                    <article class="hero-metric-card">
+                        <span class="metric-value">4.9★</span>
+                        <span class="metric-label">Community Rating</span>
+                    </article>
+                </div>
+                <div class="hero-actions">
+                    <a href="#products" class="btn primary">Explore Our Menu</a>
+                    <a href="#cake-builder" class="btn outline">Design a Custom Cake</a>
+                </div>
                 <ul class="hero-highlights">
                     <li><i class="fa-solid fa-leaf" aria-hidden="true"></i> Locally sourced ingredients</li>
                     <li><i class="fa-solid fa-heart" aria-hidden="true"></i> Seasonal specials crafted with love</li>
                     <li><i class="fa-solid fa-truck" aria-hidden="true"></i> Same-day delivery across the city</li>
                     <li><i class="fa-solid fa-seedling" aria-hidden="true"></i> Gluten-free & vegan options available</li>
                 </ul>
-                <div class="hero-actions">
-                    <a href="#products" class="btn primary">Explore Our Menu</a>
-                    <a href="#cake-builder" class="btn outline">Design a Custom Cake</a>
+                <div class="hero-trust">
+                    <div class="hero-avatars" aria-hidden="true">
+                        <img src="assets/cust1.png" alt="" loading="lazy">
+                        <img src="assets/cust2.png" alt="" loading="lazy">
+                        <img src="assets/cust3.png" alt="" loading="lazy">
+                    </div>
+                    <p><strong>Loved by 12k+ families</strong> across Mumbai with doorstep delivery every single day.</p>
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="hero-card">
-                    <img src="assets/Blueberry_Lemon_Cake.jpg" alt="Signature blueberry lemon cake" loading="lazy">
-                    <div class="hero-card-info">
+            <div class="hero-gallery">
+                <figure class="hero-gallery__primary">
+                    <img src="assets/Blueberry_Lemon_Cake.jpg" alt="Fresh blueberry lemon cake" loading="lazy">
+                    <figcaption>
                         <span class="hero-card-tag">Chef's pick</span>
                         <strong>Blueberry Lemon Dream</strong>
                         <p>Zesty lemon sponge layered with wild blueberry compote and mascarpone frosting.</p>
+                    </figcaption>
+                </figure>
+                <div class="hero-gallery__stack">
+                    <figure class="hero-gallery__mini">
+                        <img src="assets/Butter_croissant.webp" alt="Flaky butter croissants" loading="lazy">
+                        <figcaption>Fresh croissants • 7:00 AM batch</figcaption>
+                    </figure>
+                    <div class="hero-note-card">
+                        <p class="note-eyebrow">Open today</p>
+                        <p class="note-title">7:00 AM – 10:00 PM</p>
+                        <p>Walk-ins welcome · Same-day delivery · Custom cakes in 48 hrs</p>
+                        <ul>
+                            <li><i class="fa-solid fa-cake-candles" aria-hidden="true"></i> Celebration cakes</li>
+                            <li><i class="fa-solid fa-mug-hot" aria-hidden="true"></i> Coffee pairings</li>
+                        </ul>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </header>
         <div class="container1">
         <section id="products">
             <h2>Our Delicious Selection</h2>
