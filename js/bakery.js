@@ -383,12 +383,14 @@ function searchProducts(options = {}) {
     applyProductPreviewLimits();
 }
 
-// Category Switching
+// Category Switching - Global function for inline onclick handlers
 function showCategory(event, categoryId) {
+    // Prevent default behavior
     if (event) {
         event.preventDefault();
     }
 
+    // Clear any active search
     const searchInput = document.getElementById('search-input');
     if (searchInput && searchInput.value.trim() !== '') {
         searchInput.value = '';
@@ -398,23 +400,46 @@ function showCategory(event, categoryId) {
 
     isSearchActive = false;
 
-    let targetCategory = categoryId;
-    if (!setActiveCategory(targetCategory)) {
-        const fallback = getDefaultCategoryId();
-        if (fallback) {
-            targetCategory = fallback;
-            setActiveCategory(fallback);
-        }
+    // Get all category sections and tabs
+    const allCategories = document.querySelectorAll('.category-section');
+    const allTabs = document.querySelectorAll('.category-tab');
+    
+    // Remove active class from ALL categories
+    allCategories.forEach(function(cat) {
+        cat.classList.remove('active');
+    });
+    
+    // Remove active class from ALL tabs
+    allTabs.forEach(function(tab) {
+        tab.classList.remove('active');
+    });
+    
+    // Add active class to the selected category
+    const targetCategory = document.getElementById(categoryId);
+    if (targetCategory) {
+        targetCategory.classList.add('active');
+    }
+    
+    // Add active class to the corresponding tab
+    const targetTab = document.querySelector('.category-tab[data-category="' + categoryId + '"]');
+    if (targetTab) {
+        targetTab.classList.add('active');
     }
 
+    // Apply preview limits
     applyProductPreviewLimits();
-    scrollActiveCategoryTab(targetCategory);
+    
+    // Scroll tab into view on mobile
+    scrollActiveCategoryTab(categoryId);
 
-    const selectedCategory = document.getElementById(targetCategory);
-    if (selectedCategory) {
-        scrollToSectionWithOffset(selectedCategory);
+    // Scroll to the category section
+    if (targetCategory) {
+        scrollToSectionWithOffset(targetCategory);
     }
 }
+
+// Make showCategory globally accessible
+window.showCategory = showCategory;
 
 function openOfferModal(type) {
     closeActiveOfferModal();
