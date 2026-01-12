@@ -384,7 +384,7 @@ textarea {
     font-size: 0.86rem;
     text-transform: uppercase;
     letter-spacing: 0.18em;
-    color: var(--text-muted);
+    color: rgb(255 249 243 / 56%);
     margin-bottom: var(--spacing-xs);
     display: block;
     font-weight: 600;
@@ -416,12 +416,12 @@ textarea {
 }
 
 .metric-change--neutral {
-    color: var(--text-muted);
+    color: #bfaa7a;
 }
 
 .metric-footnote {
     font-size: 0.85rem;
-    color: var(--text-secondary);
+    color: #9a8f7e;
     margin-top: var(--spacing-xs);
     display: block;
 }
@@ -782,7 +782,7 @@ input::placeholder {
 
 .toggle-field span {
     font-size: 0.95rem;
-    color: var(--coffee);
+    color: #db6b00;
     font-weight: 600;
 }
 
@@ -821,7 +821,7 @@ input::placeholder {
     padding: 8px 18px;
     border-radius: var(--radius-full);
     background: var(--amber-soft);
-    color: var(--coffee);
+    color: #ffc185;
     font-size: 0.95rem;
 }
 
@@ -863,12 +863,14 @@ input::placeholder {
 
 .empty-state p {
     margin: 4px 0;
-    color: var(--text-secondary);
+    color: #a38d52;
     font-size: 1.1rem;
 }
 
 .empty-state .hint {
-    color: var(--text-muted);
+    color: rgb
+#ff7d008f
+(255 125 0 / 56%);
     font-size: 0.9rem;
 }
 
@@ -1380,7 +1382,7 @@ input::placeholder {
     padding: clamp(24px, 4vw, 32px) var(--spacing-md) clamp(32px, 5vw, 48px);
     text-align: center;
     font-size: 0.9rem;
-    color: var(--text-secondary);
+    color: rgb(221 211 201 / 72%);
     border-top: 2px solid rgba(255, 179, 0, 0.1);
     background: linear-gradient(to bottom, transparent, rgba(255, 179, 0, 0.02));
     position: relative;
@@ -1393,7 +1395,7 @@ input::placeholder {
     left: 50%;
     transform: translateX(-50%);
     font-size: 2.5rem;
-    opacity: 0.2;
+    opacity: 1;
 }
 
 .admin-footer a {
