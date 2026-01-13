@@ -44,8 +44,6 @@ A modern, responsive bakery website featuring an elegant product catalog, intera
 
 ## 🚀 Live Demo
 
-> **Note:** Add your deployed link here (GitHub Pages, Netlify, Vercel, etc.)
-
 ```
 https://samirshaikh03.github.io/bakery-web/
 ```
