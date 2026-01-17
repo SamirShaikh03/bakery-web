@@ -1933,6 +1933,406 @@ input::placeholder {
 }
 
 /* ==========================================
+   Dashboard Section (Charts)
+   ========================================== */
+.dashboard-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.dashboard-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+}
+
+.dashboard-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.dashboard-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--amber-soft);
+}
+
+.dashboard-card-header h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--coffee);
+    margin: 0;
+}
+
+.chart-filter {
+    padding: 6px 12px;
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    background: white;
+    color: var(--coffee);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.chart-filter:hover {
+    border-color: var(--amber);
+}
+
+.chart-wrapper {
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chart-placeholder {
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.chart-placeholder i {
+    font-size: 3.5rem;
+    color: var(--amber);
+    margin-bottom: var(--spacing-md);
+    opacity: 0.5;
+}
+
+.chart-placeholder p {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: var(--spacing-sm);
+}
+
+.chart-placeholder small {
+    font-size: 0.875rem;
+    color: var(--text-disabled);
+}
+
+/* ==========================================
+   Inventory Management
+   ========================================== */
+.inventory-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.inventory-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+}
+
+.inventory-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.inventory-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--card-border);
+}
+
+.inventory-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--coffee);
+}
+
+.inventory-status {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-in-stock {
+    background: var(--success-light);
+    color: var(--success);
+}
+
+.status-low-stock {
+    background: var(--warning-light);
+    color: var(--warning);
+}
+
+.status-out-of-stock {
+    background: var(--danger-light);
+    color: var(--danger);
+}
+
+.inventory-details {
+    margin: var(--spacing-md) 0;
+}
+
+.inventory-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) 0;
+}
+
+.inventory-stat .label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.inventory-stat .value {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--coffee);
+}
+
+.inventory-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--card-border);
+}
+
+.inventory-card-add {
+    border: 2px dashed var(--card-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    min-height: 220px;
+}
+
+.inventory-card-add:hover {
+    border-color: var(--amber);
+    background: var(--amber-soft);
+}
+
+.add-placeholder {
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.add-placeholder i {
+    font-size: 2.5rem;
+    color: var(--amber);
+    margin-bottom: var(--spacing-sm);
+}
+
+.add-placeholder p {
+    font-size: 0.9375rem;
+    margin: 0;
+}
+
+/* ==========================================
+   Customer Insights
+   ========================================== */
+.customer-insights {
+    margin-bottom: var(--spacing-xl);
+}
+
+.insights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.insight-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    transition: all 0.3s ease;
+}
+
+.insight-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.insight-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background: var(--amber-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.insight-icon i {
+    font-size: 1.75rem;
+    color: var(--amber-dark);
+}
+
+.insight-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.insight-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.insight-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--coffee);
+    margin-bottom: 2px;
+}
+
+.insight-subtext {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.customer-table-wrapper {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.customer-table-wrapper h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--coffee);
+    margin: 0 0 var(--spacing-md) 0;
+}
+
+.customer-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.customer-table thead {
+    background: var(--cream);
+}
+
+.customer-table th {
+    padding: var(--spacing-md);
+    text-align: left;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--coffee);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--card-border);
+}
+
+.customer-table td {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--card-border);
+    font-size: 0.9375rem;
+    color: var(--text-primary);
+}
+
+.customer-table tbody tr:hover {
+    background: var(--amber-soft);
+}
+
+.customer-table .empty-row {
+    text-align: center;
+    padding: var(--spacing-xl);
+    color: var(--text-muted);
+}
+
+.customer-table .empty-row i {
+    font-size: 2.5rem;
+    color: var(--amber);
+    margin-bottom: var(--spacing-sm);
+    opacity: 0.5;
+    display: block;
+}
+
+.customer-table .empty-row p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.status-success {
+    background: var(--success-light);
+    color: var(--success);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.status-warning {
+    background: var(--warning-light);
+    color: var(--warning);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.status-info {
+    background: var(--info-light);
+    color: var(--info);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.button-link {
+    background: none;
+    border: none;
+    color: var(--amber-dark);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: all 0.2s;
+}
+
+.button-link:hover {
+    color: var(--amber);
+    text-decoration: underline;
+}
+
+.button-link.alert {
+    color: var(--danger);
+}
+
+.button-link.alert:hover {
+    color: #dc2626;
+}
+
+/* ==========================================
    Print Styles
    ========================================== */
 @media print {
