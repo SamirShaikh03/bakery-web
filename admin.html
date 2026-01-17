@@ -287,6 +287,266 @@
             </div>
         </section>
 
+        <!-- ========== Dashboard Section (Charts) ========== -->
+        <section class="dashboard-section fade-in">
+            <div class="section-header">
+                <h2>
+                    <i class="fa-solid fa-chart-pie"></i>
+                    Dashboard Analytics
+                    <span class="section-badge">New</span>
+                </h2>
+            </div>
+            <div class="dashboard-grid">
+                <!-- Chart 1: Revenue Trends -->
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <h3>Revenue Trends</h3>
+                        <select class="chart-filter">
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="year">This Year</option>
+                        </select>
+                    </div>
+                    <div class="chart-wrapper">
+                        <div class="chart-placeholder">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <p>Revenue chart will be rendered here</p>
+                            <small>Add Chart.js or your preferred charting library</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart 2: Product Performance -->
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <h3>Product Performance</h3>
+                        <button class="button-link">View Details</button>
+                    </div>
+                    <div class="chart-wrapper">
+                        <div class="chart-placeholder">
+                            <i class="fa-solid fa-chart-bar"></i>
+                            <p>Product performance chart</p>
+                            <small>Visualize best-selling products</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart 3: Order Status Distribution -->
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <h3>Order Status</h3>
+                    </div>
+                    <div class="chart-wrapper">
+                        <div class="chart-placeholder">
+                            <i class="fa-solid fa-chart-pie"></i>
+                            <p>Order status distribution</p>
+                            <small>Pie/Donut chart for order statuses</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart 4: Customer Activity -->
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <h3>Customer Activity</h3>
+                    </div>
+                    <div class="chart-wrapper">
+                        <div class="chart-placeholder">
+                            <i class="fa-solid fa-users"></i>
+                            <p>Customer activity heatmap</p>
+                            <small>Track peak ordering times</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== Inventory Management ========== -->
+        <section class="inventory-section fade-in">
+            <div class="section-header">
+                <h2>
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                    Inventory Management
+                    <span class="section-badge">New</span>
+                </h2>
+                <button class="button" id="add-inventory-item">
+                    <i class="fa-solid fa-plus"></i>
+                    Add Item
+                </button>
+            </div>
+            <div class="inventory-grid">
+                <!-- Sample Inventory Items -->
+                <div class="inventory-card">
+                    <div class="inventory-header">
+                        <span class="inventory-name">Chocolate Cake</span>
+                        <span class="inventory-status status-in-stock">In Stock</span>
+                    </div>
+                    <div class="inventory-details">
+                        <div class="inventory-stat">
+                            <span class="label">Available</span>
+                            <span class="value">45 units</span>
+                        </div>
+                        <div class="inventory-stat">
+                            <span class="label">Reorder Level</span>
+                            <span class="value">10 units</span>
+                        </div>
+                        <div class="inventory-stat">
+                            <span class="label">Last Updated</span>
+                            <span class="value">2 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="inventory-actions">
+                        <button class="button-link">Update Stock</button>
+                        <button class="button-link">View History</button>
+                    </div>
+                </div>
+
+                <div class="inventory-card">
+                    <div class="inventory-header">
+                        <span class="inventory-name">Croissants</span>
+                        <span class="inventory-status status-low-stock">Low Stock</span>
+                    </div>
+                    <div class="inventory-details">
+                        <div class="inventory-stat">
+                            <span class="label">Available</span>
+                            <span class="value">8 units</span>
+                        </div>
+                        <div class="inventory-stat">
+                            <span class="label">Reorder Level</span>
+                            <span class="value">15 units</span>
+                        </div>
+                        <div class="inventory-stat">
+                            <span class="label">Last Updated</span>
+                            <span class="value">30 minutes ago</span>
+                        </div>
+                    </div>
+                    <div class="inventory-actions">
+                        <button class="button-link alert">Reorder Now</button>
+                        <button class="button-link">View History</button>
+                    </div>
+                </div>
+
+                <div class="inventory-card">
+                    <div class="inventory-header">
+                        <span class="inventory-name">Vanilla Cupcakes</span>
+                        <span class="inventory-status status-in-stock">In Stock</span>
+                    </div>
+                    <div class="inventory-details">
+                        <div class="inventory-stat">
+                            <span class="label">Available</span>
+                            <span class="value">120 units</span>
+                        </div>
+                        <div class="inventory-stat">
+                            <span class="label">Reorder Level</span>
+                            <span class="value">20 units</span>
+                        </div>
+                        <div class="inventory-stat">
+                            <span class="label">Last Updated</span>
+                            <span class="value">Just now</span>
+                        </div>
+                    </div>
+                    <div class="inventory-actions">
+                        <button class="button-link">Update Stock</button>
+                        <button class="button-link">View History</button>
+                    </div>
+                </div>
+
+                <!-- Placeholder for more items -->
+                <div class="inventory-card inventory-card-add">
+                    <div class="add-placeholder">
+                        <i class="fa-solid fa-plus-circle"></i>
+                        <p>Add more inventory items</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== Customer Insights ========== -->
+        <section class="customer-insights fade-in">
+            <div class="section-header">
+                <h2>
+                    <i class="fa-solid fa-users-viewfinder"></i>
+                    Customer Insights
+                    <span class="section-badge">New</span>
+                </h2>
+                <div class="section-actions">
+                    <button class="button-link">Export Report</button>
+                </div>
+            </div>
+            
+            <div class="insights-grid">
+                <!-- Customer Stats -->
+                <div class="insight-card">
+                    <div class="insight-icon">
+                        <i class="fa-solid fa-user-group"></i>
+                    </div>
+                    <div class="insight-content">
+                        <span class="insight-label">Total Customers</span>
+                        <span class="insight-value" data-metric="total-customers">0</span>
+                        <span class="insight-subtext">All time registrations</span>
+                    </div>
+                </div>
+
+                <div class="insight-card">
+                    <div class="insight-icon">
+                        <i class="fa-solid fa-repeat"></i>
+                    </div>
+                    <div class="insight-content">
+                        <span class="insight-label">Repeat Customers</span>
+                        <span class="insight-value" data-metric="repeat-customers">0</span>
+                        <span class="insight-subtext">Multiple orders</span>
+                    </div>
+                </div>
+
+                <div class="insight-card">
+                    <div class="insight-icon">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <div class="insight-content">
+                        <span class="insight-label">Avg. Customer Value</span>
+                        <span class="insight-value" data-metric="customer-ltv">₹0.00</span>
+                        <span class="insight-subtext">Lifetime value</span>
+                    </div>
+                </div>
+
+                <div class="insight-card">
+                    <div class="insight-icon">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <div class="insight-content">
+                        <span class="insight-label">Top Customer</span>
+                        <span class="insight-value" data-metric="top-customer" style="font-size: 1rem;">—</span>
+                        <span class="insight-subtext">Highest orders</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Customers Table -->
+            <div class="customer-table-wrapper">
+                <h3>Recent Customers</h3>
+                <table class="customer-table">
+                    <thead>
+                        <tr>
+                            <th>Customer</th>
+                            <th>Phone</th>
+                            <th>Orders</th>
+                            <th>Total Spent</th>
+                            <th>Last Order</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="customer-table-body">
+                        <tr>
+                            <td colspan="6" class="empty-row">
+                                <i class="fa-solid fa-users"></i>
+                                <p>Customer data will appear here</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
         <!-- ========== Recent Activity Feed ========== -->
         <section class="activity-feed fade-in">
             <div class="section-header">
@@ -1022,6 +1282,132 @@
                 refresh();
                 logActivity(`Quick filter applied: ${status}`, 'filter');
             };
+
+            // ========== New Features Handlers ==========
+            
+            // Dashboard - Add Inventory Item
+            const addInventoryBtn = document.getElementById('add-inventory-item');
+            if (addInventoryBtn) {
+                addInventoryBtn.addEventListener('click', () => {
+                    alert('Add Inventory Item functionality - To be implemented!\n\nYou can add:\n- Product name\n- Current stock\n- Reorder level\n- Category');
+                    logActivity('Attempted to add new inventory item', 'action');
+                });
+            }
+
+            // Inventory - Update Stock buttons
+            document.addEventListener('click', (e) => {
+                if (e.target.textContent === 'Update Stock') {
+                    const card = e.target.closest('.inventory-card');
+                    const itemName = card.querySelector('.inventory-name').textContent;
+                    alert(`Update Stock for ${itemName}\n\nTo be implemented:\n- Adjust quantity\n- Add/Remove stock\n- Track history`);
+                    logActivity(`Stock update requested for ${itemName}`, 'action');
+                }
+                
+                if (e.target.textContent === 'View History') {
+                    const card = e.target.closest('.inventory-card');
+                    const itemName = card.querySelector('.inventory-name').textContent;
+                    alert(`Stock History for ${itemName}\n\nTo be implemented:\n- Show stock movements\n- Date/time stamps\n- User who made changes`);
+                    logActivity(`Viewed history for ${itemName}`, 'info');
+                }
+                
+                if (e.target.textContent === 'Reorder Now') {
+                    const card = e.target.closest('.inventory-card');
+                    const itemName = card.querySelector('.inventory-name').textContent;
+                    alert(`Reorder ${itemName}\n\nTo be implemented:\n- Send reorder notification\n- Track supplier\n- Generate purchase order`);
+                    logActivity(`Reorder triggered for ${itemName}`, 'warning');
+                }
+            });
+
+            // Customer Insights - Calculate from orders
+            function updateCustomerInsights() {
+                const customerData = {};
+                
+                orders.forEach(order => {
+                    const phone = order.phone || 'Unknown';
+                    if (!customerData[phone]) {
+                        customerData[phone] = {
+                            phone: phone,
+                            name: order.customerName || 'Guest',
+                            orders: 0,
+                            totalSpent: 0,
+                            lastOrder: order.timestamp
+                        };
+                    }
+                    customerData[phone].orders++;
+                    customerData[phone].totalSpent += parseFloat(order.total || 0);
+                    if (order.timestamp > customerData[phone].lastOrder) {
+                        customerData[phone].lastOrder = order.timestamp;
+                    }
+                });
+                
+                const customers = Object.values(customerData);
+                const totalCustomers = customers.length;
+                const repeatCustomers = customers.filter(c => c.orders > 1).length;
+                const avgCustomerValue = totalCustomers > 0 ? 
+                    customers.reduce((sum, c) => sum + c.totalSpent, 0) / totalCustomers : 0;
+                const topCustomer = customers.sort((a, b) => b.orders - a.orders)[0];
+                
+                // Update metrics
+                const totalCustomersEl = document.querySelector('[data-metric=\"total-customers\"]');
+                if (totalCustomersEl) totalCustomersEl.textContent = totalCustomers;
+                
+                const repeatCustomersEl = document.querySelector('[data-metric=\"repeat-customers\"]');
+                if (repeatCustomersEl) repeatCustomersEl.textContent = repeatCustomers;
+                
+                const customerLtvEl = document.querySelector('[data-metric=\"customer-ltv\"]');
+                if (customerLtvEl) customerLtvEl.textContent = '₹' + formatCurrency(avgCustomerValue);
+                
+                const topCustomerEl = document.querySelector('[data-metric=\"top-customer\"]');
+                if (topCustomerEl && topCustomer) {
+                    topCustomerEl.textContent = `${topCustomer.name} (${topCustomer.orders} orders)`;
+                }
+                
+                // Update customer table
+                updateCustomerTable(customers.slice(0, 10)); // Show top 10
+            }
+            
+            function updateCustomerTable(customers) {
+                const tbody = document.getElementById('customer-table-body');
+                if (!tbody) return;
+                
+                if (customers.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="6" class="empty-row">
+                                <i class="fa-solid fa-users"></i>
+                                <p>Customer data will appear here</p>
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+                
+                tbody.innerHTML = customers.map((customer, idx) => {
+                    const status = customer.orders > 5 ? 'VIP' : customer.orders > 2 ? 'Regular' : 'New';
+                    const statusClass = customer.orders > 5 ? 'status-success' : 
+                                       customer.orders > 2 ? 'status-warning' : 'status-info';
+                    return `
+                        <tr>
+                            <td>${customer.name}</td>
+                            <td>${customer.phone}</td>
+                            <td>${customer.orders}</td>
+                            <td>₹${formatCurrency(customer.totalSpent)}</td>
+                            <td>${formatDate(customer.lastOrder)}</td>
+                            <td><span class="chip ${statusClass}">${status}</span></td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            // Update customer insights on refresh
+            const originalRefresh = refresh;
+            refresh = function() {
+                originalRefresh();
+                updateCustomerInsights();
+            };
+
+            // Initial customer insights update
+            updateCustomerInsights();
 
             // ========== Auto Refresh ==========
             setInterval(() => {
