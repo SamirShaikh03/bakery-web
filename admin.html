@@ -547,6 +547,119 @@
             </div>
         </section>
 
+          <!-- ========== Notifications & Alerts ========== -->
+        <section class="notifications-section fade-in">
+            <div class="section-header">
+                <h2>
+                    <i class="fa-solid fa-bell"></i>
+                    Notifications & Alerts
+                    <span class="section-badge section-badge--pulse">3</span>
+                </h2>
+                <div class="section-actions">
+                    <button class="button-link" id="mark-all-read">
+                        <i class="fa-solid fa-check-double"></i>
+                        Mark All Read
+                    </button>
+                    <button class="button-link" id="notification-settings">
+                        <i class="fa-solid fa-gear"></i>
+                        Settings
+                    </button>
+                </div>
+            </div>
+            <div class="notifications-grid">
+                <!-- Critical Alerts -->
+                <div class="notification-card notification-card--critical">
+                    <div class="notification-icon">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <span class="notification-title">Critical Stock Alert</span>
+                            <span class="notification-time">5 min ago</span>
+                        </div>
+                        <p class="notification-message">Croissants stock is critically low (8 units remaining). Reorder immediately to avoid stockout.</p>
+                        <div class="notification-actions">
+                            <button class="notification-btn notification-btn--primary">Reorder Now</button>
+                            <button class="notification-btn">View Details</button>
+                            <button class="notification-btn notification-btn--ghost">Dismiss</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Warning Alerts -->
+                <div class="notification-card notification-card--warning">
+                    <div class="notification-icon">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <span class="notification-title">Pending Orders Alert</span>
+                            <span class="notification-time">15 min ago</span>
+                        </div>
+                        <p class="notification-message">You have 8 orders in "Pending" status for more than 30 minutes. Please review and update.</p>
+                        <div class="notification-actions">
+                            <button class="notification-btn notification-btn--primary" onclick="filterByStatus('Pending')">View Pending</button>
+                            <button class="notification-btn notification-btn--ghost">Dismiss</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Success Alerts -->
+                <div class="notification-card notification-card--success">
+                    <div class="notification-icon">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <span class="notification-title">Daily Target Achieved</span>
+                            <span class="notification-time">1 hour ago</span>
+                        </div>
+                        <p class="notification-message">Congratulations! Today's revenue target of ₹15,000 has been achieved. Current revenue: ₹16,240.</p>
+                        <div class="notification-actions">
+                            <button class="notification-btn notification-btn--ghost">Dismiss</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Alerts -->
+                <div class="notification-card notification-card--info">
+                    <div class="notification-icon">
+                        <i class="fa-solid fa-info-circle"></i>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <span class="notification-title">New Customer Review</span>
+                            <span class="notification-time">2 hours ago</span>
+                        </div>
+                        <p class="notification-message">A customer left a 5-star review for Chocolate Cake. View and respond to build customer relationships.</p>
+                        <div class="notification-actions">
+                            <button class="notification-btn notification-btn--primary">View Review</button>
+                            <button class="notification-btn notification-btn--ghost">Dismiss</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Alerts -->
+                <div class="notification-card notification-card--default">
+                    <div class="notification-icon">
+                        <i class="fa-solid fa-sync"></i>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <span class="notification-title">System Update Available</span>
+                            <span class="notification-time">5 hours ago</span>
+                        </div>
+                        <p class="notification-message">A new version of the admin dashboard is available with improved analytics and performance.</p>
+                        <div class="notification-actions">
+                            <button class="notification-btn notification-btn--primary">Update Now</button>
+                            <button class="notification-btn">Learn More</button>
+                            <button class="notification-btn notification-btn--ghost">Later</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- ========== Recent Activity Feed ========== -->
         <section class="activity-feed fade-in">
             <div class="section-header">
@@ -1284,6 +1397,40 @@
             };
 
             // ========== New Features Handlers ==========
+              // Notifications - Mark All Read
+            const markAllReadBtn = document.getElementById('mark-all-read');
+            if (markAllReadBtn) {
+                markAllReadBtn.addEventListener('click', () => {
+                    document.querySelectorAll('.notification-card').forEach(card => {
+                        card.classList.add('notification-card--read');
+                    });
+                    const badge = document.querySelector('.section-badge--pulse');
+                    if (badge) badge.textContent = '0';
+                    logActivity('All notifications marked as read', 'action');
+                    showNotification('All notifications marked as read!');
+                });
+            }
+
+            // Notifications - Settings
+            const notificationSettingsBtn = document.getElementById('notification-settings');
+            if (notificationSettingsBtn) {
+                notificationSettingsBtn.addEventListener('click', () => {
+                    alert('Notification Settings\n\nTo be implemented:\n- Email notifications\n- SMS alerts\n- Custom thresholds\n- Alert preferences');
+                    logActivity('Opened notification settings', 'action');
+                });
+            }
+
+            // Notification Action Buttons
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('.notification-btn--ghost') && e.target.textContent === 'Dismiss') {
+                    const card = e.target.closest('.notification-card');
+                    if (card) {
+                        card.style.animation = 'slideOut 0.3s ease forwards';
+                        setTimeout(() => card.remove(), 300);
+                        logActivity('Notification dismissed', 'action');
+                    }
+                }
+            });
             
             // Dashboard - Add Inventory Item
             const addInventoryBtn = document.getElementById('add-inventory-item');
