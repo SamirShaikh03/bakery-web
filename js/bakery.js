@@ -5,6 +5,32 @@ const mobileCategoryQuery = window.matchMedia('(max-width: 768px)');
 const CATEGORY_PREVIEW_LIMIT = { desktop: 8, mobile: 4 };
 let isSearchActive = false;
 
+const API_BASE_URL = window.BAKERY_API_URL || localStorage.getItem('bakeryApiBaseUrl') || 'http://localhost:3000';
+
+function buildApiUrl(path) {
+    const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+    return `${API_BASE_URL}${normalizedPath}`;
+}
+
+async function postJsonWithTimeout(url, payload, timeoutMs = 9000) {
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload),
+            signal: controller.signal
+        });
+        const data = await response.json();
+        return { ok: response.ok, data };
+    } finally {
+        window.clearTimeout(timer);
+    }
+}
+
 function addToCart(itemName, price, quantity) {
     const existingItem = cart.find(item => item.name === itemName);
     if (existingItem) {
@@ -78,7 +104,7 @@ function clearCart() {
     showCart();
 }
 
-function checkout() {
+async function checkout() {
     const address = document.getElementById('address').value;
     const phone = document.getElementById('phone').value;
 
@@ -93,33 +119,69 @@ function checkout() {
     }
 
     // Generate a simple order ID
-    const orderId = 'ORD' + Math.floor(Math.random() * 1000000);
+    const orderId = 'ORD-' + Date.now() + '-' + Math.random().toString(36).substr(2, 4).toUpperCase();
     const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
     // Create order object
     const order = {
-        id: orderId,
-        date: new Date().toISOString(),
         items: cart.map(item => ({ name: item.name, price: item.price, quantity: item.quantity })),
-        total: total,
+        customerName: 'Website Customer',
         address: address,
-        phone: phone
+        phone: phone,
+        notes: ''
     };
 
-    // Save to localStorage
-    let orders = JSON.parse(localStorage.getItem('orders')) || [];
-    orders.push(order);
-    localStorage.setItem('orders', JSON.stringify(orders));
+    // Send order to backend API
+    console.log('📦 Placing order to API:', buildApiUrl('/api/orders'));
 
-    // Show confirmation
-    alert(`Order placed successfully!\nOrder ID: ${orderId}\nAddress: ${address}\nPhone: ${phone}\nItems: ${cart.map(item => `${item.name} (x${item.quantity})`).join(', ')}\nTotal: ₹${total.toFixed(2)}`);
+    try {
+        const { ok, data } = await postJsonWithTimeout(buildApiUrl('/api/orders'), order);
 
-    // Clear cart and form
-    cart = [];
-    document.getElementById('address').value = '';
-    document.getElementById('phone').value = '';
-    showCart();
-    hideCart();
+        if (ok && data && data.success) {
+            console.log('✅ Order placed successfully:', data.data);
+
+            let orders = JSON.parse(localStorage.getItem('orders')) || [];
+            orders.push(data.data);
+            localStorage.setItem('orders', JSON.stringify(orders));
+
+            alert(`🎉 Order placed successfully!\n\nOrder ID: ${data.data.id}\nAddress: ${address}\nPhone: ${phone}\nItems: ${cart.map(item => `${item.name} (x${item.quantity})`).join(', ')}\nTotal: ₹${data.data.total.toFixed(2)}`);
+
+            cart = [];
+            document.getElementById('address').value = '';
+            document.getElementById('phone').value = '';
+            showCart();
+            hideCart();
+            return;
+        }
+
+        const serverError = data && data.error ? data.error : 'Order API returned an unexpected response.';
+        console.error('❌ Order failed:', serverError);
+        alert(`Failed to place order on server: ${serverError}`);
+    } catch (error) {
+        console.error('❌ Network/API error:', error);
+
+        const localOrder = {
+            id: orderId,
+            date: new Date().toISOString(),
+            items: cart.map(item => ({ name: item.name, price: item.price, quantity: item.quantity })),
+            total: total,
+            address: address,
+            phone: phone,
+            status: 'pending (offline)'
+        };
+
+        let orders = JSON.parse(localStorage.getItem('orders')) || [];
+        orders.push(localOrder);
+        localStorage.setItem('orders', JSON.stringify(orders));
+
+        alert(`⚠️ Backend unavailable - Order saved locally!\n\nOrder ID: ${orderId}\nAddress: ${address}\nPhone: ${phone}\nTotal: ₹${total.toFixed(2)}\n\nSet API base using localStorage key bakeryApiBaseUrl if your backend runs on a different URL.`);
+
+        cart = [];
+        document.getElementById('address').value = '';
+        document.getElementById('phone').value = '';
+        showCart();
+        hideCart();
+    }
 }
 
 // Function to handle order button click and open cart
@@ -330,6 +392,7 @@ function searchProducts(options = {}) {
     const queryRaw = searchInput.value || '';
     const query = queryRaw.trim().toLowerCase();
     isSearchActive = query.length > 0;
+    document.body.classList.toggle('is-searching-products', isSearchActive);
 
     let firstMatchCategoryId = null;
 
@@ -388,6 +451,12 @@ function showCategory(event, categoryId) {
     // Prevent default behavior
     if (event) {
         event.preventDefault();
+        event.stopPropagation();
+    }
+
+    if (!categoryId) {
+        console.warn('showCategory called without categoryId');
+        return;
     }
 
     // Clear any active search
@@ -399,6 +468,7 @@ function showCategory(event, categoryId) {
     }
 
     isSearchActive = false;
+    document.body.classList.remove('is-searching-products');
 
     // Get all category sections and tabs
     const allCategories = document.querySelectorAll('.category-section');
@@ -583,8 +653,22 @@ function submitDiwaliCollection(event) {
 }
 
 function closeActiveOfferModal() {
-    ['giftbox', 'diwali'].forEach(closeOfferModal);
+    ['giftbox', 'diwali', 'seasonal'].forEach(closeOfferModal);
 }
+
+// Alias seasonal modal to diwali modal functionality
+function openSeasonalModal() {
+    return openOfferModal('diwali');
+}
+
+// Override openOfferModal to handle 'seasonal' as alias for 'diwali'
+const originalOpenOfferModal = openOfferModal;
+openOfferModal = function(type) {
+    if (type === 'seasonal') {
+        type = 'diwali';
+    }
+    return originalOpenOfferModal(type);
+};
 
 document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && document.body.dataset.offerModal === 'open') {
@@ -875,6 +959,18 @@ document.addEventListener('DOMContentLoaded', function() {
         setActiveCategory(defaultCategoryId);
     }
     applyProductPreviewLimits();
+
+    // Add event listeners to category tabs for more reliable switching
+    const categoryTabs = document.querySelectorAll('.category-tab[data-category]');
+    categoryTabs.forEach(tab => {
+        tab.addEventListener('click', function(event) {
+            event.preventDefault();
+            const categoryId = this.dataset.category;
+            if (categoryId) {
+                showCategory(event, categoryId);
+            }
+        });
+    });
 
     let previewResizeTimer = null;
     const handlePreviewResize = () => {

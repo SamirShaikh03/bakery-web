@@ -3,13 +3,323 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/Sweet_Delight_icon.png" type="image/png">
     <link rel="stylesheet" href="css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" 
     integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Sweet Delights · Admin Dashboard</title>
+    <style>
+        /* Admin Login Styles */
+        .admin-login-overlay {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 50%, #3d7a52 100%);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .admin-login-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        
+        .admin-login-card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            animation: loginSlideIn 0.6s ease-out;
+        }
+        
+        @keyframes loginSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .admin-login-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .admin-login-header img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 16px;
+        }
+        
+        .admin-login-header h1 {
+            color: #1a472a;
+            font-size: 1.8rem;
+            margin: 0 0 8px;
+        }
+        
+        .admin-login-header p {
+            color: #666;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+        
+        .admin-login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .admin-login-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .admin-login-field label {
+            font-weight: 600;
+            color: #1a472a;
+            font-size: 0.9rem;
+        }
+        
+        .admin-login-field input {
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background: #fafafa;
+        }
+        
+        .admin-login-field input:focus {
+            outline: none;
+            border-color: #3d7a52;
+            box-shadow: 0 0 0 4px rgba(61, 122, 82, 0.15);
+            background: #fff;
+        }
+        
+        .admin-login-btn {
+            background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 50%, #3d7a52 100%);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 8px;
+        }
+        
+        .admin-login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(26, 71, 42, 0.35);
+        }
+        
+        .admin-login-btn:active {
+            transform: translateY(0);
+        }
+        
+        .admin-login-error {
+            color: #dc3545;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 12px;
+            background: rgba(220, 53, 69, 0.1);
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .admin-login-error.show {
+            display: block;
+            animation: shake 0.5s ease;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+        }
+        
+        .admin-demo-credentials {
+            margin-top: 28px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(61, 122, 82, 0.08), rgba(26, 71, 42, 0.12));
+            border-radius: 12px;
+            border: 1px dashed rgba(61, 122, 82, 0.3);
+        }
+        
+        .admin-demo-credentials h3 {
+            color: #1a472a;
+            font-size: 0.95rem;
+            margin: 0 0 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .admin-demo-credentials h3 i {
+            color: #3d7a52;
+        }
+        
+        .admin-demo-credentials .credential-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+        
+        .admin-demo-credentials .credential-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .admin-demo-credentials .credential-label {
+            color: #666;
+            font-size: 0.85rem;
+        }
+        
+        .admin-demo-credentials .credential-value {
+            font-family: 'Courier New', monospace;
+            color: #1a472a;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .admin-demo-credentials .demo-note {
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: #888;
+            text-align: center;
+        }
+        
+        .admin-back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .admin-back-link a {
+            color: #3d7a52;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .admin-back-link a:hover {
+            color: #1a472a;
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
+    <!-- ========== Admin Login Overlay ========== -->
+    <div class="admin-login-overlay" id="admin-login-overlay">
+        <div class="admin-login-card">
+            <div class="admin-login-header">
+                <img src="assets/Sweet_Delight_icon.png" alt="Sweet Delights Logo">
+                <h1>Admin Portal</h1>
+                <p>Sign in to manage your bakery dashboard</p>
+            </div>
+            <form class="admin-login-form" id="admin-login-form" onsubmit="return handleAdminLogin(event)">
+                <div class="admin-login-error" id="admin-login-error">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    Invalid credentials. Please try again.
+                </div>
+                <div class="admin-login-field">
+                    <label for="admin-username">Username</label>
+                    <input type="text" id="admin-username" placeholder="Enter your username" autocomplete="username" required>
+                </div>
+                <div class="admin-login-field">
+                    <label for="admin-password">Password</label>
+                    <input type="password" id="admin-password" placeholder="Enter your password" autocomplete="current-password" required>
+                </div>
+                <button type="submit" class="admin-login-btn">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    Sign In to Dashboard
+                </button>
+            </form>
+            <div class="admin-demo-credentials">
+                <h3><i class="fa-solid fa-key"></i> Demo Access Credentials</h3>
+                <div class="credential-row">
+                    <span class="credential-label">Username:</span>
+                    <span class="credential-value">admin</span>
+                </div>
+                <div class="credential-row">
+                    <span class="credential-label">Password:</span>
+                    <span class="credential-value">demo123</span>
+                </div>
+                <p class="demo-note">Use these credentials to explore the admin dashboard</p>
+            </div>
+            <div class="admin-back-link">
+                <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to Store</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Admin Authentication
+        const DEMO_CREDENTIALS = {
+            username: 'admin',
+            password: 'demo123'
+        };
+        
+        function handleAdminLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('admin-username').value.trim();
+            const password = document.getElementById('admin-password').value;
+            const errorEl = document.getElementById('admin-login-error');
+            const overlay = document.getElementById('admin-login-overlay');
+            
+            if (username === DEMO_CREDENTIALS.username && password === DEMO_CREDENTIALS.password) {
+                // Success - hide login, show dashboard
+                errorEl.classList.remove('show');
+                overlay.classList.add('hidden');
+                sessionStorage.setItem('adminLoggedIn', 'true');
+            } else {
+                // Show error
+                errorEl.classList.add('show');
+                document.getElementById('admin-password').value = '';
+                setTimeout(() => {
+                    errorEl.classList.remove('show');
+                }, 3000);
+            }
+            
+            return false;
+        }
+        
+        // Check if already logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+                document.getElementById('admin-login-overlay').classList.add('hidden');
+            }
+        });
+        
+        // Logout function (can be called from dashboard)
+        function adminLogout() {
+            sessionStorage.removeItem('adminLoggedIn');
+            document.getElementById('admin-login-overlay').classList.remove('hidden');
+            document.getElementById('admin-login-form').reset();
+        }
+    </script>
+
     <!-- ========== Admin Header ========== -->
     <header class="admin-header">
         <a class="brand" href="index.html">
@@ -35,6 +345,10 @@
             <button class="button button-danger" type="button" id="clear-orders">
                 <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
                 Clear Orders
+            </button>
+            <button class="button button-logout" type="button" onclick="adminLogout()" title="Sign Out">
+                <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+                Logout
             </button>
         </div>
     </header>

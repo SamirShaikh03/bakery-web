@@ -1,0 +1,145 @@
+[
+  {
+    "id": "prod-001",
+    "name": "Classic Red Velvet Cake",
+    "description": "Rich, velvety red cake with cream cheese frosting",
+    "price": 1200,
+    "category": "cakes",
+    "image": "assets/Red_Velvet_Cake.jpg",
+    "available": true,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "prod-002",
+    "name": "Blueberry Lemon Dream",
+    "description": "Zesty lemon sponge layered with wild blueberry compote and mascarpone frosting",
+    "price": 1400,
+    "category": "cakes",
+    "image": "assets/Blueberry_Lemon_Cake.jpg",
+    "available": true,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "prod-003",
+    "name": "Chocolate Truffle Cake",
+    "description": "Decadent chocolate layers with rich truffle ganache",
+    "price": 1500,
+    "category": "cakes",
+    "image": "assets/Chocolate_Truffle_Cake.jpg",
+    "available": true,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "prod-004",
+    "name": "Butter Croissant",
+    "description": "Flaky, buttery French croissant made fresh daily",
+    "price": 120,
+    "category": "pastries",
+    "image": "assets/Butter_croissant.webp",
+    "available": true,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "prod-005",
+    "name": "Almond Croissant",
+    "description": "Classic croissant filled with almond cream and topped with sliced almonds",
+    "price": 150,
+    "category": "pastries",
+    "image": "assets/Almond_Croissant.jpg",
+    "available": true,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "prod-006",
+    "name": "Sourdough Bread",
+    "description": "Artisanal sourdough with crispy crust and tangy flavor",
+    "price": 250,
+    "category": "bread",
+    "image": "assets/Sourdough_Bread.jpg",
+    "available": true,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "prod-007",
+    "name": "Multigrain Loaf",
+    "description": "Healthy multigrain bread packed with seeds and whole grains",
+    "price": 180,
+    "category": "bread",
+    "image": "assets/Multigrain_Loaf.jpg",
+    "available": true,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "prod-008",
+    "name": "Paneer Puff",
+    "description": "Crispy puff pastry filled with spiced cottage cheese",
+    "price": 80,
+    "category": "savory",
+    "image": "assets/Paneer_Puff.jpg",
+    "available": true,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "prod-009",
+    "name": "Chicken Patty",
+    "description": "Golden fried patty with seasoned minced chicken",
+    "price": 90,
+    "category": "savory",
+    "image": "assets/Chicken_Patty.jpg",
+    "available": true,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "prod-010",
+    "name": "Gulab Jamun",
+    "description": "Traditional Indian milk dumplings soaked in rose-scented sugar syrup",
+    "price": 200,
+    "category": "desserts",
+    "image": "assets/Gulab_Jamun.jpg",
+    "available": true,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "prod-011",
+    "name": "Rasmalai",
+    "description": "Soft paneer discs in saffron-flavored sweetened milk",
+    "price": 280,
+    "category": "desserts",
+    "image": "assets/Rasmalai.jpg",
+    "available": true,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "prod-012",
+    "name": "Hot Chocolate",
+    "description": "Rich and creamy hot chocolate made with premium cocoa",
+    "price": 180,
+    "category": "beverages",
+    "image": "assets/Hot_Chocolate.jpg",
+    "available": true,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "prod-013",
+    "name": "Masala Chai",
+    "description": "Traditional Indian spiced tea with aromatic spices",
+    "price": 60,
+    "category": "beverages",
+    "image": "assets/Masala_Chai.jpg",
+    "available": true,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
+  }
+]

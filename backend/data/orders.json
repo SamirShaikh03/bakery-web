@@ -1,0 +1,98 @@
+[
+  {
+    "id": "ORD-1705234567-A1B2",
+    "items": [
+      {
+        "name": "Classic Red Velvet Cake",
+        "price": 1200,
+        "quantity": 1
+      },
+      {
+        "name": "Butter Croissant",
+        "price": 120,
+        "quantity": 4
+      }
+    ],
+    "customerName": "Priya Sharma",
+    "address": "123 Marine Drive, Mumbai, 400020",
+    "phone": "9876543210",
+    "email": "priya.sharma@email.com",
+    "notes": "Please add extra cream cheese frosting",
+    "total": 1680,
+    "status": "completed",
+    "createdAt": "2025-01-14T10:30:00.000Z",
+    "updatedAt": "2025-01-14T14:00:00.000Z"
+  },
+  {
+    "id": "ORD-1705334567-C3D4",
+    "items": [
+      {
+        "name": "Chocolate Truffle Cake",
+        "price": 1500,
+        "quantity": 1
+      },
+      {
+        "name": "Hot Chocolate",
+        "price": 180,
+        "quantity": 2
+      }
+    ],
+    "customerName": "Ahmed Khan",
+    "address": "456 Hill Road, Bandra West, Mumbai, 400050",
+    "phone": "9876543211",
+    "email": "ahmed.khan@email.com",
+    "notes": "",
+    "total": 1860,
+    "status": "pending",
+    "createdAt": "2025-01-15T11:00:00.000Z",
+    "updatedAt": "2025-01-15T11:00:00.000Z"
+  },
+  {
+    "id": "ORD-1705434567-E5F6",
+    "items": [
+      {
+        "name": "Sourdough Bread",
+        "price": 250,
+        "quantity": 2
+      },
+      {
+        "name": "Paneer Puff",
+        "price": 80,
+        "quantity": 6
+      },
+      {
+        "name": "Masala Chai",
+        "price": 60,
+        "quantity": 4
+      }
+    ],
+    "customerName": "Meera Patel",
+    "address": "789 Lake Gardens, Thane, 400601",
+    "phone": "9876543212",
+    "email": "meera.patel@email.com",
+    "notes": "Delivery after 5 PM please",
+    "total": 1220,
+    "status": "processing",
+    "createdAt": "2025-01-15T09:15:00.000Z",
+    "updatedAt": "2025-01-15T10:30:00.000Z"
+  },
+  {
+    "id": "ORD-1771746415956-5TQ0",
+    "items": [
+      {
+        "price": 500,
+        "quantity": 1,
+        "name": "Test Cake"
+      }
+    ],
+    "customerName": "UI Test",
+    "address": "Bandra",
+    "phone": "9999999999",
+    "email": "",
+    "notes": "layout verification order",
+    "total": 500,
+    "status": "pending",
+    "createdAt": "2026-02-22T07:46:55.956Z",
+    "updatedAt": "2026-02-22T07:46:55.956Z"
+  }
+]
