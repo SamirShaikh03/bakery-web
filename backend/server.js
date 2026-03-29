@@ -13,6 +13,7 @@ const cors = require('cors');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 const fs = require('fs');
+const crypto = require('crypto');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -33,6 +34,10 @@ const DATA_DIR = path.join(__dirname, 'data');
 const PRODUCTS_FILE = path.join(DATA_DIR, 'products.json');
 const ORDERS_FILE = path.join(DATA_DIR, 'orders.json');
 const CONTACTS_FILE = path.join(DATA_DIR, 'contacts.json');
+const CUSTOMERS_FILE = path.join(DATA_DIR, 'customers.json');
+
+// In-memory customer sessions for demo purposes
+const CUSTOMER_SESSIONS = new Map();
 
 // Ensure data directory exists
 if (!fs.existsSync(DATA_DIR)) {
@@ -61,6 +66,61 @@ function writeJsonFile(filePath, data) {
         console.error(`Error writing ${filePath}:`, error);
         return false;
     }
+}
+
+function normalizeEmail(email = '') {
+    return String(email).trim().toLowerCase();
+}
+
+function createPasswordHash(password, salt = crypto.randomBytes(16).toString('hex')) {
+    const hash = crypto.pbkdf2Sync(password, salt, 100000, 64, 'sha512').toString('hex');
+    return `${salt}:${hash}`;
+}
+
+function verifyPassword(password, storedHash = '') {
+    const [salt, expectedHash] = String(storedHash).split(':');
+    if (!salt || !expectedHash) {
+        return false;
+    }
+    const computedHash = crypto.pbkdf2Sync(password, salt, 100000, 64, 'sha512').toString('hex');
+    if (expectedHash.length !== computedHash.length) {
+        return false;
+    }
+    return crypto.timingSafeEqual(Buffer.from(expectedHash, 'hex'), Buffer.from(computedHash, 'hex'));
+}
+
+function getCustomerPublicProfile(customer) {
+    return {
+        id: customer.id,
+        name: customer.name,
+        email: customer.email,
+        phone: customer.phone || '',
+        address: customer.address || '',
+        createdAt: customer.createdAt,
+        lastLoginAt: customer.lastLoginAt || null
+    };
+}
+
+function extractCustomerToken(req) {
+    const authorization = req.headers.authorization || '';
+    if (authorization.startsWith('Bearer ')) {
+        return authorization.slice(7).trim();
+    }
+    const headerToken = req.headers['x-customer-token'];
+    return headerToken ? String(headerToken).trim() : '';
+}
+
+function getAuthenticatedCustomer(req) {
+    const token = extractCustomerToken(req);
+    if (!token) {
+        return null;
+    }
+    const customerId = CUSTOMER_SESSIONS.get(token);
+    if (!customerId) {
+        return null;
+    }
+    const customers = readJsonFile(CUSTOMERS_FILE);
+    return customers.find(c => c.id === customerId) || null;
 }
 
 // =============================================
@@ -257,15 +317,22 @@ app.get('/api/orders/:id', (req, res) => {
 // POST create new order
 app.post('/api/orders', (req, res) => {
     const { items, customerName, address, phone, email, notes } = req.body;
+    const authenticatedCustomer = getAuthenticatedCustomer(req);
+
+    const finalCustomerName = customerName || (authenticatedCustomer ? authenticatedCustomer.name : 'Guest');
+    const finalAddress = address || (authenticatedCustomer ? authenticatedCustomer.address : '');
+    const finalPhone = phone || (authenticatedCustomer ? authenticatedCustomer.phone : '');
+    const finalEmail = email || (authenticatedCustomer ? authenticatedCustomer.email : '');
 
     console.log('📥 Incoming order payload:', {
         itemCount: Array.isArray(items) ? items.length : 0,
-        customerName: customerName || 'Guest',
-        phone,
-        hasAddress: Boolean(address)
+        customerName: finalCustomerName,
+        phone: finalPhone,
+        hasAddress: Boolean(finalAddress),
+        isAuthenticated: Boolean(authenticatedCustomer)
     });
     
-    if (!items || !items.length || !address || !phone) {
+    if (!items || !items.length || !finalAddress || !finalPhone) {
         return res.status(400).json({
             success: false,
             error: 'Items, address, and phone are required'
@@ -280,10 +347,11 @@ app.post('/api/orders', (req, res) => {
     const newOrder = {
         id: `ORD-${Date.now()}-${Math.random().toString(36).substr(2, 4).toUpperCase()}`,
         items,
-        customerName: customerName || 'Guest',
-        address,
-        phone,
-        email: email || '',
+        customerId: authenticatedCustomer ? authenticatedCustomer.id : null,
+        customerName: finalCustomerName,
+        address: finalAddress,
+        phone: finalPhone,
+        email: finalEmail,
         notes: notes || '',
         total,
         status: 'pending',
@@ -415,6 +483,138 @@ app.get('/api/contact', (req, res) => {
 // ADMIN AUTHENTICATION
 // =============================================
 
+// =============================================
+// CUSTOMER AUTHENTICATION
+// =============================================
+
+app.post('/api/customer-auth/signup', (req, res) => {
+    const { name, email, password, phone = '', address = '' } = req.body;
+
+    const sanitizedName = String(name || '').trim();
+    const sanitizedEmail = normalizeEmail(email);
+    const sanitizedPassword = String(password || '');
+
+    if (!sanitizedName || !sanitizedEmail || !sanitizedPassword) {
+        return res.status(400).json({
+            success: false,
+            error: 'Name, email, and password are required'
+        });
+    }
+
+    if (sanitizedPassword.length < 6) {
+        return res.status(400).json({
+            success: false,
+            error: 'Password must be at least 6 characters long'
+        });
+    }
+
+    const customers = readJsonFile(CUSTOMERS_FILE);
+    const alreadyExists = customers.some(customer => normalizeEmail(customer.email) === sanitizedEmail);
+
+    if (alreadyExists) {
+        return res.status(409).json({
+            success: false,
+            error: 'An account with this email already exists'
+        });
+    }
+
+    const newCustomer = {
+        id: `CUS-${Date.now()}-${Math.random().toString(36).substr(2, 4).toUpperCase()}`,
+        name: sanitizedName,
+        email: sanitizedEmail,
+        phone: String(phone || '').trim(),
+        address: String(address || '').trim(),
+        passwordHash: createPasswordHash(sanitizedPassword),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        lastLoginAt: new Date().toISOString()
+    };
+
+    customers.push(newCustomer);
+    writeJsonFile(CUSTOMERS_FILE, customers);
+
+    const token = `cust_${Date.now()}_${crypto.randomBytes(12).toString('hex')}`;
+    CUSTOMER_SESSIONS.set(token, newCustomer.id);
+
+    res.status(201).json({
+        success: true,
+        message: 'Signup successful',
+        data: {
+            token,
+            customer: getCustomerPublicProfile(newCustomer),
+            expiresIn: '24h'
+        }
+    });
+});
+
+app.post('/api/customer-auth/login', (req, res) => {
+    const { email, password } = req.body;
+
+    const sanitizedEmail = normalizeEmail(email);
+    const sanitizedPassword = String(password || '');
+
+    if (!sanitizedEmail || !sanitizedPassword) {
+        return res.status(400).json({
+            success: false,
+            error: 'Email and password are required'
+        });
+    }
+
+    const customers = readJsonFile(CUSTOMERS_FILE);
+    const customerIndex = customers.findIndex(c => normalizeEmail(c.email) === sanitizedEmail);
+
+    if (customerIndex === -1 || !verifyPassword(sanitizedPassword, customers[customerIndex].passwordHash)) {
+        return res.status(401).json({
+            success: false,
+            error: 'Invalid email or password'
+        });
+    }
+
+    customers[customerIndex].lastLoginAt = new Date().toISOString();
+    customers[customerIndex].updatedAt = new Date().toISOString();
+    writeJsonFile(CUSTOMERS_FILE, customers);
+
+    const token = `cust_${Date.now()}_${crypto.randomBytes(12).toString('hex')}`;
+    CUSTOMER_SESSIONS.set(token, customers[customerIndex].id);
+
+    res.json({
+        success: true,
+        message: 'Login successful',
+        data: {
+            token,
+            customer: getCustomerPublicProfile(customers[customerIndex]),
+            expiresIn: '24h'
+        }
+    });
+});
+
+app.get('/api/customer-auth/me', (req, res) => {
+    const customer = getAuthenticatedCustomer(req);
+    if (!customer) {
+        return res.status(401).json({
+            success: false,
+            error: 'Unauthorized customer session'
+        });
+    }
+
+    res.json({
+        success: true,
+        data: getCustomerPublicProfile(customer)
+    });
+});
+
+app.post('/api/customer-auth/logout', (req, res) => {
+    const token = extractCustomerToken(req);
+    if (token) {
+        CUSTOMER_SESSIONS.delete(token);
+    }
+
+    res.json({
+        success: true,
+        message: 'Logged out successfully'
+    });
+});
+
 // Demo credentials (in production, use proper authentication)
 const ADMIN_CREDENTIALS = {
     username: 'admin',
@@ -524,6 +724,10 @@ app.listen(PORT, () => {
 ║   • GET/POST/PUT/DELETE  /api/products                        ║
 ║   • GET/POST/PUT/DELETE  /api/orders                          ║
 ║   • GET/POST             /api/contact                         ║
+║   • POST                 /api/customer-auth/signup            ║
+║   • POST                 /api/customer-auth/login             ║
+║   • GET                  /api/customer-auth/me                ║
+║   • POST                 /api/customer-auth/logout            ║
 ║   • POST                 /api/auth/login                      ║
 ║   • GET                  /api/stats                           ║
 ║   • GET                  /api/health                          ║

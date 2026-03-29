@@ -1,4 +1,4 @@
-# 🍰 Sweet Delights Bakery
+# Sweet Delights Bakery
 
 ![Bakery Banner](assets/banner-img.png)
 
@@ -12,22 +12,22 @@ A modern, responsive bakery website featuring an elegant product catalog, intera
 
 ---
 
-## 🌟 Features
+## Features
 
-### 🛍️ Core Functionality
+### Core Functionality
 - **Dynamic Product Catalog** – Browse 40+ bakery items across categories (cakes, pastries, cookies, breads, desserts, beverages)
 - **Interactive Shopping Cart** – Add, remove, and adjust quantities (max 3 per item) with live total calculation
 - **Real-time Search** – Instant product filtering with category-aware search and live suggestions
 - **Order Tracking** – Track your order status with order ID lookup
 - **Custom Cake Builder** – Interactive form to design personalized cakes (flavor, size, frosting, toppings, message)
 
-### 🔐 Admin Portal
+### Admin Portal
 - **Secure Login** – Session-based authentication with demo credentials
 - **Demo Access** – Username: `admin` | Password: `demo123`
 - **Dashboard** – View orders, manage products, and track statistics
 - **Quick Access** – Admin portal button conveniently located below the navbar
 
-### 🎨 User Experience
+### User Experience
 - **Responsive Design** – Mobile-first approach with hamburger navigation, optimized layouts for phones, tablets, and desktops
 - **Beautiful Animations** – Smooth transitions, hover effects, and scroll animations
 - **Green Theme** – Elegant green gradient navbar and footer design
@@ -36,14 +36,14 @@ A modern, responsive bakery website featuring an elegant product catalog, intera
 - **Seasonal Offers** – Rotating promotional banners with special discounts
 - **Customer Reviews** – Testimonial section showcasing customer feedback
 
-### 📰 Content & Engagement
+### Content & Engagement
 - **Blog Section** – Modal-based blog posts with baking tips, recipes, and stories
 - **About Section** – Company history, founders, and values
 - **Location Finder** – Embedded Google Maps for store locations
 - **Contact Form** – Email, phone, and social media links
 - **Draggable Logo** – Fun interactive logo element
 
-### 🔧 Technical Highlights
+### Technical Highlights
 - **Vanilla JS** – No frameworks, lightweight, and fast
 - **CSS Grid & Flexbox** – Modern layout system with mobile breakpoints
 - **CSS Animations** – Custom keyframe animations (slideIn, fadeIn, pulse, glow)
@@ -54,7 +54,7 @@ A modern, responsive bakery website featuring an elegant product catalog, intera
 
 ---
 
-## 🚀 Live Demo
+## Live Demo
 
 ```
 https://samirshaikh03.github.io/bakery-web/
@@ -62,7 +62,7 @@ https://samirshaikh03.github.io/bakery-web/
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 ### Desktop View
 ![Desktop Hero](assets/desktop-view.png)
@@ -78,7 +78,7 @@ https://samirshaikh03.github.io/bakery-web/
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ------------------------------------------------------------------------------
 |         Technology          |                   Purpose                    |
@@ -93,7 +93,7 @@ https://samirshaikh03.github.io/bakery-web/
 
 ---
 
-## 📦 Installation & Setup
+## Installation & Setup
 
 ### Prerequisites
 - A modern web browser (Chrome, Firefox, Safari, Edge)
@@ -119,7 +119,7 @@ The API server will run at `http://localhost:3000`
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 Bakery_Website/
@@ -150,7 +150,7 @@ Bakery_Website/
 
 ---
 
-## 🎯 Usage Guide
+## Usage Guide
 
 ### For Customers
 
@@ -185,12 +185,12 @@ Bakery_Website/
 
 ---
 
-## 🧩 Features Roadmap
+## Features Roadmap
 
 - [x] Backend integration (Node.js/Express)
 - [x] Admin dashboard for product/order management
 - [x] Beautiful animations and effects
-- [ ] User authentication (login/signup for customers)
+- [x] User authentication (login/signup for customers)
 - [ ] Payment gateway (Stripe, Razorpay)
 - [ ] Email notifications for orders
 - [ ] Dark mode toggle
@@ -210,6 +210,10 @@ The backend provides REST APIs for managing the bakery's operations:
 | `/api/products` | GET, POST, PUT, DELETE | Product catalog CRUD |
 | `/api/orders` | GET, POST, PUT, DELETE | Order management |
 | `/api/contact` | GET, POST | Contact form submissions |
+| `/api/customer-auth/signup` | POST | Customer signup |
+| `/api/customer-auth/login` | POST | Customer login |
+| `/api/customer-auth/me` | GET | Get logged-in customer profile |
+| `/api/customer-auth/logout` | POST | Customer logout |
 | `/api/auth/login` | POST | Admin authentication |
 | `/api/stats` | GET | Dashboard statistics |
 
@@ -223,7 +227,7 @@ For detailed API documentation, see [backend/README.md](backend/README.md)
 
 ---
 
-## 🐛 Bug Reports & Feature Requests
+## Bug Reports & Feature Requests
 
 Found a bug or have a feature idea?
 
@@ -237,7 +241,7 @@ Found a bug or have a feature idea?
 
 ---
 
-## 📜 License
+## License
 
 This project is licensed under the **Apache 2.0 License** – see the [LICENSE](LICENSE) file for details.
 
@@ -245,7 +249,7 @@ This project is licensed under the **Apache 2.0 License** – see the [LICENSE](
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **Font Awesome** – Icon library ([fontawesome.com](https://fontawesome.com))
 - **Google Fonts** – Typography
@@ -254,7 +258,7 @@ This project is licensed under the **Apache 2.0 License** – see the [LICENSE](
 
 ---
 
-## 📊 Project Stats
+## Project Stats
 
 - **Lines of Code:** ~10,000+
 - **Product Images:** 40+

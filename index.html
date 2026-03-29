@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" href="assets/Sweet_Delight_icon.png" type="image/jpg">
+    <link rel="icon" href="assets/Sweet_Delight_icon.png" type="image/png">
     <link rel="stylesheet" href="css/bakery.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Sweet Delights Bakery</title>
@@ -30,6 +30,10 @@
         <a href="#products"><i class="fas fa-cookie-bite"></i> Products</a>
         <a href="#location"><i class="fa-solid fa-location-dot"></i> Location</a>
         <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+        <button type="button" class="account-trigger" id="account-trigger" onclick="openCustomerAuthModal('login')">
+            <i class="fas fa-user" aria-hidden="true"></i>
+            <span>Login</span>
+        </button>
         <a class="cart-icon" onclick="showCart()"><i class="fas fa-shopping-cart"></i> Cart</a>
         <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation" style="display:none;">
             <span class="nav-toggle-bar"></span>
@@ -48,6 +52,7 @@
                 <a href="#products" role="menuitem"><i class="fas fa-cookie-bite"></i> Products</a>
                 <a href="#location" role="menuitem"><i class="fa-solid fa-location-dot"></i> Location</a>
                 <a href="#contact" role="menuitem"><i class="fas fa-envelope"></i> Contact</a>
+                <button type="button" class="mobile-menu__account" role="menuitem" onclick="openCustomerAuthModal('login')"><i class="fas fa-user"></i> Account</button>
                 <button type="button" class="mobile-menu__cart" role="menuitem" onclick="showCart()"><i class="fas fa-shopping-cart"></i> Cart</button>
             </nav>
         </div>
@@ -73,11 +78,11 @@
                     <small>Since 1960</small>
                 </div>
                 <div class="hero-logo">
-                    <p class="hero-logo__tagline">Family-owned · Since 1960</p>
+                    <p class="hero-logo__tagline">Family-owned  -  Since 1960</p>
                 </div>
                 <div class="hero-pill-group">
-                    <span class="hero-pill"><i class="fa-solid fa-star" aria-hidden="true"></i> Artisanal bakery · Est. 1960</span>
-                    <span class="hero-pill pill-outline"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Bandra • Mumbai</span>
+                    <span class="hero-pill"><i class="fa-solid fa-star" aria-hidden="true"></i> Artisanal bakery  -  Est. 1960</span>
+                    <span class="hero-pill pill-outline"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Bandra  -  Mumbai</span>
                 </div>
                 <h1>Sweet Delight's Bakery</h1>
                 <p class="hero-lead">Fresh croissants, celebration cakes, and artisanal breads leaving the oven every sunrise. Crafted by three generations of Patels with locally sourced ingredients.</p>
@@ -91,7 +96,7 @@
                         <span class="metric-label">Daily Orders</span>
                     </article>
                     <article class="hero-metric-card">
-                        <span class="metric-value">4.9★</span>
+                        <span class="metric-value">4.9*</span>
                         <span class="metric-label">Community Rating</span>
                     </article>
                 </div>
@@ -126,17 +131,8 @@
                 <div class="hero-gallery__stack">
                     <figure class="hero-gallery__mini">
                         <img src="assets/Butter_croissant.webp" alt="Flaky butter croissants" loading="lazy">
-                        <figcaption>Fresh croissants • 7:00 AM batch</figcaption>
+                        <figcaption>Fresh croissants  -  7:00 AM batch</figcaption>
                     </figure>
-                    <div class="hero-note-card">
-                        <p class="note-eyebrow">Open today</p>
-                        <p class="note-title">7:00 AM – 10:00 PM</p>
-                        <p>Walk-ins welcome · Same-day delivery · Custom cakes in 48 hrs</p>
-                        <ul>
-                            <li><i class="fa-solid fa-cake-candles" aria-hidden="true"></i> Celebration cakes</li>
-                            <li><i class="fa-solid fa-mug-hot" aria-hidden="true"></i> Coffee pairings</li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
@@ -163,219 +159,219 @@
                 <div class="product">
                     <img src="assets/Chocolate_cake.webp" alt="Chocolate Cake">
                     <h3>Chocolate Cake</h3>
-                    <p>899.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Chocolate Cake', 899.00, 1)">Order Now</button>
+                    <p>$9.99</p>
+                    <button class="order-btn" onclick="addToCart('Chocolate Cake', 9.99, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Red_Velvet.jpeg" alt="Red Velvet Cake">
                     <h3>Red Velvet</h3>
-                    <p>599.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Red Velvet', 599.00, 1)">Order Now</button>
+                    <p>$9.89</p>
+                    <button class="order-btn" onclick="addToCart('Red Velvet', 9.89, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Rasmalai_Cake.jpg" alt="Rasmalai Cake">
                     <h3>Rasmalai Cake</h3>
-                    <p>699.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Rasmalai Cake', 699.00, 1)">Order Now</button>
+                    <p>$8.99</p>
+                    <button class="order-btn" onclick="addToCart('Rasmalai Cake', 8.99, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Blueberry_Lemon_Cake.jpg" alt="Blueberry Lemon Cake">
                     <h3>Blueberry Cake</h3>
-                    <p>969.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Blueberry Cake', 969.00, 1)">Order Now</button>
+                    <p>$11.19</p>
+                    <button class="order-btn" onclick="addToCart('Blueberry Cake', 11.19, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Carrot_Cake.jpeg" alt="Carrot Cake">
                     <h3>Carrot Cake</h3>
-                    <p>499.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Carrot Cake', 499.00, 1)">Order Now</button>
+                    <p>$7.99</p>
+                    <button class="order-btn" onclick="addToCart('Carrot Cake', 7.99, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Oreo_Cheesecake.webp" alt="Oreo Cheesecake">
                     <h3>Oreo Cheesecake</h3>
-                    <p>399.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Oreo Cheesecake', 399.00, 1)">Order Now</button>
+                    <p>$5.99</p>
+                    <button class="order-btn" onclick="addToCart('Oreo Cheesecake', 5.99, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Black_Forest.jpg" alt="Black Forest Cake">
                     <h3>Black Forest</h3>
-                    <p>599.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Black Forest', 599.00, 1)">Order Now</button>
+                    <p>$5.99</p>
+                    <button class="order-btn" onclick="addToCart('Black Forest', 5.99, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/HummingBird_Cake.jpeg" alt="HummingBird Cake">
                     <h3>HummingBird Cake</h3>
-                    <p>899.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('HummingBird Cake', 899.00, 1)">Order Now</button>
+                    <p>$8.99</p>
+                    <button class="order-btn" onclick="addToCart('HummingBird Cake', 8.99, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Butter_croissant.webp" alt="Butter Croissant">
                     <h3>Butter Croissant</h3>
-                    <p>320.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Butter Croissant', 320.00, 1)">Order Now</button>
+                    <p>$7.99</p>
+                    <button class="order-btn" onclick="addToCart('Butter Croissant', 7.99, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Oatmeal_cookies.jpeg" alt="Oatmeal Cookies">
                     <h3>Oatmeal Cookies</h3>
-                    <p>240.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Oatmeal Cookies', 240.00, 1)">Order Now</button>
+                    <p>$4.19</p>
+                    <button class="order-btn" onclick="addToCart('Oatmeal Cookies', 4.19, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Glazed_donuts.jpg" alt="Glazed Donuts">
                     <h3>Glazed Donuts</h3>
-                    <p>160.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Glazed Donuts', 160.00, 1)">Order Now</button>
+                    <p>$3.99</p>
+                    <button class="order-btn" onclick="addToCart('Glazed Donuts', 3.99, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Blueberry_muffins.jpg" alt="Blueberry Muffin">
                     <h3>Blueberry Muffin</h3>
-                    <p>280.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Blueberry Muffin', 280.00, 1)">Order Now</button>
+                    <p>$4.19</p>
+                    <button class="order-btn" onclick="addToCart('Blueberry Muffin', 4.19, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Apple_pie.jpeg" alt="Apple Pie">
                     <h3>Apple Pie</h3>
-                    <p>999.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Apple Pie', 999.00, 1)">Order Now</button>
+                    <p>$13.99</p>
+                    <button class="order-btn" onclick="addToCart('Apple Pie', 13.99, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Cranberry_scones.jpg" alt="Cranberry Scone">
                     <h3>Cranberry Scone</h3>
-                    <p>180.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Cranberry Scone', 180.00, 1)">Order Now</button>
+                    <p>$5.99</p>
+                    <button class="order-btn" onclick="addToCart('Cranberry Scone', 5.99, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Sourdough_bread.jpg" alt="Sourdough Bread">
                     <h3>Sourdough Bread</h3>
-                    <p>480.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Sourdough Bread', 480.00, 1)">Order Now</button>
+                    <p>$3.99</p>
+                    <button class="order-btn" onclick="addToCart('Sourdough Bread', 3.99, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Cinnamon_Bagel.jpeg" alt="Cinnamon Bagel">
                     <h3>Cinnamon Bagel</h3>
-                    <p>189.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Cinnamon Bagel', 189.00, 1)">Order Now</button>
+                    <p>$3.19</p>
+                    <button class="order-btn" onclick="addToCart('Cinnamon Bagel', 3.19, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Almon_Pastry.webp" alt="Almond Pastry">
                     <h3>Almond Pastry</h3>
-                    <p>269.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Almond Pastry', 269.00, 1)">Order Now</button>
+                    <p>$4.99</p>
+                    <button class="order-btn" onclick="addToCart('Almond Pastry', 4.99, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Fudge_Brownie.jpg" alt="Fudge Brownie">
                     <h3>Fudge Brownie</h3>
-                    <p>189.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Fudge Brownie', 189.00, 1)">Order Now</button>
+                    <p>$3.19</p>
+                    <button class="order-btn" onclick="addToCart('Fudge Brownie', 3.19, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Lemon_Tart.jpg" alt="Lemon Tart">
                     <h3>Lemon Tart</h3>
-                    <p>499.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Lemon Tart', 499.00, 1)">Order Now</button>
+                    <p>$8.99</p>
+                    <button class="order-btn" onclick="addToCart('Lemon Tart', 8.99, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Chocolate_Eclairs.jpg" alt="Chocolate Eclair">
                     <h3>Chocolate Eclair</h3>
-                    <p>199.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Chocolate Eclair', 199.00, 1)">Order Now</button>
+                    <p>$5.99</p>
+                    <button class="order-btn" onclick="addToCart('Chocolate Eclair', 5.99, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Macrons.jpg" alt="Assorted Macarons">
                     <h3>Assorted Macarons</h3>
-                    <p>199.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Assorted Macarons', 199.00, 1)">Order Now</button>
+                    <p>$5.19</p>
+                    <button class="order-btn" onclick="addToCart('Assorted Macarons', 5.19, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Vanilla_Cupcake.jpg" alt="Vanilla Cupcake">
                     <h3>Vanilla Cupcake</h3>
-                    <p>149.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Vanilla Cupcake', 149.00, 1)">Order Now</button>
+                    <p>$4.99</p>
+                    <button class="order-btn" onclick="addToCart('Vanilla Cupcake', 4.99, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Chocolate_Truffle.jpg" alt="Chocolate Truffle">
                     <h3>Chocolate Truffle</h3>
-                    <p>419.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Chocolate Truffle', 419.00, 1)">Order Now</button>
+                    <p>$5.19</p>
+                    <button class="order-btn" onclick="addToCart('Chocolate Truffle', 5.19, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Cookie_Dough.jpg" alt="Edible Cookie Dough">
                     <h3>Edible Cookie Dough</h3>
-                    <p>299.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Edible Cookie Dough', 299.00, 1)">Order Now</button>
+                    <p>$4.99</p>
+                    <button class="order-btn" onclick="addToCart('Edible Cookie Dough', 4.99, 1)">Order Now</button>
                 </div>
                 <!---Add from here--->
                 <div class="product">
                     <img src="assets/Salted-Caramel-Pretzel-Brownies.jpg" alt="Salted-Caramel-Pretzel-Brownies">
                     <h3>Salted Pretzel Brownie</h3>
-                    <p>99.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Salted Pretzel Brownie', 99.00, 1)">Order Now</button>
+                    <p>$2.19</p>
+                    <button class="order-btn" onclick="addToCart('Salted Pretzel Brownie', 2.19, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/matcha.jpg" alt="Matcha Cake">
                     <h3>Matcha Cupcake</h3>
-                    <p>49.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Matcha Cupcake', 49.00, 1)">Order Now</button>
+                    <p>$2.00</p>
+                    <button class="order-btn" onclick="addToCart('Matcha Cupcake', 2.00, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Lavender-Lemon-Scone.jpg" alt="Lavender Lemon Scone">
                     <h3>Lavender Lemon Scone</h3>
-                    <p>199.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Lavender Lemon Scone ', 199.00, 1)">Order Now</button>
+                    <p>$4.19</p>
+                    <button class="order-btn" onclick="addToCart('Lavender Lemon Scone ', 4.19, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Bannana_bread.webp" alt="Banana Bread">
                     <h3>Bannana Bread</h3>
-                    <p>199.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Bannana Bread', 199.00, 1)">Order Now</button>
+                    <p>$2.00</p>
+                    <button class="order-btn" onclick="addToCart('Bannana Bread', 2.00, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/raspberry-and-white-chocolate-eclairs.webp" alt="raspberry-and-white-chocolate-eclairs">
                     <h3>White chocolate Eclairs</h3>
-                    <p>119.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('White Chocolate Eclairs', 119.00, 1)">Order Now</button>
+                    <p>$2.00</p>
+                    <button class="order-btn" onclick="addToCart('White Chocolate Eclairs', 2.00, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Mapple_Danish.jpg" alt="Mapple Danish">
                     <h3>Mapple Danish</h3>
-                    <p>49.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Mapple Danish', 49.00, 1)">Order Now</button>
+                    <p>$1.00</p>
+                    <button class="order-btn" onclick="addToCart('Mapple Danish', 1.00, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Apple-turnover.jpg" alt="Apple Turnover">
                     <h3>Apple Turnover</h3>
-                    <p>129.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Apple Turnover', 129.00, 1)">Order Now</button>
+                    <p>$2.19</p>
+                    <button class="order-btn" onclick="addToCart('Apple Turnover', 2.19, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Hezelnut_Truffle.webp" alt="Hazelnut Truffle">
                     <h3>Hazelnut Truffle</h3>
-                    <p>99.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Salted Caramel Macarons', 99.00, 1)">Order Now</button>
+                    <p>$3.19</p>
+                    <button class="order-btn" onclick="addToCart('Salted Caramel Macarons', 3.19, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Salted-Caramel-Macaron.jpg" alt="Salted Caramel Macarons">
                     <h3>Salted Caramel Macarons</h3>
-                    <p>129.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Salted Caramel Macarons', 129.00, 1)">Order Now</button>
+                    <p>$3.19</p>
+                    <button class="order-btn" onclick="addToCart('Salted Caramel Macarons', 3.19, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/pistachio-roll.jpg" alt="Pistachio Roll">
                     <h3>Pistachio Roll</h3>
-                    <p>159.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Pistachio Roll', 159.00, 1)">Order Now</button>
+                    <p>$3.00</p>
+                    <button class="order-btn" onclick="addToCart('Pistachio Roll', 3.00, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Chai-Spices-Cookies.jpg" alt="Chai Spice Cookie">
                     <h3>Chai Spice Cookie</h3>
-                    <p>79.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Chai Spice Cookie', 79.00, 1)">Order Now</button>
+                    <p>$2.19</p>
+                    <button class="order-btn" onclick="addToCart('Chai Spice Cookie', 2.19, 1)">Order Now</button>
                 </div>
                 <div class="product">
                     <img src="assets/Orange-blossom-tart.jpg" alt="Orange Blossom Mini Tart">
                     <h3>Orange Blossom Mini Tart</h3>
-                    <p>139.00 ₹</p>
-                    <button class="order-btn" onclick="addToCart('Orange Blossom Mini Tart', 139.00, 1)">Order Now</button>
+                    <p>$4.00</p>
+                    <button class="order-btn" onclick="addToCart('Orange Blossom Mini Tart', 4.00, 1)">Order Now</button>
                 </div>
             </div>
             
@@ -386,38 +382,38 @@
                     <div class="product">
                         <img src="assets/Butter_croissant.webp" alt="Butter Croissant">
                         <h3>Butter Croissant</h3>
-                        <p>89.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Butter Croissant', 89.00, 1)">Order Now</button>
+                        <p>$2.00</p>
+                        <button class="order-btn" onclick="addToCart('Butter Croissant', 2.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/Almon_Pastry.webp" alt="Pain au Chocolat">
                         <h3>Pain au Chocolat</h3>
-                        <p>109.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Pain au Chocolat', 109.00, 1)">Order Now</button>
+                        <p>$2.00</p>
+                        <button class="order-btn" onclick="addToCart('Pain au Chocolat', 2.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/Blueberry_muffins.jpg" alt="Danish Pastry">
                         <h3>Danish Pastry</h3>
-                        <p>119.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Danish Pastry', 119.00, 1)">Order Now</button>
+                        <p>$3.00</p>
+                        <button class="order-btn" onclick="addToCart('Danish Pastry', 3.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/Fudge_Brownie.jpg" alt="Puff Pastry">
                         <h3>Puff Pastry</h3>
-                        <p>79.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Puff Pastry', 79.00, 1)">Order Now</button>
+                        <p>$2.00</p>
+                        <button class="order-btn" onclick="addToCart('Puff Pastry', 2.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/Glazed_donuts.jpg" alt="Apple Turnover">
                         <h3>Apple Turnover</h3>
-                        <p>99.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Apple Turnover', 99.00, 1)">Order Now</button>
+                        <p>$3.00</p>
+                        <button class="order-btn" onclick="addToCart('Apple Turnover', 3.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/Chai-Spices-Cookies.jpg" alt="Napoleons">
                         <h3>Napoleons</h3>
-                        <p>149.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Napoleons', 149.00, 1)">Order Now</button>
+                        <p>$3.00</p>
+                        <button class="order-btn" onclick="addToCart('Napoleons', 3.00, 1)">Order Now</button>
                     </div>
                 </div>
             </div>
@@ -429,38 +425,38 @@
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Sourdough Bread">
                         <h3>Sourdough Bread</h3>
-                        <p>189.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Sourdough Bread', 189.00, 1)">Order Now</button>
+                        <p>$4.00</p>
+                        <button class="order-btn" onclick="addToCart('Sourdough Bread', 4.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="French Baguette">
                         <h3>French Baguette</h3>
-                        <p>149.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('French Baguette', 149.00, 1)">Order Now</button>
+                        <p>$3.00</p>
+                        <button class="order-btn" onclick="addToCart('French Baguette', 3.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Whole Wheat Bread">
                         <h3>Whole Wheat Bread</h3>
-                        <p>119.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Whole Wheat Bread', 119.00, 1)">Order Now</button>
+                        <p>$2.00</p>
+                        <button class="order-btn" onclick="addToCart('Whole Wheat Bread', 2.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Multigrain Bread">
                         <h3>Multigrain Bread</h3>
-                        <p>139.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Multigrain Bread', 139.00, 1)">Order Now</button>
+                        <p>$3.00</p>
+                        <button class="order-btn" onclick="addToCart('Multigrain Bread', 3.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Garlic Bread">
                         <h3>Garlic Bread</h3>
-                        <p>99.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Garlic Bread', 99.00, 1)">Order Now</button>
+                        <p>$2.00</p>
+                        <button class="order-btn" onclick="addToCart('Garlic Bread', 2.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Focaccia">
                         <h3>Focaccia</h3>
-                        <p>169.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Focaccia', 169.00, 1)">Order Now</button>
+                        <p>$3.00</p>
+                        <button class="order-btn" onclick="addToCart('Focaccia', 3.00, 1)">Order Now</button>
                     </div>
                 </div>
             </div>
@@ -472,50 +468,50 @@
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Mini Pizza">
                         <h3>Mini Pizza</h3>
-                        <p>149.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Mini Pizza', 149.00, 1)">Order Now</button>
+                        <p>$3.00</p>
+                        <button class="order-btn" onclick="addToCart('Mini Pizza', 3.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Vegetable Puff">
                         <h3>Vegetable Puff</h3>
-                        <p>69.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Vegetable Puff', 69.00, 1)">Order Now</button>
+                        <p>$1.00</p>
+                        <button class="order-btn" onclick="addToCart('Vegetable Puff', 1.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Chicken Puff">
                         <h3>Chicken Puff</h3>
-                        <p>89.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Chicken Puff', 89.00, 1)">Order Now</button>
+                        <p>$2.00</p>
+                        <button class="order-btn" onclick="addToCart('Chicken Puff', 2.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Cheese Straws">
                         <h3>Cheese Straws</h3>
-                        <p>119.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Cheese Straws', 119.00, 1)">Order Now</button>
+                        <p>$3.00</p>
+                        <button class="order-btn" onclick="addToCart('Cheese Straws', 3.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Sausage Roll">
                         <h3>Sausage Roll</h3>
-                        <p>129.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Sausage Roll', 129.00, 1)">Order Now</button>
+                        <p>$3.00</p>
+                        <button class="order-btn" onclick="addToCart('Sausage Roll', 3.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Spinach & Feta Puff">
                         <h3>Spinach & Feta Puff</h3>
-                        <p>99.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Spinach & Feta Puff', 99.00, 1)">Order Now</button>
+                        <p>$2.00</p>
+                        <button class="order-btn" onclick="addToCart('Spinach & Feta Puff', 2.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Quiche Lorraine">
                         <h3>Quiche Lorraine</h3>
-                        <p>179.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Quiche Lorraine', 179.00, 1)">Order Now</button>
+                        <p>$4.00</p>
+                        <button class="order-btn" onclick="addToCart('Quiche Lorraine', 4.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Samosa">
                         <h3>Samosa (Pack of 4)</h3>
-                        <p>89.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Samosa Pack', 89.00, 1)">Order Now</button>
+                        <p>$2.00</p>
+                        <button class="order-btn" onclick="addToCart('Samosa Pack', 2.00, 1)">Order Now</button>
                     </div>
                 </div>
             </div>
@@ -527,38 +523,38 @@
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Chocolate Truffle">
                         <h3>Chocolate Truffle</h3>
-                        <p>49.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Chocolate Truffle', 49.00, 1)">Order Now</button>
+                        <p>$2.00</p>
+                        <button class="order-btn" onclick="addToCart('Chocolate Truffle', 2.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Tiramisu Cup">
                         <h3>Tiramisu Cup</h3>
-                        <p>129.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Tiramisu Cup', 129.00, 1)">Order Now</button>
+                        <p>$3.00</p>
+                        <button class="order-btn" onclick="addToCart('Tiramisu Cup', 3.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
-                        <img src="assets/matcha.jpg" alt="Crème Brûlée">
-                        <h3>Crème Brûlée</h3>
-                        <p>159.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Crème Brûlée', 159.00, 1)">Order Now</button>
+                        <img src="assets/matcha.jpg" alt="CrÃ¨me BrÃ»lÃ©e">
+                        <h3>CrÃ¨me BrÃ»lÃ©e</h3>
+                        <p>$3.00</p>
+                        <button class="order-btn" onclick="addToCart('CrÃ¨me BrÃ»lÃ©e', 3.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Panna Cotta">
                         <h3>Panna Cotta</h3>
-                        <p>119.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Panna Cotta', 119.00, 1)">Order Now</button>
+                        <p>$2.00</p>
+                        <button class="order-btn" onclick="addToCart('Panna Cotta', 2.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Chocolate Mousse">
                         <h3>Chocolate Mousse</h3>
-                        <p>139.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Chocolate Mousse', 139.00, 1)">Order Now</button>
+                        <p>$3.00</p>
+                        <button class="order-btn" onclick="addToCart('Chocolate Mousse', 3.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Fruit Tart">
                         <h3>Fruit Tart</h3>
-                        <p>179.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Fruit Tart', 179.00, 1)">Order Now</button>
+                        <p>$3.00</p>
+                        <button class="order-btn" onclick="addToCart('Fruit Tart', 3.00, 1)">Order Now</button>
                     </div>
                 </div>
             </div>
@@ -570,38 +566,38 @@
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Fresh Coffee">
                         <h3>Fresh Brewed Coffee</h3>
-                        <p>89.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Fresh Brewed Coffee', 89.00, 1)">Order Now</button>
+                        <p>$2.00</p>
+                        <button class="order-btn" onclick="addToCart('Fresh Brewed Coffee', 2.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Cappuccino">
                         <h3>Cappuccino</h3>
-                        <p>119.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Cappuccino', 119.00, 1)">Order Now</button>
+                        <p>$3.00</p>
+                        <button class="order-btn" onclick="addToCart('Cappuccino', 3.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Latte">
                         <h3>Latte</h3>
-                        <p>129.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Latte', 129.00, 1)">Order Now</button>
+                        <p>$3.00</p>
+                        <button class="order-btn" onclick="addToCart('Latte', 3.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Hot Chocolate">
                         <h3>Hot Chocolate</h3>
-                        <p>99.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Hot Chocolate', 99.00, 1)">Order Now</button>
+                        <p>$2.00</p>
+                        <button class="order-btn" onclick="addToCart('Hot Chocolate', 2.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Fresh Juice">
                         <h3>Fresh Orange Juice</h3>
-                        <p>79.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Fresh Orange Juice', 79.00, 1)">Order Now</button>
+                        <p>$2.00</p>
+                        <button class="order-btn" onclick="addToCart('Fresh Orange Juice', 2.00, 1)">Order Now</button>
                     </div>
                     <div class="product">
                         <img src="assets/matcha.jpg" alt="Masala Chai">
                         <h3>Masala Chai</h3>
-                        <p>59.00 ₹</p>
-                        <button class="order-btn" onclick="addToCart('Masala Chai', 59.00, 1)">Order Now</button>
+                        <p>$2.00</p>
+                        <button class="order-btn" onclick="addToCart('Masala Chai', 2.00, 1)">Order Now</button>
                     </div>
                 </div>
             </div>
@@ -653,8 +649,8 @@
                     </div>
                 </div>
                 <div class="offer-pricing">
-                    <span class="price-original">₹2,499</span>
-                    <span class="price-discounted">₹1,899</span>
+                    <span class="price-original">$2,499</span>
+                    <span class="price-discounted">$1,899</span>
                     <span class="discount-percent">24% OFF</span>
                 </div>
                 <div class="offer-actions">
@@ -707,7 +703,7 @@
                 </div>
                 <div class="offer-pricing">
                     <span class="discount-text">Up to 30% OFF</span>
-                    <span class="price-range">Starting from ₹299</span>
+                    <span class="price-range">Starting from $1,299</span>
                 </div>
                 <div class="offer-actions">
                     <button type="button" class="btn btn--primary" onclick="event.preventDefault(); openOfferModal('seasonal');">Shop Collection</button>
@@ -722,8 +718,8 @@
                 <i class="fa-solid fa-birthday-cake"></i>
                 <div class="quick-offer-content">
                     <h4>Birthday Specials</h4>
-                    <p>Free decoration on orders above ₹1500</p>
-                    <a href="#products" class="quick-link">Explore →</a>
+                    <p>Free decoration on orders above $1500</p>
+                    <a href="#products" class="quick-link">Explore -></a>
                 </div>
             </div>
             <div class="quick-offer-item">
@@ -731,7 +727,7 @@
                 <div class="quick-offer-content">
                     <h4>Fresh Cookies</h4>
                     <p>Buy 2 dozen, get 20% off</p>
-                    <a href="#products" class="quick-link">Order Now →</a>
+                    <a href="#products" class="quick-link">Order Now -></a>
                 </div>
             </div>
             <div class="quick-offer-item">
@@ -739,7 +735,7 @@
                 <div class="quick-offer-content">
                     <h4>Daily Fresh Bread</h4>
                     <p>Pre-order for next day delivery</p>
-                    <a href="#products" class="quick-link">Pre-order →</a>
+                    <a href="#products" class="quick-link">Pre-order -></a>
                 </div>
             </div>
         </div>
@@ -781,23 +777,23 @@
                     <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
                     <select id="cake-size" required>
                         <option value="" disabled selected>Select size</option>
-                        <option value="4 inch">4 inch · serves 2–4 (Petite)</option>
-                        <option value="5 inch">5 inch · serves 4–6</option>
-                        <option value="6 inch">6 inch · serves 6–8</option>
-                        <option value="7 inch">7 inch · serves 8–10</option>
-                        <option value="9 inch">9 inch · serves 12–14</option>
-                        <option value="12 inch">12 inch · serves 18–24</option>
-                        <option value="14 inch">14 inch · serves 24–30</option>
-                        <option value="half-sheet">Half sheet · serves 30–40</option>
-                        <option value="full-sheet">Full sheet · serves 50–60</option>
-                        <option value="6+8">2-tier (6″ + 8″) · serves 16–20</option>
-                        <option value="8+10">2-tier (8″ + 10″) · serves 24–30</option>
-                        <option value="6+8+10">3-tier (6″ + 8″ + 10″) · serves 40–50</option>
-                        <option value="cupcakes-dozen">Dozen cupcakes (assorted) · 12 pcs</option>
-                        <option value="mini-assortment">Mini assortment · 24 mini portions</option>
+                        <option value="4 inch">4 inch  -  serves 2-4 (Petite)</option>
+                        <option value="5 inch">5 inch  -  serves 4-6</option>
+                        <option value="6 inch">6 inch  -  serves 6-8</option>
+                        <option value="7 inch">7 inch  -  serves 8-10</option>
+                        <option value="9 inch">9 inch  -  serves 12-14</option>
+                        <option value="12 inch">12 inch  -  serves 18-24</option>
+                        <option value="14 inch">14 inch  -  serves 24-30</option>
+                        <option value="half-sheet">Half sheet  -  serves 30-40</option>
+                        <option value="full-sheet">Full sheet  -  serves 50-60</option>
+                        <option value="6+8">2-tier (6" + 8")  -  serves 16-20</option>
+                        <option value="8+10">2-tier (8" + 10")  -  serves 24-30</option>
+                        <option value="6+8+10">3-tier (6" + 8" + 10")  -  serves 40-50</option>
+                        <option value="cupcakes-dozen">Dozen cupcakes (assorted)  -  12 pcs</option>
+                        <option value="mini-assortment">Mini assortment  -  24 mini portions</option>
                         </optgroup>
-                        <option value="8 inch">8 inch · serves 10-12</option>
-                        <option value="10 inch">10 inch · serves 14-18</option>
+                        <option value="8 inch">8 inch  -  serves 10-12</option>
+                        <option value="10 inch">10 inch  -  serves 14-18</option>
                     </select>
                 </div>
             </div>
@@ -868,21 +864,21 @@
             <div class="card-content">
                 <h3 id="post1-title" class="post-title">Salted Pretzel Brownie: Balancing Sweet & Savory</h3>
                 <div class="post-meta">
-                    <span class="author">By: Rohit Mehta</span> •
-                    <time datetime="2025-05-20">May 20, 2025</time> •
+                    <span class="author">By: Rohit Mehta</span>  - 
+                    <time datetime="2025-05-20">May 20, 2025</time>  - 
                     <span class="read-time">4 min read</span>
                 </div>
                 <p class="excerpt">Combining crunchy salted pretzels with a fudgy brownie creates an addictive contrast. Learn the right salt level, how to keep pretzels crisp and a quick caramel drizzle to finish.</p>
                 <div class="post-tags">Tags: <span>brownie</span>, <span>salted caramel</span>, <span>snack</span></div>
-                <a href="#post-1" class="read-more" data-blog-trigger="post-1">Read More →</a>
+                <a href="#post-1" class="read-more" data-blog-trigger="post-1">Read More -></a>
             </div>
             <div id="post-1" class="full-post" hidden>
                 <h4 class="post-title">Salted Pretzel Brownie: Balancing Sweet & Savory</h4>
                 <div class="post-meta">
-                    <span class="author">Rohit Mehta</span> • <time datetime="2025-05-20">May 20, 2025</time>
+                    <span class="author">Rohit Mehta</span>  -  <time datetime="2025-05-20">May 20, 2025</time>
                 </div>
                 <div class="post-body">
-                    <p>Use a slightly underbaked, fudgy brownie base so the pretzels don't make it cakey. Toss pretzel pieces in a small amount of melted butter and a sprinkle of sugar before pressing some into the top of the batter — this helps them stay crisp after baking. For the caramel, cook sugar until amber, add cream and a pinch of flaky sea salt. Drizzle lightly to keep the balance between sweet and salty.</p>
+                    <p>Use a slightly underbaked, fudgy brownie base so the pretzels don't make it cakey. Toss pretzel pieces in a small amount of melted butter and a sprinkle of sugar before pressing some into the top of the batter - this helps them stay crisp after baking. For the caramel, cook sugar until amber, add cream and a pinch of flaky sea salt. Drizzle lightly to keep the balance between sweet and salty.</p>
                     <h5>Pro Tip</h5>
                     <p>If you want extra crunch on serving day, reserve a handful of pretzel pieces to scatter over the caramel just before presenting.</p>
                 </div>
@@ -893,21 +889,21 @@
             <div class="card-content">
                 <h3 id="post2-title" class="post-title">Matcha Cupcake</h3>
                 <div class="post-meta">
-                    <span class="author">By: GitHub Copilot</span> •
-                    <time datetime="2025-04-10">Apr 10, 2025</time> •
+                    <span class="author">By: GitHub Copilot</span>  - 
+                    <time datetime="2025-04-10">Apr 10, 2025</time>  - 
                     <span class="read-time">3 min read</span>
                 </div>
-                <p class="excerpt">Bring out the vibrant, earthy aroma of matcha in a light, tender cupcake — 
-                    learn how to bloom and sift matcha powder to avoid bitterness, balance sweetness with a white‑chocolate or citrus frosting, 
+                <p class="excerpt">Bring out the vibrant, earthy aroma of matcha in a light, tender cupcake - 
+                    learn how to bloom and sift matcha powder to avoid bitterness, balance sweetness with a white-chocolate or citrus frosting, 
                     and use gentle folding to keep the crumb airy.</p>
                 <div class="post-tags">Tags: <span>matcha</span>, <span>cupcake</span></div>
-                <a href="#post-2" class="read-more" data-blog-trigger="post-2">Read More →</a>
+                <a href="#post-2" class="read-more" data-blog-trigger="post-2">Read More -></a>
             </div>
 
             <div id="post-2" class="full-post" hidden>
                 <h4 class="post-title">Matcha Cupcake</h4>
                 <div class="post-meta">
-                    <span class="author">Kavya Deshpande</span> • <time datetime="2025-04-10">Apr 10, 2025</time>
+                    <span class="author">Kavya Deshpande</span>  -  <time datetime="2025-04-10">Apr 10, 2025</time>
                 </div>
                 <div class="post-body">
                     <p>Mix matcha powder with flour.</p>
@@ -926,7 +922,7 @@
     <div id="blog-modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" hidden>
         <div class="modal-overlay" data-blog-close aria-hidden="true"></div>
         <div class="modal-panel" role="document" tabindex="-1">
-            <button class="modal-close" type="button" aria-label="Close" data-blog-close>✕</button>
+            <button class="modal-close" type="button" aria-label="Close" data-blog-close>x</button>
             <header>
                 <h3 id="modal-title"></h3>
                 <div id="modal-meta" class="post-meta"></div>
@@ -1072,7 +1068,7 @@
                     </figcaption>
                 </figure>
                 <blockquote class="review-text">The Red Velvet was moist, beautifully decorated and tasted homemade. I'll be ordering this for every celebration.</blockquote>
-                <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+                <div class="stars" aria-label="5 out of 5 stars">*****</div>
             </article>
 
             <article class="review-card">
@@ -1084,8 +1080,8 @@
                         <time datetime="2025-04-28" class="review-date">Apr 28, 2025</time>
                     </figcaption>
                 </figure>
-                <blockquote class="review-text">Quick delivery and the croissants were flaky and buttery — exactly what I hoped for on a busy morning.</blockquote>
-                <div class="stars" aria-label="4 out of 5 stars">★★★★☆</div>
+                <blockquote class="review-text">Quick delivery and the croissants were flaky and buttery - exactly what I hoped for on a busy morning.</blockquote>
+                <div class="stars" aria-label="4 out of 5 stars">****+</div>
             </article>
 
             <article class="review-card">
@@ -1097,8 +1093,8 @@
                         <time datetime="2025-03-12" class="review-date">Mar 12, 2025</time>
                     </figcaption>
                 </figure>
-                <blockquote class="review-text">Ordered a custom birthday cake — the design matched the mockup and it tasted better than we imagined. Highly recommend.</blockquote>
-                <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+                <blockquote class="review-text">Ordered a custom birthday cake - the design matched the mockup and it tasted better than we imagined. Highly recommend.</blockquote>
+                <div class="stars" aria-label="5 out of 5 stars">*****</div>
             </article>
 
             <article class="review-card">
@@ -1111,7 +1107,7 @@
                     </figcaption>
                 </figure>
                 <blockquote class="review-text">Great service and friendly staff. The pastries were a touch sweeter than I prefer, but overall a solid experience.</blockquote>
-                <div class="stars" aria-label="4 out of 5 stars">★★★★☆</div>
+                <div class="stars" aria-label="4 out of 5 stars">****+</div>
             </article>
 
             <article class="review-card">
@@ -1123,16 +1119,29 @@
                         <time datetime="2025-01-20" class="review-date">Jan 20, 2025</time>
                     </figcaption>
                 </figure>
-                <blockquote class="review-text">Fresh muffins, punctual delivery and very polite delivery team. Excellent value for money — will order again.</blockquote>
-                <div class="stars" aria-label="4 out of 5 stars">★★★★☆</div>
+                <blockquote class="review-text">Fresh muffins, punctual delivery and very polite delivery team. Excellent value for money - will order again.</blockquote>
+                <div class="stars" aria-label="4 out of 5 stars">****+</div>
             </article>
         </div>
     </div>
 </section>
 <section id="location" class="locations-section content-section">
-    <h2>Company Locations:</h2>
-    <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3766.6304122126494!2d72.97454087716243!3d19.254932599909406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7bb687e77c67b%3A0xf56ed765bc7831a7!2sSweet%20Delight!5e0!3m2!1sen!2sin!4v1746081886509!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <h2>Visit Our Bakery</h2>
+    <p class="section-subtext">Find us in Bandra and stop by during our baking hours.</p>
+    <div class="location-layout">
+        <article class="store-hours-card" aria-label="Store opening hours">
+            <p class="note-eyebrow">Open Today</p>
+            <p class="note-title"><time datetime="07:00">7:00 AM</time> - <time datetime="22:00">10:00 PM</time></p>
+            <p>Walk-ins welcome  -  Same-day delivery  -  Custom cakes in 48 hrs</p>
+            <ul>
+                <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> 123 Bakery Lane, Bandra West, Mumbai</li>
+                <li><i class="fa-solid fa-cake-candles" aria-hidden="true"></i> Celebration cakes and party platters</li>
+                <li><i class="fa-solid fa-mug-hot" aria-hidden="true"></i> Fresh coffee pairings all day</li>
+            </ul>
+        </article>
+        <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3766.6304122126494!2d72.97454087716243!3d19.254932599909406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7bb687e77c67b%3A0xf56ed765bc7831a7!2sSweet%20Delight!5e0!3m2!1sen!2sin!4v1746081886509!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
     </div>
 </section>
 <section id="contact" class="contact-section content-section">
@@ -1152,7 +1161,7 @@
     </main>
 
     <footer>
-        <p>© 2025 Sweet Delights Bakery. All Rights Reserved.</p>
+        <p>(c) 2025 Sweet Delights Bakery. All Rights Reserved.</p>
     </footer>
 
     <!-- Offer Modals -->
@@ -1171,9 +1180,9 @@
                 <div class="form-group">
                     <label for="giftbox-size">Select Box Size</label>
                     <select id="giftbox-size" name="boxSize" required>
-                        <option value="classic">Classic (₹1,899 · 8 artisanal sweets)</option>
-                        <option value="deluxe">Deluxe (₹2,199 · 12 premium treats)</option>
-                        <option value="royal">Royal (₹2,899 · 18 indulgent delights)</option>
+                        <option value="classic">Classic ($1,899 - 8 artisanal sweets)</option>
+                        <option value="deluxe">Deluxe ($2,199 - 12 premium treats)</option>
+                        <option value="royal">Royal ($2,899 - 18 indulgent delights)</option>
                     </select>
                 </div>
                 <div class="form-grid">
@@ -1189,9 +1198,9 @@
                 <div class="form-group">
                     <label>Include Add-ons</label>
                     <div class="form-checkboxes">
-                        <label><input type="checkbox" name="addon" value="sparkles"> Sparkler candles (+₹99)</label>
-                        <label><input type="checkbox" name="addon" value="nuts"> Assorted nut cluster (+₹149)</label>
-                        <label><input type="checkbox" name="addon" value="tea"> Masala chai sachets (+₹129)</label>
+                        <label><input type="checkbox" name="addon" value="sparkles"> Sparkler candles (+$99)</label>
+                        <label><input type="checkbox" name="addon" value="nuts"> Assorted nut cluster (+$149)</label>
+                        <label><input type="checkbox" name="addon" value="tea"> Masala chai sachets (+$129)</label>
                     </div>
                 </div>
                 <div class="offer-modal__actions">
@@ -1219,9 +1228,9 @@
                     <div class="form-group">
                         <label for="diwali-box">Select Collection</label>
                         <select id="diwali-box" name="collection" required>
-                            <option value="radiance">Classic Dessert Box · ₹1,299</option>
-                            <option value="royal">Royal Dry Fruit Hamper · ₹1,699</option>
-                            <option value="lumina">Premium Dessert Platter · ₹2,299</option>
+                            <option value="radiance">Classic Dessert Box - $1,299</option>
+                            <option value="royal">Royal Dry Fruit Hamper - $1,699</option>
+                            <option value="lumina">Premium Dessert Platter - $2,299</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -1232,9 +1241,9 @@
                 <div class="form-group">
                     <label>Preferred Delivery Slot</label>
                     <div class="form-radio">
-                        <label><input type="radio" name="delivery" value="morning" required> Morning (9 AM – 12 PM)</label>
-                        <label><input type="radio" name="delivery" value="afternoon"> Afternoon (1 PM – 4 PM)</label>
-                        <label><input type="radio" name="delivery" value="evening"> Evening (5 PM – 8 PM)</label>
+                        <label><input type="radio" name="delivery" value="morning" required> Morning (9 AM - 12 PM)</label>
+                        <label><input type="radio" name="delivery" value="afternoon"> Afternoon (1 PM - 4 PM)</label>
+                        <label><input type="radio" name="delivery" value="evening"> Evening (5 PM - 8 PM)</label>
                     </div>
                 </div>
                 <div class="form-group">
@@ -1249,6 +1258,52 @@
             </form>
         </div>
     </div>
+
+    <div class="offer-modal" id="customer-auth-modal" aria-hidden="true">
+        <div class="offer-modal__overlay" onclick="closeCustomerAuthModal()"></div>
+        <div class="offer-modal__panel customer-auth-panel" role="dialog" aria-modal="true" aria-labelledby="customer-auth-title" tabindex="-1">
+            <button type="button" class="offer-modal__close" onclick="closeCustomerAuthModal()" aria-label="Close customer authentication">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="offer-modal__header">
+                <span class="offer-modal__badge">Customer Account</span>
+                <h3 id="customer-auth-title">Welcome Back</h3>
+                <p id="customer-auth-subtitle">Log in to manage your bakery profile and speed up checkout.</p>
+            </div>
+            <div class="customer-auth-tabs" role="tablist" aria-label="Authentication mode">
+                <button type="button" class="customer-auth-tab is-active" id="auth-tab-login" role="tab" aria-selected="true" onclick="switchCustomerAuthMode('login')">Login</button>
+                <button type="button" class="customer-auth-tab" id="auth-tab-signup" role="tab" aria-selected="false" onclick="switchCustomerAuthMode('signup')">Sign Up</button>
+            </div>
+            <form class="offer-modal__form" id="customer-auth-form" onsubmit="return submitCustomerAuth(event)">
+                <div class="form-group" id="auth-name-group" hidden>
+                    <label for="auth-name">Full Name</label>
+                    <input type="text" id="auth-name" name="name" autocomplete="name" placeholder="Your name">
+                </div>
+                <div class="form-group">
+                    <label for="auth-email">Email</label>
+                    <input type="email" id="auth-email" name="email" autocomplete="email" required placeholder="you@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="auth-password">Password</label>
+                    <input type="password" id="auth-password" name="password" autocomplete="current-password" minlength="6" required placeholder="Minimum 6 characters">
+                </div>
+                <div class="form-group" id="auth-phone-group" hidden>
+                    <label for="auth-phone">Phone</label>
+                    <input type="tel" id="auth-phone" name="phone" autocomplete="tel" pattern="[0-9]{10}" placeholder="10-digit phone number">
+                </div>
+                <div class="form-group" id="auth-address-group" hidden>
+                    <label for="auth-address">Address</label>
+                    <input type="text" id="auth-address" name="address" autocomplete="street-address" placeholder="Delivery address">
+                </div>
+                <div class="offer-modal__actions">
+                    <button type="submit" class="btn btn--primary" id="customer-auth-submit">Login to Account</button>
+                    <button type="button" class="btn btn--secondary" onclick="closeCustomerAuthModal()">Cancel</button>
+                </div>
+                <p class="offer-modal__status" id="customer-auth-status" role="status" aria-live="polite"></p>
+            </form>
+        </div>
+    </div>
+
  <!-- Cart Overlay -->
     <div id="cart-section">
        <div class="cart-content">
@@ -1257,6 +1312,10 @@
            <div id="cart-items"></div>
            <div id="cart-total"></div>
            <form id="cart-form">
+               <label for="customer-name">Customer Name:</label>
+               <input type="text" id="customer-name" name="customer-name" autocomplete="name" placeholder="Your name">
+               <label for="customer-email">Email:</label>
+               <input type="email" id="customer-email" name="customer-email" autocomplete="email" placeholder="you@example.com">
                <label for="address">Address:</label>
                <input type="text" id="address" name="address" required>
                <label for="phone">Phone Number:</label>
@@ -1278,3 +1337,4 @@
     </noscript>
 </body>
 </html>
+

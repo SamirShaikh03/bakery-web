@@ -6,20 +6,25 @@ const CATEGORY_PREVIEW_LIMIT = { desktop: 8, mobile: 4 };
 let isSearchActive = false;
 
 const API_BASE_URL = window.BAKERY_API_URL || localStorage.getItem('bakeryApiBaseUrl') || 'http://localhost:3000';
+const CUSTOMER_AUTH_STORAGE_KEY = 'bakeryCustomerAuth';
+const DEFAULT_CUSTOMER_AUTH_STATE = { token: '', customer: null };
+
+let customerAuthState = { ...DEFAULT_CUSTOMER_AUTH_STATE };
 
 function buildApiUrl(path) {
     const normalizedPath = path.startsWith('/') ? path : `/${path}`;
     return `${API_BASE_URL}${normalizedPath}`;
 }
 
-async function postJsonWithTimeout(url, payload, timeoutMs = 9000) {
+async function postJsonWithTimeout(url, payload, timeoutMs = 9000, extraHeaders = {}) {
     const controller = new AbortController();
     const timer = window.setTimeout(() => controller.abort(), timeoutMs);
     try {
         const response = await fetch(url, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                ...extraHeaders
             },
             body: JSON.stringify(payload),
             signal: controller.signal
@@ -30,6 +35,275 @@ async function postJsonWithTimeout(url, payload, timeoutMs = 9000) {
         window.clearTimeout(timer);
     }
 }
+
+function loadCustomerAuthState() {
+    try {
+        const rawState = localStorage.getItem(CUSTOMER_AUTH_STORAGE_KEY);
+        if (!rawState) {
+            customerAuthState = { ...DEFAULT_CUSTOMER_AUTH_STATE };
+            return;
+        }
+        const parsed = JSON.parse(rawState);
+        customerAuthState = {
+            token: parsed && parsed.token ? String(parsed.token) : '',
+            customer: parsed && parsed.customer ? parsed.customer : null
+        };
+    } catch (error) {
+        console.warn('Could not load customer auth state:', error);
+        customerAuthState = { ...DEFAULT_CUSTOMER_AUTH_STATE };
+    }
+}
+
+function saveCustomerAuthState() {
+    localStorage.setItem(CUSTOMER_AUTH_STORAGE_KEY, JSON.stringify(customerAuthState));
+}
+
+function clearCustomerAuthState() {
+    customerAuthState = { ...DEFAULT_CUSTOMER_AUTH_STATE };
+    localStorage.removeItem(CUSTOMER_AUTH_STORAGE_KEY);
+}
+
+function getCustomerAuthHeaders() {
+    if (!customerAuthState.token) {
+        return {};
+    }
+    return { Authorization: `Bearer ${customerAuthState.token}` };
+}
+
+function updateAccountTriggers() {
+    const accountTrigger = document.getElementById('account-trigger');
+    const mobileAccountTrigger = document.querySelector('.mobile-menu__account');
+
+    const customer = customerAuthState.customer;
+    const customerName = customer && customer.name ? customer.name : '';
+    const label = customerName ? `Hi, ${customerName.split(' ')[0]}` : 'Account';
+
+    if (accountTrigger) {
+        const textNode = accountTrigger.querySelector('span');
+        if (textNode) {
+            textNode.textContent = label;
+        }
+    }
+
+    if (mobileAccountTrigger) {
+        const icon = mobileAccountTrigger.querySelector('i');
+        mobileAccountTrigger.innerHTML = '';
+        if (icon) {
+            mobileAccountTrigger.appendChild(icon);
+        } else {
+            const freshIcon = document.createElement('i');
+            freshIcon.className = 'fas fa-user';
+            mobileAccountTrigger.appendChild(freshIcon);
+        }
+        mobileAccountTrigger.append(` ${label}`);
+    }
+}
+
+function prefillCheckoutFromCustomer() {
+    const customer = customerAuthState.customer;
+    if (!customer) {
+        return;
+    }
+
+    const customerNameField = document.getElementById('customer-name');
+    const customerEmailField = document.getElementById('customer-email');
+    const phoneField = document.getElementById('phone');
+    const addressField = document.getElementById('address');
+
+    if (customerNameField && !customerNameField.value && customer.name) {
+        customerNameField.value = customer.name;
+    }
+    if (customerEmailField && !customerEmailField.value && customer.email) {
+        customerEmailField.value = customer.email;
+    }
+    if (phoneField && !phoneField.value && customer.phone) {
+        phoneField.value = customer.phone;
+    }
+    if (addressField && !addressField.value && customer.address) {
+        addressField.value = customer.address;
+    }
+}
+
+function setCustomerAuthStatus(message, isError = false) {
+    const status = document.getElementById('customer-auth-status');
+    if (!status) {
+        return;
+    }
+    status.textContent = message || '';
+    status.style.color = isError ? '#c62828' : '#2e7d32';
+    status.style.background = isError ? 'rgba(198, 40, 40, 0.1)' : 'rgba(76, 175, 80, 0.1)';
+}
+
+function switchCustomerAuthMode(mode = 'login') {
+    const isSignup = mode === 'signup';
+    const title = document.getElementById('customer-auth-title');
+    const subtitle = document.getElementById('customer-auth-subtitle');
+    const submit = document.getElementById('customer-auth-submit');
+
+    const loginTab = document.getElementById('auth-tab-login');
+    const signupTab = document.getElementById('auth-tab-signup');
+
+    const nameGroup = document.getElementById('auth-name-group');
+    const phoneGroup = document.getElementById('auth-phone-group');
+    const addressGroup = document.getElementById('auth-address-group');
+
+    const nameInput = document.getElementById('auth-name');
+    const phoneInput = document.getElementById('auth-phone');
+    const addressInput = document.getElementById('auth-address');
+    const passwordInput = document.getElementById('auth-password');
+
+    if (title) {
+        title.textContent = isSignup ? 'Create Your Sweet Delights Account' : 'Welcome Back';
+    }
+    if (subtitle) {
+        subtitle.textContent = isSignup
+            ? 'Sign up to save your profile, then place orders faster.'
+            : 'Log in to manage your bakery profile and speed up checkout.';
+    }
+    if (submit) {
+        submit.textContent = isSignup ? 'Create Account' : 'Login to Account';
+    }
+
+    if (loginTab && signupTab) {
+        loginTab.classList.toggle('is-active', !isSignup);
+        signupTab.classList.toggle('is-active', isSignup);
+        loginTab.setAttribute('aria-selected', String(!isSignup));
+        signupTab.setAttribute('aria-selected', String(isSignup));
+    }
+
+    if (nameGroup) {
+        nameGroup.hidden = !isSignup;
+    }
+    if (phoneGroup) {
+        phoneGroup.hidden = !isSignup;
+    }
+    if (addressGroup) {
+        addressGroup.hidden = !isSignup;
+    }
+    if (nameInput) {
+        nameInput.required = isSignup;
+    }
+    if (phoneInput) {
+        phoneInput.required = false;
+    }
+    if (addressInput) {
+        addressInput.required = false;
+    }
+    if (passwordInput) {
+        passwordInput.setAttribute('autocomplete', isSignup ? 'new-password' : 'current-password');
+    }
+
+    setCustomerAuthStatus('');
+}
+
+function openCustomerAuthModal(mode = 'login') {
+    const modal = document.getElementById('customer-auth-modal');
+    const panel = modal ? modal.querySelector('.customer-auth-panel') : null;
+    const form = document.getElementById('customer-auth-form');
+
+    if (!modal || !panel || !form) {
+        return false;
+    }
+
+    if (customerAuthState.customer) {
+        const authName = document.getElementById('auth-name');
+        const authEmail = document.getElementById('auth-email');
+        const authPhone = document.getElementById('auth-phone');
+        const authAddress = document.getElementById('auth-address');
+
+        if (authName && customerAuthState.customer.name) authName.value = customerAuthState.customer.name;
+        if (authEmail && customerAuthState.customer.email) authEmail.value = customerAuthState.customer.email;
+        if (authPhone && customerAuthState.customer.phone) authPhone.value = customerAuthState.customer.phone;
+        if (authAddress && customerAuthState.customer.address) authAddress.value = customerAuthState.customer.address;
+    }
+
+    switchCustomerAuthMode(mode);
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.dataset.customerAuthModal = 'open';
+    document.body.style.overflow = 'hidden';
+
+    requestAnimationFrame(() => {
+        panel.focus();
+    });
+
+    if (customerAuthState.customer) {
+        setCustomerAuthStatus(`Logged in as ${customerAuthState.customer.email}.`, false);
+    }
+
+    return false;
+}
+
+function closeCustomerAuthModal() {
+    const modal = document.getElementById('customer-auth-modal');
+    if (!modal) {
+        return;
+    }
+
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    delete document.body.dataset.customerAuthModal;
+
+    if (document.body.dataset.offerModal !== 'open' && document.body.dataset.blogModal !== 'open') {
+        document.body.style.overflow = '';
+    }
+}
+
+async function submitCustomerAuth(event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const isSignup = document.getElementById('auth-tab-signup') && document.getElementById('auth-tab-signup').classList.contains('is-active');
+
+    const payload = {
+        email: form.email.value.trim(),
+        password: form.password.value
+    };
+
+    if (isSignup) {
+        payload.name = form.name.value.trim();
+        payload.phone = form.phone.value.trim();
+        payload.address = form.address.value.trim();
+    }
+
+    const endpoint = isSignup ? '/api/customer-auth/signup' : '/api/customer-auth/login';
+    setCustomerAuthStatus(isSignup ? 'Creating account...' : 'Signing in...', false);
+
+    try {
+        const { ok, data } = await postJsonWithTimeout(buildApiUrl(endpoint), payload, 9000);
+        if (!ok || !data || !data.success) {
+            const message = data && data.error ? data.error : 'Authentication failed. Please try again.';
+            setCustomerAuthStatus(message, true);
+            return false;
+        }
+
+        customerAuthState = {
+            token: data.data.token,
+            customer: data.data.customer
+        };
+
+        saveCustomerAuthState();
+        updateAccountTriggers();
+        prefillCheckoutFromCustomer();
+
+        setCustomerAuthStatus(isSignup ? 'Account created successfully.' : 'Login successful.', false);
+        form.reset();
+
+        window.setTimeout(() => {
+            closeCustomerAuthModal();
+        }, 700);
+    } catch (error) {
+        console.error('Customer auth error:', error);
+        setCustomerAuthStatus('Unable to reach server. Please try again.', true);
+    }
+
+    return false;
+}
+
+window.openCustomerAuthModal = openCustomerAuthModal;
+window.closeCustomerAuthModal = closeCustomerAuthModal;
+window.switchCustomerAuthMode = switchCustomerAuthMode;
+window.submitCustomerAuth = submitCustomerAuth;
 
 function addToCart(itemName, price, quantity) {
     const existingItem = cart.find(item => item.name === itemName);
@@ -75,7 +349,7 @@ function showCart() {
         cart.forEach(item => {
             cartItems.innerHTML += `
                 <div class="cart-item">
-                    <span>${item.name} - ₹${(item.price * item.quantity).toFixed(2)}</span>
+                    <span>${item.name} - $${(item.price * item.quantity).toFixed(2)}</span>
                     <div class="quantity-controls">
                         <button class="quantity-btn" onclick="updateQuantity('${item.name}', -1)" ${item.quantity <= 1 ? 'disabled' : ''}>-</button>
                         <span>${item.quantity}</span>
@@ -84,7 +358,7 @@ function showCart() {
                 </div>`;
         });
         const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        cartTotal.innerHTML = `Total: ₹${total.toFixed(2)}`;
+        cartTotal.innerHTML = `Total: $${total.toFixed(2)}`;
     }
 }
 
@@ -105,6 +379,8 @@ function clearCart() {
 }
 
 async function checkout() {
+    const customerName = document.getElementById('customer-name').value;
+    const customerEmail = document.getElementById('customer-email').value;
     const address = document.getElementById('address').value;
     const phone = document.getElementById('phone').value;
 
@@ -125,9 +401,10 @@ async function checkout() {
     // Create order object
     const order = {
         items: cart.map(item => ({ name: item.name, price: item.price, quantity: item.quantity })),
-        customerName: 'Website Customer',
+        customerName: customerName || (customerAuthState.customer ? customerAuthState.customer.name : 'Website Customer'),
         address: address,
         phone: phone,
+        email: customerEmail || (customerAuthState.customer ? customerAuthState.customer.email : ''),
         notes: ''
     };
 
@@ -135,7 +412,7 @@ async function checkout() {
     console.log('📦 Placing order to API:', buildApiUrl('/api/orders'));
 
     try {
-        const { ok, data } = await postJsonWithTimeout(buildApiUrl('/api/orders'), order);
+        const { ok, data } = await postJsonWithTimeout(buildApiUrl('/api/orders'), order, 9000, getCustomerAuthHeaders());
 
         if (ok && data && data.success) {
             console.log('✅ Order placed successfully:', data.data);
@@ -144,13 +421,17 @@ async function checkout() {
             orders.push(data.data);
             localStorage.setItem('orders', JSON.stringify(orders));
 
-            alert(`🎉 Order placed successfully!\n\nOrder ID: ${data.data.id}\nAddress: ${address}\nPhone: ${phone}\nItems: ${cart.map(item => `${item.name} (x${item.quantity})`).join(', ')}\nTotal: ₹${data.data.total.toFixed(2)}`);
+            alert(`🎉 Order placed successfully!\n\nOrder ID: ${data.data.id}\nAddress: ${address}\nPhone: ${phone}\nItems: ${cart.map(item => `${item.name} (x${item.quantity})`).join(', ')}\nTotal: $${data.data.total.toFixed(2)}`);
 
             cart = [];
+            document.getElementById('customer-name').value = '';
+            document.getElementById('customer-email').value = '';
             document.getElementById('address').value = '';
             document.getElementById('phone').value = '';
             showCart();
             hideCart();
+
+            prefillCheckoutFromCustomer();
             return;
         }
 
@@ -174,13 +455,17 @@ async function checkout() {
         orders.push(localOrder);
         localStorage.setItem('orders', JSON.stringify(orders));
 
-        alert(`⚠️ Backend unavailable - Order saved locally!\n\nOrder ID: ${orderId}\nAddress: ${address}\nPhone: ${phone}\nTotal: ₹${total.toFixed(2)}\n\nSet API base using localStorage key bakeryApiBaseUrl if your backend runs on a different URL.`);
+        alert(`⚠️ Backend unavailable - Order saved locally!\n\nOrder ID: ${orderId}\nAddress: ${address}\nPhone: ${phone}\nTotal: $${total.toFixed(2)}\n\nSet API base using localStorage key bakeryApiBaseUrl if your backend runs on a different URL.`);
 
         cart = [];
+        document.getElementById('customer-name').value = '';
+        document.getElementById('customer-email').value = '';
         document.getElementById('address').value = '';
         document.getElementById('phone').value = '';
         showCart();
         hideCart();
+
+        prefillCheckoutFromCustomer();
     }
 }
 
@@ -671,6 +956,10 @@ openOfferModal = function(type) {
 };
 
 document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && document.body.dataset.customerAuthModal === 'open') {
+        closeCustomerAuthModal();
+        return;
+    }
     if (event.key === 'Escape' && document.body.dataset.offerModal === 'open') {
         closeActiveOfferModal();
     }
@@ -748,7 +1037,7 @@ function buildCake() {
         price: totalPrice
     };
 
-    result.textContent = `Estimated price: ₹${totalPrice.toLocaleString('en-IN')} (includes custom décor)`;
+    result.textContent = `Estimated price: $${totalPrice.toLocaleString('en-US')} (includes custom décor)`;
     result.classList.remove('is-error');
     
     // Show order button
@@ -775,7 +1064,7 @@ function orderCustomCake() {
     // Show confirmation
     const result = document.getElementById('cake-result');
     if (result) {
-        result.textContent = `✓ Custom cake added to cart! (₹${customCakeDetails.price.toLocaleString('en-IN')})`;
+        result.textContent = `✓ Custom cake added to cart! ($${customCakeDetails.price.toLocaleString('en-US')})`;
         result.classList.remove('is-error');
     }
 
@@ -952,6 +1241,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (cartSection) {
         cartSection.setAttribute('aria-hidden', 'true');
     }
+
+    loadCustomerAuthState();
+    updateAccountTriggers();
+    prefillCheckoutFromCustomer();
 
     buildProductIndex();
     const defaultCategoryId = getDefaultCategoryId();
@@ -1130,6 +1423,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             const cartButton = event.target.closest('.mobile-menu__cart');
             if (cartButton) {
+                setMenuState(false);
+                return;
+            }
+            const accountButton = event.target.closest('.mobile-menu__account');
+            if (accountButton) {
                 setMenuState(false);
             }
         });
