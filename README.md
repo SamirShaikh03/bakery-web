@@ -1,7 +1,5 @@
 # Sweet Delights Bakery
 
-![Bakery Banner](assets/banner-img.png)
-
 A modern, responsive bakery website featuring an elegant product catalog, interactive shopping cart, custom cake builder, blog section, admin portal, and backend API. Built with vanilla HTML, CSS, and JavaScript for optimal performance and accessibility.
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache2.0-yellow.svg)](LICENSE)
